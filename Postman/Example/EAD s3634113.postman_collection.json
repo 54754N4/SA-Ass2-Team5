@@ -1,0 +1,3188 @@
+{
+	"info": {
+		"_postman_id": "40fa716b-934a-4ee5-8cd7-28a53266ff31",
+		"name": "EAD s3634113",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test API",
+			"item": [
+				{
+					"name": "Setup",
+					"item": [
+						{
+							"name": "1. Create A Drug",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "henry",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "1234",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n\t{\n    \t\"name\": \"Panadol\",\n    \t\"usage\": \"Eat before taking\"\n\t},\n\t{\n    \t\"name\": \"Zibi\",\n    \t\"usage\": \"Eat before taking\"\n\t},\n\t{\n    \t\"name\": \"Zanadol\",\n    \t\"usage\": \"Eat before taking\"\n\t},\n\t{\n    \t\"name\": \"Lanadol\",\n    \t\"usage\": \"Eat before taking\"\n\t}\n]"
+								},
+								"url": {
+									"raw": "localhost:9999/drugs",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"drugs"
+									]
+								},
+								"description": "Creates a single __drug__ as defined in the json body of the request"
+							},
+							"response": []
+						},
+						{
+							"name": "2. Create New Patient + Visit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Rami\",\n    \"birthday\": \"1970-01-02\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": [\n    \t{\n    \t\t\"date\": \"2015-01-02\",\n    \t\t\"problems\": \"headache\",\n    \t\t\"doctor\": \"Dr. Fred\",\n    \t\t\"disease\": {\n    \t\t\t\"code\": \"A01\",\n    \t\t\t\"name\": \"Malaria\"\n    \t\t},\n    \t\t\"prescriptions\": [\n    \t\t\t{\n\t    \t\t\t\"dosages\": \"1 pill\",\n\t    \t\t\t\"instructions\": \"Intake pre-meal\",\n\t    \t\t\t\"prescriptionDetails\": [\n\t    \t\t\t\t{\n\t    \t\t\t\t\t\"drug\": { \"id\": 1 }\n\t    \t\t\t\t},\n\t    \t\t\t\t{\n\t    \t\t\t\t\t\"drug\": { \n\t    \t\t\t\t\t\t\"name\": \"Alco\",\n\t    \t\t\t\t\t\t\"usage\": \"Twice daily\"\n\t    \t\t\t\t\t}\n\t    \t\t\t\t}\n\t    \t\t\t]\n    \t\t\t}\n    \t\t]\n    \t}\t\n    ]\n}"
+								},
+								"url": {
+									"raw": "localhost:9999/patients",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"patients"
+									]
+								},
+								"description": "This also showcases how we can also give the list of visits\nand it will automatically create both. \nNotes : If drug objects (in json) have an id property only, they're retrieved; otherwise new drug entities will be created."
+							},
+							"response": []
+						},
+						{
+							"name": "3. Add New Visit To Returning Patient",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"date\": \"2015-01-03\",\n\t\"problems\": \"stomach-ache\",\n\t\"doctor\": \"Dr. George\",\n\t\"disease\": { \"id\" : 1 },\n\t\"prescriptions\": [\n\t\t{\n\t\t\t\"dosages\": \"2 pill\",\n\t\t\t\"instructions\": \"Intake post-meal\",\n\t\t\t\"prescriptionDetails\": [\n\t\t\t\t{\n\t\t\t\t\t\"drug\": { \"id\": 1 }\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"drug\": { \n\t\t\t\t\t\t\"name\": \"Thanatol\",\n\t\t\t\t\t\t\"usage\": \"Thrice daily\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "localhost:9999/visits?pid=1",
+									"host": [
+										"localhost"
+									],
+									"port": "9999",
+									"path": [
+										"visits"
+									],
+									"query": [
+										{
+											"key": "pid",
+											"value": "1"
+										}
+									]
+								},
+								"description": "To set the returning patient we can either do it like this request (using pid as GET param) or use the path variable at /visits/patient/{pid}\n\n**Note** The same as when we created the patient, if the drugs are referenced by ID they're retrieved, otherwise they're created."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "List All Patients",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "henry",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9999/patients/list?",
+							"host": [
+								"localhost"
+							],
+							"port": "9999",
+							"path": [
+								"patients",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "count",
+									"value": "999",
+									"disabled": true
+								}
+							]
+						},
+						"description": "All list and search implement paging, just add the optional count and page GET request parameters to select page count and number respectively."
+					},
+					"response": []
+				},
+				{
+					"name": "Patients By Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9999/patients/search?for=a",
+							"host": [
+								"localhost"
+							],
+							"port": "9999",
+							"path": [
+								"patients",
+								"search"
+							],
+							"query": [
+								{
+									"key": "for",
+									"value": "a",
+									"description": "case insensitive btw"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patients By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9999/patients?id=1&id=2",
+							"host": [
+								"localhost"
+							],
+							"port": "9999",
+							"path": [
+								"patients"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patients By Birthday",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9999/patients/birth?day=2&year=1970&month=1",
+							"host": [
+								"localhost"
+							],
+							"port": "9999",
+							"path": [
+								"patients",
+								"birth"
+							],
+							"query": [
+								{
+									"key": "day",
+									"value": "2",
+									"description": "defaults to 01"
+								},
+								{
+									"key": "year",
+									"value": "1970",
+									"description": "defaults to 1970"
+								},
+								{
+									"key": "month",
+									"value": "1",
+									"description": "defaults to 01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visits By Patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9999/visits/patient/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9999",
+							"path": [
+								"visits",
+								"patient",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visists By Time",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9999/visits/date?day=2&month=1&year=2015&hour=1&minute=0&second=0",
+							"host": [
+								"localhost"
+							],
+							"port": "9999",
+							"path": [
+								"visits",
+								"date"
+							],
+							"query": [
+								{
+									"key": "day",
+									"value": "2",
+									"description": "default 01"
+								},
+								{
+									"key": "month",
+									"value": "1",
+									"description": "default 01"
+								},
+								{
+									"key": "year",
+									"value": "2015",
+									"description": "default 1970"
+								},
+								{
+									"key": "hour",
+									"value": "1",
+									"description": "default 00"
+								},
+								{
+									"key": "minute",
+									"value": "0",
+									"description": "default 00"
+								},
+								{
+									"key": "second",
+									"value": "0",
+									"description": "default 00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Drugs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9999/drugs/search?for=c",
+							"host": [
+								"localhost"
+							],
+							"port": "9999",
+							"path": [
+								"drugs",
+								"search"
+							],
+							"query": [
+								{
+									"key": "for",
+									"value": "c",
+									"description": "case insensitive btw"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requests",
+			"item": [
+				{
+					"name": "Authenticated",
+					"item": [
+						{
+							"name": "Patients",
+							"item": [
+								{
+									"name": "CUD",
+									"item": [
+										{
+											"name": "Create (+ Disease)",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Rami\",\n    \"birthday\": \"1970-01-02\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": [\n    \t{\n    \t\t\"date\": \"2015-01-02\",\n    \t\t\"problems\": \"headache\",\n    \t\t\"doctor\": \"Dr. Fred\",\n    \t\t\"disease\": {\n    \t\t\t\"code\": \"A10\",\n    \t\t\t\"name\": \"Malaria\"\n    \t\t},\n    \t\t\"prescriptions\": [\n    \t\t\t{\n\t    \t\t\t\"dosages\": \"1 pill\",\n\t    \t\t\t\"instructions\": \"Intake pre-meal\",\n\t    \t\t\t\"prescriptionDetails\": [\n\t    \t\t\t\t{\n\t    \t\t\t\t\t\"drug\": { \"id\": 1 }\n\t    \t\t\t\t},\n\t    \t\t\t\t{\n\t    \t\t\t\t\t\"drug\": { \n\t    \t\t\t\t\t\t\"name\": \"Alco\",\n\t    \t\t\t\t\t\t\"usage\": \"Twice daily\"\n\t    \t\t\t\t\t}\n\t    \t\t\t\t}\n\t    \t\t\t]\n    \t\t\t}\n    \t\t]\n    \t}\t\n    ]\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/patients",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create (+ LabTest)",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"type": "text",
+														"value": "application/json"
+													},
+													{
+														"key": "Content-Type",
+														"type": "text",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Allah\",\n    \"birthday\": \"1970-01-01\",\n    \"male\": true,\n    \"address\": \"702 nguyen van linh, RMIT\",\n    \"visits\": [\n    \t{\n    \t\t\"date\": \"2015-01-01\",\n    \t\t\"problems\": \"depression\",\n    \t\t\"doctor\": \"Dr. Albert\",\n    \t\t\"labTestOrder\": {\n    \t\t\t\"labTestOrderDetails\" : [\n    \t\t\t\t{\n    \t\t\t\t\t\"service\": { \"id\": 1 }\n    \t\t\t\t},\n    \t\t\t\t{\n    \t\t\t\t\t\"service\": {\n    \t\t\t\t\t\t\"code\" : \"B01\",\n    \t\t\t\t\t\t\"name\" : \"Brain scan\"\n    \t\t\t\t\t}\n    \t\t\t\t}\n    \t\t\t]\n    \t\t},\n    \t\t\"prescriptions\": [\n    \t\t\t{\n\t    \t\t\t\"dosages\": \"1 pill\",\n\t    \t\t\t\"instructions\": \"Intake pre-meal\",\n\t    \t\t\t\"prescriptionDetails\": [\n\t    \t\t\t\t{\n\t    \t\t\t\t\t\"drug\": { \"id\": 1 }\n\t    \t\t\t\t},\n\t    \t\t\t\t{\n\t    \t\t\t\t\t\"drug\": { \n\t    \t\t\t\t\t\t\"name\": \"Blight\",\n\t    \t\t\t\t\t\t\"usage\": \"Every time anxiety kicks in\"\n\t    \t\t\t\t\t}\n\t    \t\t\t\t}\n\t    \t\t\t]\n    \t\t\t}\n    \t\t]\n    \t}\t\n    ]\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/patients",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\": 1,\n    \"name\": \"Rami ANASTAS\"\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/patients/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients",
+														"1"
+													]
+												},
+												"description": "Body Example (id mandatory) : \n{\n    \"id\": 1,\n    \"name\": \"Rami Anastas\",\n    \"birthday\": \"2015-01-01\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": []\n}"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/patients?id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "R",
+									"item": [
+										{
+											"name": "Single ID",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/patients/3",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients",
+														"3"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Multiple IDs",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/patients?id=1&id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1"
+														},
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "IDs CSVs",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/patients?id=1,2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1,2"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Search",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/patients/search?for=a",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients",
+														"search"
+													],
+													"query": [
+														{
+															"key": "for",
+															"value": "a",
+															"description": "case insensitive btw"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Birthday",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/patients/birth?day=2&year=1970&month=1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients",
+														"birth"
+													],
+													"query": [
+														{
+															"key": "day",
+															"value": "2",
+															"description": "defaults to 01"
+														},
+														{
+															"key": "year",
+															"value": "1970",
+															"description": "defaults to 1970"
+														},
+														{
+															"key": "month",
+															"value": "1",
+															"description": "defaults to 01"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "All",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/patients/list?",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"patients",
+														"list"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1",
+															"disabled": true
+														},
+														{
+															"key": "count",
+															"value": "999",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Visits",
+							"item": [
+								{
+									"name": "CUD",
+									"item": [
+										{
+											"name": "Create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n\t\"date\": \"2015-01-03\",\n\t\"problems\": \"stomach-ache\",\n\t\"doctor\": \"Dr. George\",\n\t\"prescriptions\": [\n\t\t{\n\t\t\t\"dosages\": \"2 pill\",\n\t\t\t\"instructions\": \"Intake post-meal\",\n\t\t\t\"prescriptionDetails\": [\n\t\t\t\t{\n\t\t\t\t\t\"drug\": { \"id\": 1 }\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"drug\": { \n\t\t\t\t\t\t\"name\": \"Thanatol\",\n\t\t\t\t\t\t\"usage\": \"Thrice daily\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/visits?pid=1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits"
+													],
+													"query": [
+														{
+															"key": "pid",
+															"value": "1"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create bis",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n\t\"date\": \"2015-01-03\",\n\t\"problems\": \"stomach-ache\",\n\t\"doctor\": \"Dr. George\",\n\t\"prescriptions\": [\n\t\t{\n\t\t\t\"dosages\": \"2 pill\",\n\t\t\t\"instructions\": \"Intake post-meal\",\n\t\t\t\"prescriptionDetails\": [\n\t\t\t\t{\n\t\t\t\t\t\"drug\": { \"id\": 1 }\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"drug\": { \n\t\t\t\t\t\t\"name\": \"Thanatol\",\n\t\t\t\t\t\t\"usage\": \"Thrice daily\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/visits/patient/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits",
+														"patient",
+														"1"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Ciplox\",\n    \"usage\": \"Twice daily\"\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/visits/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits",
+														"1"
+													]
+												},
+												"description": "Body Example (id mandatory) : \n{\n    \"id\": 1,\n    \"name\": \"Rami Anastas\",\n    \"birthday\": \"2015-01-01\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": []\n}"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/visits?id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "R",
+									"item": [
+										{
+											"name": "Single ID",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/visits/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits",
+														"1"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Multiple IDs",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/visits?id=1&id=3",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1"
+														},
+														{
+															"key": "id",
+															"value": "3"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "IDs CSVs",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/visits?id=1,3",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1,3"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Day",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/visits/date?day=2&month=1&year=2015&hour=1&minute=0&second=0",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits",
+														"date"
+													],
+													"query": [
+														{
+															"key": "day",
+															"value": "2",
+															"description": "default 01"
+														},
+														{
+															"key": "month",
+															"value": "1",
+															"description": "default 01"
+														},
+														{
+															"key": "year",
+															"value": "2015",
+															"description": "default 1970"
+														},
+														{
+															"key": "hour",
+															"value": "1",
+															"description": "default 00"
+														},
+														{
+															"key": "minute",
+															"value": "0",
+															"description": "default 00"
+														},
+														{
+															"key": "second",
+															"value": "0",
+															"description": "default 00"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Patient",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/visits/patient/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits",
+														"patient",
+														"1"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "All",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/visits/list?",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"visits",
+														"list"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1",
+															"disabled": true
+														},
+														{
+															"key": "count",
+															"value": "999",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Drugs",
+							"item": [
+								{
+									"name": "CUD",
+									"item": [
+										{
+											"name": "Create",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n\t{\n\t    \"name\": \"Panadol\",\n\t    \"usage\": \"Eat before taking\"\n\t}\n]"
+												},
+												"url": {
+													"raw": "localhost:9999/drugs",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"drugs"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Ciplox\",\n    \"usage\": \"Twice daily\"\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/drugs/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"drugs",
+														"1"
+													]
+												},
+												"description": "Body Example (id mandatory) : \n{\n    \"id\": 1,\n    \"name\": \"Rami Anastas\",\n    \"birthday\": \"2015-01-01\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": []\n}"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/drugs?id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"drugs"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "R",
+									"item": [
+										{
+											"name": "Single ID",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/drugs/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"drugs",
+														"1"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Multiple IDs",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/drugs?id=1&id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"drugs"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1"
+														},
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "IDs CSVs",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/drugs?id=1,2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"drugs"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1,2"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Search",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/drugs/search?for=c",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"drugs",
+														"search"
+													],
+													"query": [
+														{
+															"key": "for",
+															"value": "c",
+															"description": "case insensitive btw"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "All",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/drugs/list?page=0",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"drugs",
+														"list"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "0"
+														},
+														{
+															"key": "count",
+															"value": "999",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Prescriptions",
+							"item": [
+								{
+									"name": "CUD",
+									"item": [
+										{
+											"name": "Create",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n\t{\n\t\t\"dosages\": \"1 capsule/intake\",\n\t    \"instructions\": \"Intake pre-lunch\",\n\t\t\"prescriptionDetails\": [\n\t\t\t{\n\t\t\t\t\"drug\": { \"id\": 1 }\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"drug\": { \n\t\t\t\t\t\"name\": \"Ventalin\",\n\t\t\t\t\t\"usage\": \"Mix with water then drink\"\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t}\n]"
+												},
+												"url": {
+													"raw": "localhost:9999/prescriptions",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"prescriptions"
+													]
+												},
+												"description": "Doesn't work. Because ReferenceFixer doesn't check if Visit from json attribute has an ID to retrieve and link appropriately.."
+											},
+											"response": []
+										},
+										{
+											"name": "Update",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n\t\"dosages\": \"2 capsule/intake\",\n    \"instructions\": \"Intake post-lunch\",\n\t\"prescriptionDetails\": [\n\t\t{\n\t\t\t\"drug\": { \"id\": 1 }\n\t\t},\n\t\t{\n\t\t\t\"drug\": { \"id\": 2 }\n\t\t}\n\t]\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/prescriptions/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"prescriptions",
+														"1"
+													]
+												},
+												"description": "Body Example (id mandatory) : \n{\n    \"id\": 1,\n    \"name\": \"Rami Anastas\",\n    \"birthday\": \"2015-01-01\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": []\n}"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/prescriptions?id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"prescriptions"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "R",
+									"item": [
+										{
+											"name": "Single Id",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/prescriptions/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"prescriptions",
+														"1"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Multiple Ids",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/prescriptions?id=1&id=3",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"prescriptions"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1"
+														},
+														{
+															"key": "id",
+															"value": "3"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Ids CSVs",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/prescriptions?id=1,3",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"prescriptions"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1,3"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Search",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/prescriptions/search?for=c",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"prescriptions",
+														"search"
+													],
+													"query": [
+														{
+															"key": "for",
+															"value": "c",
+															"description": "case insensitive btw"
+														}
+													]
+												},
+												"description": "Basically searches prescriptions based on what's inside the instructions."
+											},
+											"response": []
+										},
+										{
+											"name": "All",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "henry",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/prescriptions/list?",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"prescriptions",
+														"list"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1",
+															"disabled": true
+														},
+														{
+															"key": "count",
+															"value": "999",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Services",
+							"item": [
+								{
+									"name": "CUD",
+									"item": [
+										{
+											"name": "Create",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n\t{\n\t\t\"code\": \"SC01\",\n\t\t\"name\": \"Blood test\"\n\t},\n\t{\n\t\t\"code\": \"SC02\",\n\t\t\"name\": \"Urine test\"\n\t},\n\t{\n\t\t\"code\": \"SC03\",\n\t\t\"name\": \"X-Ray scan\"\n\t},\n\t{\n\t\t\"code\": \"SC04\",\n\t\t\"name\": \"MRI scan\"\n\t},\n\t{\n\t\t\"code\": \"SC05\",\n\t\t\"name\": \"CT scan\"\n\t},\n\t{\n\t\t\"code\": \"SC06\",\n\t\t\"name\": \"Ultrasound scan\"\n\t}\n]"
+												},
+												"url": {
+													"raw": "localhost:9999/services",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"services"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n\t\"name\": \"Drive test\"\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/services/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"services",
+														"1"
+													]
+												},
+												"description": "Body Example (id mandatory) : \n{\n    \"id\": 1,\n    \"name\": \"Rami Anastas\",\n    \"birthday\": \"2015-01-01\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": []\n}"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/prescriptions?id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"prescriptions"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "R",
+									"item": [
+										{
+											"name": "Single Id",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/services/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"services",
+														"1"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Multiple Codes",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/services?code=SC01&code=SC03",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"services"
+													],
+													"query": [
+														{
+															"key": "code",
+															"value": "SC01"
+														},
+														{
+															"key": "code",
+															"value": "SC03"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Codes CSVs",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/services?code=SC01,SC03",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"services"
+													],
+													"query": [
+														{
+															"key": "code",
+															"value": "SC01,SC03"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Search",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/services/search?for=c",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"services",
+														"search"
+													],
+													"query": [
+														{
+															"key": "for",
+															"value": "c",
+															"description": "case insensitive btw"
+														}
+													]
+												},
+												"description": "Basically searches prescriptions based on what's inside the instructions."
+											},
+											"response": []
+										},
+										{
+											"name": "All",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/services/list?",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"services",
+														"list"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1",
+															"disabled": true
+														},
+														{
+															"key": "count",
+															"value": "999",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Diseases",
+							"item": [
+								{
+									"name": "CUD",
+									"item": [
+										{
+											"name": "Create",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n\t{\n\t\t\"code\": \"A01\",\n    \t\"name\": \"Aidz\"\n\t},\n\t{\n\t\t\"code\": \"A02\",\n    \t\"name\": \"Malaria\"\n\t},\n\t{\n\t\t\"code\": \"A03\",\n    \t\"name\": \"Head-ache\"\n\t}\n]"
+												},
+												"url": {
+													"raw": "localhost:9999/diseases",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"diseases"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"code\": \"A04\"\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/diseases/2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"diseases",
+														"2"
+													]
+												},
+												"description": "Body Example (id mandatory) : \n{\n    \"id\": 1,\n    \"name\": \"Rami Anastas\",\n    \"birthday\": \"2015-01-01\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": []\n}"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/diseases?id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"diseases"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "R",
+									"item": [
+										{
+											"name": "Single ID",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/diseases/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"diseases",
+														"1"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Multiple Codes",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/diseases?code=D01&code=D03",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"diseases"
+													],
+													"query": [
+														{
+															"key": "code",
+															"value": "D01"
+														},
+														{
+															"key": "code",
+															"value": "D03"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Codes CSVs",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/diseases?code=D01,D03",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"diseases"
+													],
+													"query": [
+														{
+															"key": "code",
+															"value": "D01,D03"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Search",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/diseases/search?for=a",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"diseases",
+														"search"
+													],
+													"query": [
+														{
+															"key": "for",
+															"value": "a",
+															"description": "case insensitive btw"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "All",
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "username",
+															"value": "default",
+															"type": "string"
+														},
+														{
+															"key": "password",
+															"value": "1234",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/diseases/list?",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"diseases",
+														"list"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1",
+															"disabled": true
+														},
+														{
+															"key": "count",
+															"value": "999",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Unauthenticated",
+					"item": [
+						{
+							"name": "Users",
+							"item": [
+								{
+									"name": "CUD",
+									"item": [
+										{
+											"name": "Create",
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n\t{\n\t\t\"name\": \"henry\",\n\t\t\"password\": \"1234\",\n\t\t\"userRoles\": [\n\t\t\t{\n\t\t\t\t\"role\" : { \"id\": 1 }\n\t\t\t}\n\t\t]\n\t},\n\t{\n\t\t\"name\": \"thanh\",\n\t\t\"password\": \"1234\",\n\t\t\"userRoles\": [\n\t\t\t{\n\t\t\t\t\"role\" : { \"authority\" : \"ROLE_ADMIN\" }\n\t\t\t}\n\t\t]\n\t}\n]"
+												},
+												"url": {
+													"raw": "localhost:9999/users",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"users"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n\t\"name\": \"ANewUsername\",\n    \"password\": \"a new passphrase\"\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/users/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"users",
+														"1"
+													]
+												},
+												"description": "Body Example (id mandatory) : \n{\n    \"id\": 1,\n    \"name\": \"Rami Anastas\",\n    \"birthday\": \"2015-01-01\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": []\n}"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/users?id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"users"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "R",
+									"item": [
+										{
+											"name": "Single Id",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/users/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"users",
+														"1"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Multiple IDs",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/users?id=1&id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"users"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1"
+														},
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "IDs CSVs",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/users?id=1,2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"users"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1,2"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Search",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/users/search?for=e",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"users",
+														"search"
+													],
+													"query": [
+														{
+															"key": "for",
+															"value": "e",
+															"description": "case insensitive btw"
+														}
+													]
+												},
+												"description": "Basically searches prescriptions based on what's inside the instructions."
+											},
+											"response": []
+										},
+										{
+											"name": "All",
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/users/list?",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"users",
+														"list"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1",
+															"disabled": true
+														},
+														{
+															"key": "count",
+															"value": "999",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Roles",
+							"item": [
+								{
+									"name": "CUD",
+									"item": [
+										{
+											"name": "Create",
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n\t{\n\t\t\"authority\": \"ROLE_USER\"\n\t},\n\t{\n\t\t\"authority\": \"ROLE_EDIT\"\n\t}\n]"
+												},
+												"url": {
+													"raw": "localhost:9999/roles",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"roles"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"authority\": \"ROLE_NORMAL\"\n}"
+												},
+												"url": {
+													"raw": "localhost:9999/roles/2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"roles",
+														"2"
+													]
+												},
+												"description": "Body Example (id mandatory) : \n{\n    \"id\": 1,\n    \"name\": \"Rami Anastas\",\n    \"birthday\": \"2015-01-01\",\n    \"male\": false,\n    \"address\": \"702 nguyen van linh\",\n    \"visits\": []\n}"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/roles?id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"roles"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "R",
+									"item": [
+										{
+											"name": "Single ID",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/roles/1",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"roles",
+														"1"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Multiple IDs",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/roles?id=1&id=2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"roles"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1"
+														},
+														{
+															"key": "id",
+															"value": "2"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "IDs CSVs",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/roles?id=1,2",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"roles"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "1,2"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Search",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/roles/search?for=role",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"roles",
+														"search"
+													],
+													"query": [
+														{
+															"key": "for",
+															"value": "role",
+															"description": "case insensitive btw"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "All",
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9999/roles/list?",
+													"host": [
+														"localhost"
+													],
+													"port": "9999",
+													"path": [
+														"roles",
+														"list"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1",
+															"disabled": true
+														},
+														{
+															"key": "count",
+															"value": "999",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
