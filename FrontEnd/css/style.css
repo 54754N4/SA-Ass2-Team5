@@ -1,0 +1,184 @@
+/* LOGIN */
+.login-box {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 50px;
+}
+.bg {
+  /* The image used */
+  background-image: url("../images/background.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* WRAPPER */
+#wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#wrapper #content-wrapper {
+  overflow-x: hidden;
+  width: 100%;
+  /* padding-top: 1em; */
+  /* padding-bottom: 80px; */
+}
+
+/*SIDEBAR*/
+.sidebar {
+  width: 90px !important;
+  background-color: #1caf9a;
+  min-height: 100vh ;
+}
+
+/* .sidebar .nav-item:last-child {
+  margin-bottom: 1rem;
+} */
+
+.sidebar .nav-item .nav-link {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  width: 90px;
+}
+
+.sidebar .nav-item .nav-link span {
+  font-size: 0.8rem;
+  display: block;
+}
+
+.sidebar .nav-item .nav-link {
+  color: #ffffff;
+}
+
+.sidebar .nav-item .nav-link:active, .sidebar .nav-item .nav-link:hover, .sidebar .nav-item .nav-link:focus {
+  color: #000000;
+}
+
+
+/* .sidebar.toggled {
+  width: 0 !important;
+  overflow: hidden;
+} */
+
+.topbar-divider {
+  width: 0;
+  border-right: 1px solid #c2c2c2;
+  height: calc(4.375rem - 2rem);
+  margin: auto 1rem;
+}
+
+.sidebar .sidebar-brand {
+  height: 4.375rem;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.05rem;
+  z-index: 1;
+}
+
+.sidebar .sidebar-brand .sidebar-brand-text {
+  color: #ffffff;
+}
+
+.sidebar hr.sidebar-divider {
+  margin: 0 1rem 1rem;
+  color: #ffffff;
+}
+
+#userDropdown{
+  color: #1caf9a;
+  font-size: 1rem; 
+  
+}
+
+#userDropdown:hover{
+  color: #000000;
+}
+
+/*NAVBAR*/
+.navbar-custom{
+  background-color: #e7e7e7;
+}
+
+/*ADD DRUG button*/
+.btn-primary{
+  /* font-family: Montserrat-Bold !important; */
+  background-color: #1caf9a !important;
+  border-radius: 10px !important;
+}
+
+.btn-primary:hover{
+  background-color: #272020 !important; 
+}
+
+.btn-primary1{
+  /* font-family: Montserrat-Bold !important; */
+  background-color: #fff !important;
+  /* border-radius: 10px !important; */
+}
+
+.btn-primary1:hover{
+  background-color: #dae7ab !important; 
+}
+
+.list-group a:hover, .list-group a:focus{
+  background-color: #2db8a3 !important;
+}
+
+/*404 page*/
+.error-part h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0b0b0d;
+  margin: 0;
+  padding: 0 0 0em 0;
+  font-size: 14em;
+}
+.error-part h2 span {
+  color: #f2f2f2;
+}
+.error-part p {
+  color: #777;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0;
+  padding: 1em 0;
+}
+a.home-btn {
+  border: 2px solid #0b0b0d;
+  text-transform: uppercase;
+  padding: 0.7em 1.5em;
+  margin-top: 0.4em;
+  display: inline-block;
+  color: #0b0b0d;
+  text-decoration: none;
+}
+a.home-btn:hover {
+  border-color: #c1061b;
+  color: #c1061b;
+}
+
+
+
+/* For width 400px and larger: */
+@media only screen and (min-width: 320px) and (max-width: 650px) {
+  .bg {
+    background-image: url("../images/medbackground.jpg");
+  }
+
+  .login-box {
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
+    padding: 50px;
+  }
+}
+
+
