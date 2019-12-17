@@ -10,7 +10,7 @@ import rmit.team5.visiderm.Model.UserInfo.UserRole;
 
 @Repository
 public interface IUserDAO extends JpaRepository<UserAccount, Long> {
-    @Query("select r from UserRole r where r.account.accountID = ?1")
+    @Query("select r from UserRole r where r.account.id = ?1")
     Page<UserRole> getUserRoles(long id, Pageable pageable);
 
     @Query("select distinct role.name from UserRole role")
