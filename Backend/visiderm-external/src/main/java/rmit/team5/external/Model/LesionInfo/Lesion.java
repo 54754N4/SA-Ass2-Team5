@@ -1,9 +1,11 @@
 package rmit.team5.external.Model.LesionInfo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "lesion")
@@ -13,11 +15,14 @@ public class Lesion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long lesionID;
 
-//    @Column(name = "timeTake")
-//    private Date timeTaken;
-//
-//    @Column(name = "size")
-//    private double size;
+    @Column(name = "timeTaken")
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(style = "HH:mm")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
+    private Date timeTaken;
+
+    @Column(name = "size")
+    private double size;
 
     @Column(name = "location")
     private String location;
@@ -26,10 +31,10 @@ public class Lesion {
     private String status;
 
     @Column(name = "visitID")
-    private Long visitID;
+    private String visitID;     // actually = "<hospital_short_name>_<visit_id>"
 
-    @OneToMany(mappedBy = "lesion", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<LesionHistory> historyList = new ArrayList<>();
+    @Column(name = "doctorNote")
+    private String doctorNote;
 
     public long getLesionID() {
         return lesionID;
@@ -39,21 +44,21 @@ public class Lesion {
         this.lesionID = lesionID;
     }
 
-//    public Date getTimeTaken() {
-//        return timeTaken;
-//    }
-//
-//    public void setTimeTaken(Date timeTaken) {
-//        this.timeTaken = timeTaken;
-//    }
-//
-//    public double getSize() {
-//        return size;
-//    }
-//
-//    public void setSize(double size) {
-//        this.size = size;
-//    }
+    public Date getTimeTaken() {
+        return timeTaken;
+    }
+
+    public void setTimeTaken(Date timeTaken) {
+        this.timeTaken = timeTaken;
+    }
+
+    public double getSize() {
+        return size;
+    }
+
+    public void setSize(double size) {
+        this.size = size;
+    }
 
     public String getLocation() {
         return location;
@@ -71,37 +76,20 @@ public class Lesion {
         this.status = status;
     }
 
-//    public List<Long> getLesionHistory() {
-//        return lesionHistory;
-//    }
-//
-//    public void setLesionHistory(List<Long> lesionHistory) {
-//        this.lesionHistory = lesionHistory;
-//    }
-
-    public List<LesionHistory> getHistoryList() {
-        return historyList;
+    public String getDoctorNote() {
+        return doctorNote;
     }
 
-    public void setHistoryList(List<LesionHistory> historyList) {
-        this.historyList = historyList;
+    public void setDoctorNote(String doctorNote) {
+        this.doctorNote = doctorNote;
     }
 
-    public Long getVisitID() {
+    public String getVisitID() {
         return visitID;
     }
 
-    public void setVisitID(Long visitID) {
+    public void setVisitID(String visitID) {
         this.visitID = visitID;
     }
 
-    public void addLesionHistory(LesionHistory history) {
-        historyList.add(history);
-        history.setLesion(this);
-    }
-
-    public void removeLesionHistory(LesionHistory history) {
-        historyList.remove(history);
-        history.setLesion(null);
-    }
 }
