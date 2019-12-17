@@ -4,9 +4,6 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
-import static org.hibernate.annotations.CascadeType.ALL;
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
-
 @Entity
 @Table(name = "role")
 public class UserRole {
@@ -18,9 +15,8 @@ public class UserRole {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name= "accountID")
-    @Cascade({ALL})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accountID")
     private UserAccount account;
 
     public UserAccount getAccount() {
@@ -45,5 +41,17 @@ public class UserRole {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserRole)) return false;
+        return id != null && id.equals(((UserRole) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
     }
 }

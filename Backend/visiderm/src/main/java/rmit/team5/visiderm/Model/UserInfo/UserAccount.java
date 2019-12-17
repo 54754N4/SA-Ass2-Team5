@@ -1,11 +1,9 @@
 package rmit.team5.visiderm.Model.UserInfo;
 
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-
-import static org.hibernate.annotations.CascadeType.*;
 
 @Entity
 @Table(name = "account")
@@ -15,7 +13,7 @@ public class UserAccount {
     @Column(name = "accountID")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -24,9 +22,13 @@ public class UserAccount {
     @Column(nullable = false)
     private Boolean enable;     // what is this boolean for btw ? =o i saw in class diagram so i added it but i'm confused
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, orphanRemoval = true)
-    @Cascade({ALL})
-    private List<UserRole> userRoleList;
+    @OneToMany(
+            mappedBy = "account",
+            fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            cascade = CascadeType.ALL
+    )
+    private List<UserRole> userRoleList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -66,5 +68,15 @@ public class UserAccount {
 
     public void setUserRoleList(List<UserRole> userRoleList) {
         this.userRoleList = userRoleList;
+    }
+
+    public void addUserRole(UserRole role) {
+        userRoleList.add(role);
+        role.setAccount(this);
+    }
+
+    public void removeUserRole(UserRole role) {
+        userRoleList.remove(role);
+        role.setAccount(null);
     }
 }

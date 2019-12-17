@@ -18,7 +18,7 @@ public class UserDTO {
     private Boolean enable;
 
     @NotNull(message = "Roles cannot be null")
-    private List<UserRole> userRoleList;
+    private List<RoleDTO> userRoleList;
 
     public String getUsername() {
         return username;
@@ -44,11 +44,11 @@ public class UserDTO {
         this.enable = enable;
     }
 
-    public List<UserRole> getUserRoleList() {
+    public List<RoleDTO> getUserRoleList() {
         return userRoleList;
     }
 
-    public void setUserRoleList(List<UserRole> userRoleList) {
+    public void setUserRoleList(List<RoleDTO> userRoleList) {
         this.userRoleList = userRoleList;
     }
 }

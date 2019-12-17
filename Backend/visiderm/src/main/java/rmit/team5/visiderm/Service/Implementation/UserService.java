@@ -5,7 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import rmit.team5.visiderm.DAO.Intereface.IRoleDAO;
 import rmit.team5.visiderm.DAO.Intereface.IUserDAO;
+import rmit.team5.visiderm.DTO.RoleDTO;
 import rmit.team5.visiderm.DTO.UserDTO;
 import rmit.team5.visiderm.Model.UserInfo.UserAccount;
 import rmit.team5.visiderm.Model.UserInfo.UserRole;
@@ -17,18 +19,21 @@ import java.util.*;
 public class UserService implements IUserService {
     private static final int PAGE_LIMIT = 10;
     private final IUserDAO userDAO;
+    private final IRoleDAO roleDAO;
 
     @Autowired
-    public UserService(IUserDAO userDAO) {
+    public UserService(IUserDAO userDAO, IRoleDAO roleDAO) {
         this.userDAO = userDAO;
+        this.roleDAO = roleDAO;
     }
 
     @Override
     public boolean addUser(UserDTO userDTO) {
         try {
-            userDAO.save(copyFromDTO(userDTO, new UserAccount()));
+            userDAO.saveAndFlush(copyFromDTO(userDTO, new UserAccount()));
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -37,7 +42,7 @@ public class UserService implements IUserService {
     public boolean updateUser(UserDTO userDTO, long ID) {
         Optional<UserAccount> userRequested = userDAO.findById(ID);
         if (userRequested.isPresent()) {
-            userDAO.save(copyFromDTO(userDTO, userRequested.get()));
+            userDAO.saveAndFlush(copyFromDTO(userDTO, userRequested.get()));
             return true;
         } return false;
     }
@@ -46,7 +51,11 @@ public class UserService implements IUserService {
         user.setUsername(userDTO.getUsername().trim());
         user.setPassword(userDTO.getPassword().trim());
         user.setEnable(userDTO.getEnable());
-        user.setUserRoleList(userDTO.getUserRoleList());
+        for (RoleDTO roleDTO : userDTO.getUserRoleList()) {
+            UserRole role = new UserRole();
+            role.setName(roleDTO.getName());
+            user.addUserRole(role);
+        }
         return user;
     }
 
@@ -71,7 +80,7 @@ public class UserService implements IUserService {
     @Override
     public HashMap<String, Object> getRoles(int page) {
         Pageable pageable = PageRequest.of(page-1, PAGE_LIMIT);
-        Page<UserRole> pagedResults = userDAO.getUserRoles(pageable);
+        Page<UserRole> pagedResults = roleDAO.getUserRoles(pageable);
         List<HashMap<String, Object>> results = new ArrayList<>();
         for (UserRole role : pagedResults.getContent())
             results.add(createRoleHashMap(role));
@@ -81,7 +90,7 @@ public class UserService implements IUserService {
     @Override
     public HashMap<String, Object> getUserRoles(long id, int page) {
         Pageable pageable = PageRequest.of(page-1, PAGE_LIMIT);
-        Page<UserRole> pagedResults = userDAO.getUserRoles(id, pageable);
+        Page<UserRole> pagedResults = roleDAO.getUserRoles(id, pageable);
         List<HashMap<String, Object>> results = new ArrayList<>();
         for (UserRole role : pagedResults.getContent())
             results.add(createRoleHashMap(role));
