@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="./css/form-validation.css" rel="stylesheet"> -->
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <title>Screen8</title>
+</head>
+
+<body class="bg-light">
+
+    <div class="container">
+        <!-- jumbotron update -->
+        <div class="py-5 text-center">
+            <h2>INTERNAL CENTRAL PATIENT RECORD SIR JOHN MONASH HOSPITAL</h2>
+        </div>
+
+        <!-- Updating Patient Visit Record -->
+        <div class="row">
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Patient Visit Record Updating</h4>
+                <hr class="mb-4">
+            </div>
+
+           
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 order-md-1 mb-1">
+
+                <form class="needs-validation" novalidate>
+                    <!-- Date -->
+                    <div class="row">
+                        <div class="col-md-12 mb-1">
+                            <label for="date">Date</label>
+                            <input type="text" class="form-control" name="date" value="10/24/1984" />
+                        </div>
+                    </div>
+                    <!-- Time -->
+                    <div class="row">
+                        <div class="col-md-12 mb-1">
+                            <label for="time">Time</label>
+                            <input type="text" class="form-control" id="time" placeholder="" value="" required>
+                        </div>
+                    </div>
+
+                    <!-- Doctor -->
+                    <div class="row">
+                        <div class="col-md-12 mb-1">
+                            <label for="doctor">Doctor</label>
+                            <input type="text" class="form-control" id="patientID" placeholder="" value="" required>
+                        </div>
+                    </div>
+
+                    <!-- Clinic -->
+                    <div class="row">
+                        <div class="col-md-12 mb-1">
+                            <label for="clinic">Clinic</label>
+                            <input type="text" class="form-control" id="clinic" placeholder="" value="" required>
+                        </div>
+                    </div>
+
+                    <!-- Patient Name & ID -->
+                    <div class="row">
+                        <div class="col-md-8 mb-1">
+                            <label for="patientname">Patient Name</label>
+                            <input type="text" class="form-control" id="patientname" placeholder="" value="" required>
+
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <label for="patientID">Patient ID Number</label>
+                            <input type="text" class="form-control" id="patientID" placeholder="" value="" required>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-3 order-md-2 mb-1">
+                <br>
+                <img style="min-height: 325px; height: 325px;" src="./images/picture.png" class="rounded mx-auto d-block" alt="...">
+                <small style="color: red; text-align: center;">Click on the body image to locate the new lesion</small>
+
+            </div>  
+        </div>
+        <br class="mb-4">
+
+        <!-- add new lesion -->
+        <div class="row">
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Add new Lesion</h4>
+                <hr class="mb-4">
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 order-md-1">
+
+                <form class="needs-validation" novalidate>
+                    <!-- Date -->
+                    <div class="row">
+                        <div class="col-md-12 mb-1">
+                            <label for="date">Date</label>
+                            <input type="text" class="form-control" name="date" value="10/24/1984" />
+                        </div>
+                    </div>
+                    <!-- Time -->
+                    <div class="row">
+                        <div class="col-md-12 mb-1">
+                            <label for="time">Time</label>
+                            <input type="text" class="form-control" id="time" placeholder="" value="" required>
+                        </div>
+                    </div>
+
+                    <!-- Lesion ID & size -->
+                    <div class="row">
+                        <div class="col-md-8 mb-1">
+                            <label for="lesionid">Lesion ID</label>
+                            <input type="text" class="form-control" id="lesionid" placeholder="" value="" required>
+
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <label for="size">Lesion Size</label>
+                            <input type="text" class="form-control" id="size" placeholder="" value="" required>
+                        </div>
+                    </div> 
+
+
+                    <!-- Lesion Location -->
+                    <div class="row">
+                        <div class="col-md-12 mb-1">
+                            <label for="location">Lesion Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="" value="" required>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="col-md-4 order-md-2">
+                <div class="form-group row">
+                    <label for="note">Note</label>
+                    <textarea class="form-control" id="note" rows="3"></textarea>
+                  </div>
+            </div>
+        </div>
+
+        <!-- button -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-block" type="submit">Update Record</button>
+
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-block" type="submit">Cancel</button>
+
+            </div>
+        </div>
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+
+        </footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"
+        integrity="sha256-ifihHN6L/pNU1ZQikrAb7CnyMBvisKG3SUAab0F3kVU=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(function () {
+            $('input[name="date"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                minYear: 1901,
+                maxYear: parseInt(moment().format('YYYY'), 10)
+            }, function (start, end, label) {
+                var years = moment().diff(start, 'years');
+                // alert("You are " + years + " years old!");
+            });
+        });
+    </script>
+</body>
+
+</html>

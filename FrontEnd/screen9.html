@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-    <title>Screen7</title>
+    <title>Screen9</title>
 </head>
 
 <body class="bg-light">
@@ -24,7 +24,7 @@
     <div class="container">
         <!-- jumbotron update -->
         <div class="py-5 text-center">
-            <h2>INTERNAL CENTRAL PATIENT RECORD SIR JOHN MONASH HOSPITAL</h2>
+            <h2>LESION RECORD SIR JOHN MONASH HOSPITAL</h2>
         </div>
 
 
@@ -33,58 +33,43 @@
             <div class="col-md-6 order-md-1">
 
                 <form class="needs-validation" novalidate>
-                    <!-- Date -->
+                    <!-- Lesion ID -->
                     <div class="form-group row">
-                        <label for="date" class="col-sm-3 col-form-label">Date:</label>
-                        <label for="date" class="col-sm-9 col-form-label">25/05/1995</label>
+                        <label for="lesionid" class="col-sm-4 col-form-label">Lesion ID:</label>
+                        <label for="lesionid" class="col-sm-8 col-form-label">ED1389</label>
                       </div>
                       
-                      <!-- Time -->
-                      <div class="form-group row">
-                        <label for="time" class="col-sm-3 col-form-label">Time:</label>
-                        <label for="time" class="col-sm-9 col-form-label">02:00 PM - 03:00 PM (US/Eastern)</label>
-                      </div>
                       <!-- Doctor -->
                       <div class="form-group row">
-                        <label for="doctor" class="col-sm-3 col-form-label">Doctor:</label>
-                        <label for="doctor" class="col-sm-9 col-form-label">Jim Boyce</label>
+                        <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
+                        <label for="doctor" class="col-sm-8 col-form-label">Jim Baye</label>
                       </div>
-                      <!-- Clinic -->
+                      <!-- Patient -->
                       <div class="form-group row">
-                        <label for="clinic" class="col-sm-3 col-form-label">Clinic:</label>
-                        <label for="clinic" class="col-sm-9 col-form-label">Clayton Medical Center</label>
+                        <label for="patient" class="col-sm-4 col-form-label">Patient:</label>
+                        <label for="patient" class="col-sm-8 col-form-label">Anthony Hopkin</label>
                       </div>
-                      <!-- Patient Name -->
+                      <!-- Lesion Location -->
                       <div class="form-group row">
-                        <label for="patientname" class="col-sm-3 col-form-label">Patient Name:</label>
-                        <label for="patientname" class="col-sm-9 col-form-label">Mr Anthony Hopkin</label>
+                        <label for="location" class="col-sm-4 col-form-label">Leision Location:</label>
+                        <label for="location" class="col-sm-8 col-form-label">Lelt am</label>
                       </div>
-                      <!-- Patient ID -->
+                      <!-- Status -->
                       <div class="form-group row">
-                        <label for="patientid" class="col-sm-3 col-form-label">Patient ID:</label>
-                        <label for="patientid" class="col-sm-9 col-form-label">12345678</label>
+                        <label for="status" class="col-sm-4 col-form-label">Status:</label>
+                        <label for="status" class="col-sm-8 col-form-label">Hamless Active</label>
                       </div>
-                   
                 </form>
             </div>
+
             <div class="col-md-3 order-md-1"></div>
 
             <div class="col-md-3 order-md-2 mb-1">
                 <div class="form-group row">
-                    <button class="btn btn-primary btn-block" type="submit">Create New Visit Record</button>
-
+                    <button class="btn btn-primary btn-block" type="submit">Update record</button>
                   </div>
-
                   <div class="form-group row">
-                    <button class="btn btn-primary btn-block" type="submit">Create New Visit Record</button>
-
-                  </div>
-
-                
-
-                  <div class="form-group row">
-                    <button class="btn btn-primary btn-block" type="submit">Create New Visit Record</button>
-
+                    <button class="btn btn-primary btn-block" type="submit">Add new lesion image</button>
                   </div>
                 <br class="mb-4">
                 <br>   
@@ -101,37 +86,49 @@
         <!-- Visit Information and note -->
         <div class="row">
             <div class="col-md-12 order-md-1">
-                <h4 class="mb-3">Visit Information and Notes</h4>
+                <h4 class="mb-3">History of Lesion</h4>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-8 order-md-1">
-
-                <form class="needs-validation" novalidate>
-                    <!-- Date -->
-                    
-                    <div class="form-group row">
-                        <label for="exampleFormControlTextarea1">Example textarea</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                      </div>
-
-                    <div class="form-group row">
-                        <label for="date" class="col-sm-3 col-form-label">Lesion ED1389</label>
-                        <label for="date" class="col-sm-9 col-form-label">Taken: 02:00 PM</label>
-                        <!-- insert image -->
-                      </div>
-                </form>
+            <div class="col-md-3 order-md-1">
+                    <li class="list-group-item">
+                        <label for="date" class="col-sm-12 col-form-label">25/05/1995</label>
+                        <label for="time" class="col-sm-12 col-form-label">02:00PM</label>
+                        <label for="size" class="col-sm-12 col-form-label">50 cm in size</label>
+                    </li>
             </div>
-            <div class="col-md-1 order-md-1"></div>
+            <div class="col-md-2 order-md-1">
+                <img style="min-height: 140px; height: 140px;" src="./images/lesion.png" class="rounded mx-auto d-block" alt="...">
+
+            </div>
     
             <!-- Body Image ???? -->
-            <div class="col-md-3 order-md-2 mb-1">
-                <img style="min-height: 325px; height: 325px;" src="./images/picture.png" class="rounded mx-auto d-block" alt="...">
+            <div class="col-md-7 order-md-2">
+                <form class="form-inline">
+                    <label for="status" class="mb-2">Note:</label>
 
+                    <div class="form-group mx-sm-3 mb-2">
+                      <!-- <label for="inputPassword2" class="sr-only">Password</label> -->
+                      <textarea class="form-control" id="" rows="5" style="width: 500px;"></textarea>
+
+                      <!-- <input type="password" class="form-control" id="inputPassword2" placeholder="Password"> -->
+                    </div>
+                  </form>
                 <br class="mb-4">
                 <br>
             </div>  
+        </div>
+<!-- CBIR Button -->
+        <div class="row mt-2">
+            <div class="col-md-9">
+
+            </div>
+            
+            <div class="col-md-3">
+                <button class="btn btn-primary btn-block" type="submit">CBIR Search for similar lesion</button>
+
+            </div>
         </div>
        
 
