@@ -50,9 +50,10 @@ public class UserService implements IUserService {
     public boolean validate(String username, String password) {
         Pageable pageable = PageRequest.of(0, PAGE_LIMIT);
         Page<UserAccount> page = userDAO.findMatchingUsername(username.trim(), pageable);
-        Iterator<UserAccount> iterator = page.iterator();
-        if (page.getSize()>0 && iterator.hasNext())         // in this case, it should return a single user
-            return page.iterator().next().getPassword().equals(password.trim());
+        List<UserAccount> accounts = page.getContent();
+        for (UserAccount account : accounts)
+            if (account.getPassword().equals(password.trim()))
+                return true;
         return false;
     }
 
