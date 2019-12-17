@@ -35,8 +35,8 @@ public class PatientController {
     }
 
     // use for screen 1
-    @GetMapping(path = "/single/{ID}")
-    public ResponseEntity<?> getPatientSummaryByID(@PathVariable Long ID) {
+    @GetMapping(path = "/single")
+    public ResponseEntity<?> getPatientSummaryByID(@RequestParam Long ID) {
         HashMap<String, Object> patientInfo = patientService.getPatientByID(ID);
         return ResponseEntity.ok(patientInfo);
     }
@@ -56,8 +56,8 @@ public class PatientController {
     }
 
     // use for screen 2
-    @GetMapping(path = "/detail/{ID}")
-    public ResponseEntity<?> getPatientDetail (@PathVariable Long ID) {
+    @GetMapping(path = "/detail")
+    public ResponseEntity<?> getPatientDetail (@RequestParam Long ID) {
         Patient patient = patientService.getPatientDetail(ID);
         if (patient != null) return ResponseEntity.ok(patient);
         else return ResponseEntity.notFound().build();

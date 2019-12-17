@@ -25,6 +25,7 @@ public class Patient {
     private String title;
 
     @Column(name = "birthDay")
+    @Temporal(TemporalType.DATE)
     private Date birthDay;
 
     @Column(name = "married")

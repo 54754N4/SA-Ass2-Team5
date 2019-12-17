@@ -68,8 +68,6 @@ public class PatientService implements IPatientService {
     public boolean addNewPatient(PatientDTO patientDTO) {
         Patient newPatient = new Patient();
         getPatientInfoFromDTO(patientDTO, newPatient);
-        newPatient.setOccupation(patientDTO.getOccupation());
-        newPatient.setMarried(patientDTO.isMarried());
 
         ContactInfo contactInfo = getContactInfoFromDTO(patientDTO);
         contactInfo.setPatient(newPatient);
@@ -129,9 +127,9 @@ public class PatientService implements IPatientService {
             HashMap<String, Object> singlePatient = constructPatientSumInfo(p);
             patientResult.add(singlePatient);
         }
-        returnPatientList.put("data", patientResult);
         returnPatientList.put("totalPage", queryResult.getTotalPages());
         returnPatientList.put("currentPage", queryResult.getPageable().getPageNumber() + 1);
+        returnPatientList.put("data", patientResult);
         return returnPatientList;
     }
 
