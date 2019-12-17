@@ -13,5 +13,5 @@ public interface IRoleDAO extends JpaRepository<UserRole, Long> {
     Page<UserRole> getUserRoles(long id, Pageable pageable);
 
     @Query("select distinct r.name from UserRole r")
-    Page<UserRole> getUserRoles(Pageable pageable);
+    Page<String> getUserRoles(Pageable pageable);
 }

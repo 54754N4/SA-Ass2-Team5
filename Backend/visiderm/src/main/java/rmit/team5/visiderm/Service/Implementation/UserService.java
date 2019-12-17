@@ -80,10 +80,10 @@ public class UserService implements IUserService {
     @Override
     public HashMap<String, Object> getRoles(int page) {
         Pageable pageable = PageRequest.of(page-1, PAGE_LIMIT);
-        Page<UserRole> pagedResults = roleDAO.getUserRoles(pageable);
+        Page<String> pagedResults = roleDAO.getUserRoles(pageable);
         List<HashMap<String, Object>> results = new ArrayList<>();
-        for (UserRole role : pagedResults.getContent())
-            results.add(createRoleHashMap(role));
+        for (String role : pagedResults.getContent())
+            results.add(createNameHashMap(role));
         return createQueryResultHashMap(results, pagedResults);
     }
 
@@ -105,9 +105,13 @@ public class UserService implements IUserService {
         return result;
     }
 
-    private static HashMap<String, Object> createRoleHashMap(UserRole role) {
+    private static HashMap<String, Object> createNameHashMap(String value) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("name", role.getName());
+        map.put("name", value);
         return map;
+    }
+
+    private static HashMap<String, Object> createRoleHashMap(UserRole role) {
+        return createNameHashMap(role.getName());
     }
 }
