@@ -25,8 +25,12 @@ public class UserService implements IUserService {
 
     @Override
     public boolean addUser(UserDTO userDTO) {
-        userDAO.save(copyFromDTO(userDTO, new UserAccount()));
-        return true;
+        try {
+            userDAO.save(copyFromDTO(userDTO, new UserAccount()));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
