@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/form-validation.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <title>Screen2</title>
+</head>
+
+<body class="bg-light">
+
+    <div class="container">
+        <!-- jumbotron update -->
+        <div class="py-5 text-center">
+            <h2>INTERNAL CENTRAL PATIENT RECORD SIR JOHN MONASH HOSPITAL</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 order-md-1">
+                <h4 class="mb-3">Patient List</h4>
+                <hr class="mb-4">
+            </div>
+        </div>
+
+        <form class="form-inline">
+            <div class="form-group mb-4">
+                <label for="sdate">Mon 04/04/2006</label>
+              </div>
+              <div class="form-group mx-sm-3 mb-4">
+                <label for="page" class="mr-2 ml-4">Page</label>
+                <input type="number" class="form-control w-10" id="page" value="1">
+              </div>
+
+              <button type="submit" class="btn btn-primary mb-4 ml-4">Search</button>
+              
+            <div class="form-group mx-sm-3 mb-4">
+              <label for="inputPassword2" class="sr-only">Password</label>
+              <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+            </div>
+
+            <div class="form-group mx-sm-3 mb-4">
+                <label for="search" class="mr-2 ml-4">By</label>
+                <select class="form-control" id="search" required>
+                    <option value="">Name</option>
+                    <option value="">ID</option>
+
+
+                </select>
+              </div>
+          </form>
+
+        <div class="row">
+            <!-- Patient List -->
+            <div class="col-md-12">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- DETAILS OF PATIENT TABLE -->
+                            <table class="table text-center table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="cl">Name</th>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Sex</th>
+                                        <th scope="col">Date of Birth</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Phone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Anthony Taylor</td>
+                                        <td>123456789</td>
+                                        <td>M</td>
+                                        <td>23/09/1964</td>
+                                        <td>29 Irwin Street Clayton</td>
+                                        <td>0421567888</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                </form>
+            </div>
+        </div>
+
+        <!-- Visit Summary -->
+        <br>
+        <div class="row">
+            <div class="col-md-12 order-md-1">
+                <h4 class="mb-3">Visit Summary</h4>
+                <hr class="mb-4">
+            </div>
+        </div>
+
+        <div class="row">
+            <ul class="col-md-12 list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Product name</h6>
+                        <small class="text-muted">Brief description</small>
+
+                    </div>
+                    <span class="text-muted">$12</span>
+
+                    <span class="text-muted">$12</span>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Third item</h6>
+                        <small class="text-muted">Brief description</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Third item</h6>
+                        <small class="text-muted">Brief description</small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+
+        </footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"
+        integrity="sha256-ifihHN6L/pNU1ZQikrAb7CnyMBvisKG3SUAab0F3kVU=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+</body>
+
+</html>
