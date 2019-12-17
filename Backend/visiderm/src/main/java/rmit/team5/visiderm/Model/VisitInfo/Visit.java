@@ -3,7 +3,6 @@ package rmit.team5.visiderm.Model.VisitInfo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
-import rmit.team5.visiderm.Model.LesionInfo.Lesion;
 import rmit.team5.visiderm.Model.PatientInfo.Patient;
 
 import javax.persistence.*;

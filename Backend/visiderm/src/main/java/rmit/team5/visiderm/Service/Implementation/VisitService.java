@@ -12,13 +12,10 @@ import rmit.team5.visiderm.DTO.VisitDTO;
 import rmit.team5.visiderm.Exception.AllFieldValuedException;
 import rmit.team5.visiderm.Exception.PatientNotFoundException;
 import rmit.team5.visiderm.Exception.VisitNotFoundException;
-import rmit.team5.visiderm.Model.LesionInfo.Lesion;
-import rmit.team5.visiderm.Model.LesionInfo.LesionHistory;
 import rmit.team5.visiderm.Model.PatientInfo.Patient;
 import rmit.team5.visiderm.Model.VisitInfo.Visit;
 import rmit.team5.visiderm.Service.Interface.IVisitService;
 
-import java.sql.Time;
 import java.util.*;
 
 @Service
@@ -174,27 +171,27 @@ public class VisitService implements IVisitService {
             }else return true;
         }else return true;
     }
-
-    private Lesion addNewLesion (VisitDTO visitDTO) {
-        Date lesionDate = visitDTO.getLesionDate();
-        Double lesionSize = visitDTO.getLesionSize();
-        Date lesionTime = visitDTO.getLesionTime();
-        String lesionLocation = visitDTO.getLesionLocation();
-        String lesionNote = visitDTO.getLesionNote();
-        // create lesion record
-        Lesion lesion = new Lesion();
-        lesion.setLocation(lesionLocation);
-        lesion.setStatus("NEW");
-        // create new lesion history and add it to the lesion history list
-        LesionHistory lesionHistory = new LesionHistory();
-        lesionHistory.setDateTaken(lesionDate);
-        lesionHistory.setTimeTaken(lesionTime);
-        lesionHistory.setSize(lesionSize);
-        lesionHistory.setDoctorNote(lesionNote);
-        // add to the lesion history
-        List<LesionHistory> lesionHistoryList = lesion.getHistoryList();
-        lesionHistoryList.add(lesionHistory);
-        lesion.setHistoryList(lesionHistoryList);
-        return lesion;
-    }
+//
+//    private Lesion addNewLesion (VisitDTO visitDTO) {
+//        Date lesionDate = visitDTO.getLesionDate();
+//        Double lesionSize = visitDTO.getLesionSize();
+//        Date lesionTime = visitDTO.getLesionTime();
+//        String lesionLocation = visitDTO.getLesionLocation();
+//        String lesionNote = visitDTO.getLesionNote();
+//        // create lesion record
+//        Lesion lesion = new Lesion();
+//        lesion.setLocation(lesionLocation);
+//        lesion.setStatus("NEW");
+//        // create new lesion history and add it to the lesion history list
+//        LesionHistory lesionHistory = new LesionHistory();
+//        lesionHistory.setDateTaken(lesionDate);
+//        lesionHistory.setTimeTaken(lesionTime);
+//        lesionHistory.setSize(lesionSize);
+//        lesionHistory.setDoctorNote(lesionNote);
+//        // add to the lesion history
+//        List<LesionHistory> lesionHistoryList = lesion.getHistoryList();
+//        lesionHistoryList.add(lesionHistory);
+//        lesion.setHistoryList(lesionHistoryList);
+//        return lesion;
+//    }
 }

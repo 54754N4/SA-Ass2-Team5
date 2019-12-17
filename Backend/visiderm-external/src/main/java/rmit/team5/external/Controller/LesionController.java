@@ -1,4 +1,4 @@
-package rmit.team5.visiderm.Controller;
+package rmit.team5.external.Controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
