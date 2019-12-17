@@ -129,9 +129,9 @@ public class PatientService implements IPatientService {
             HashMap<String, Object> singlePatient = constructPatientSumInfo(p);
             patientResult.add(singlePatient);
         }
-        returnPatientList.put("data", patientResult);
         returnPatientList.put("totalPage", queryResult.getTotalPages());
         returnPatientList.put("currentPage", queryResult.getPageable().getPageNumber() + 1);
+        returnPatientList.put("data", patientResult);
         return returnPatientList;
     }
 
