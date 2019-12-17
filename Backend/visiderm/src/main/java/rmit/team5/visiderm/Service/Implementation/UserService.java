@@ -39,8 +39,8 @@ public class UserService implements IUserService {
     }
 
     private static UserAccount copyFromDTO(UserDTO userDTO, UserAccount user) {
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
+        user.setUsername(userDTO.getUsername().trim());
+        user.setPassword(userDTO.getPassword().trim());
         user.setEnable(userDTO.getEnable());
         user.setUserRoleList(userDTO.getUserRoleList());
         return user;
@@ -49,10 +49,10 @@ public class UserService implements IUserService {
     @Override
     public boolean validate(String username, String password) {
         Pageable pageable = PageRequest.of(0, PAGE_LIMIT);
-        Page<UserAccount> page = userDAO.findMatchingUsername(username, pageable);
+        Page<UserAccount> page = userDAO.findMatchingUsername(username.trim(), pageable);
         Iterator<UserAccount> iterator = page.iterator();
         if (page.getSize()>0 && iterator.hasNext())         // in this case, it should return a single user
-            return page.iterator().next().getPassword().equals(password);
+            return page.iterator().next().getPassword().equals(password.trim());
         return false;
     }
 
@@ -83,7 +83,7 @@ public class UserService implements IUserService {
         return createQueryResultHashMap(results, pagedResults);
     }
 
-    private HashMap<String, Object> createQueryResultHashMap(List<?> data, Page<?> page) {
+    private static HashMap<String, Object> createQueryResultHashMap(List<?> data, Page<?> page) {
         HashMap<String, Object> result = new HashMap<>();
         result.put("data", data);
         result.put("totalPage", page.getTotalPages());
@@ -91,7 +91,7 @@ public class UserService implements IUserService {
         return result;
     }
 
-    private HashMap<String, Object> createRoleHashMap(UserRole role) {
+    private static HashMap<String, Object> createRoleHashMap(UserRole role) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", role.getName());
         return map;
