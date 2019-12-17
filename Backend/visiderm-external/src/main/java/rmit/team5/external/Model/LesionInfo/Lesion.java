@@ -1,8 +1,4 @@
-package rmit.team5.visiderm.Model.LesionInfo;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import rmit.team5.visiderm.Model.VisitInfo.Visit;
+package rmit.team5.external.Model.LesionInfo;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -29,21 +25,11 @@ public class Lesion {
     @Column(name = "status")
     private String status;
 
-   // private List<Long> lesionHistory;  //why do we need long here ? should we have the class in lesion history
+    @Column(name = "visitID")
+    private Long visitID;
 
-    @ManyToOne
-    @Cascade(CascadeType.PERSIST)
-    @JoinColumn(name = "visitID", referencedColumnName ="visitID")
-    private Visit visit;
-
-    @OneToMany(mappedBy = "lesion", fetch = FetchType.LAZY, orphanRemoval = true)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.MERGE})
-    private List<LesionHistory> historyList;
-
-    public Lesion () {
-        super();
-        historyList = new ArrayList<>();
-    }
+    @OneToMany(mappedBy = "lesion", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<LesionHistory> historyList = new ArrayList<>();
 
     public long getLesionID() {
         return lesionID;
@@ -101,11 +87,21 @@ public class Lesion {
         this.historyList = historyList;
     }
 
-    public Visit getVisit() {
-        return visit;
+    public Long getVisitID() {
+        return visitID;
     }
 
-    public void setVisit(Visit visit) {
-        this.visit = visit;
+    public void setVisitID(Long visitID) {
+        this.visitID = visitID;
+    }
+
+    public void addLesionHistory(LesionHistory history) {
+        historyList.add(history);
+        history.setLesion(this);
+    }
+
+    public void removeLesionHistory(LesionHistory history) {
+        historyList.remove(history);
+        history.setLesion(null);
     }
 }

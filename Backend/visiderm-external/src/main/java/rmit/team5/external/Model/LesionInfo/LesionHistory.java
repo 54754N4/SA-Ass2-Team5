@@ -1,4 +1,4 @@
-package rmit.team5.visiderm.Model.LesionInfo;
+package rmit.team5.external.Model.LesionInfo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Cascade;
@@ -31,13 +31,10 @@ public class LesionHistory {
     @Column(name = "size")
     private double size;
 
-
     @ManyToOne
     @JoinColumn(name= "lesionID")
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Lesion lesion;
-
-    public LesionHistory () {}
 
     public long getHistoryID() {
         return historyID;
