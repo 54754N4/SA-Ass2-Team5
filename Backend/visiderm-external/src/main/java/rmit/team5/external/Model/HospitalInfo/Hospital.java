@@ -1,12 +1,6 @@
-package rmit.team5.visiderm.Model.HospitalInfo;
-
-import org.hibernate.annotations.Cascade;
-import rmit.team5.visiderm.Model.CountryMapInfo.CountryMap;
+package rmit.team5.external.Model.HospitalInfo;
 
 import javax.persistence.*;
-
-import static org.hibernate.annotations.CascadeType.ALL;
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Entity
 @Table(name = "hospital")
@@ -33,11 +27,6 @@ public class Hospital {
 
     @Column(nullable = false)
     private String loginScreenURL;
-
-    @ManyToOne
-    @JoinColumn(name= "mapID")
-    @Cascade({ALL})
-    private CountryMap map;
 
     public Long getId() {
         return id;
@@ -93,13 +82,5 @@ public class Hospital {
 
     public void setLatitude(Float latitude) {
         this.latitude = latitude;
-    }
-
-    public CountryMap getMap() {
-        return map;
-    }
-
-    public void setMap(CountryMap map) {
-        this.map = map;
     }
 }
