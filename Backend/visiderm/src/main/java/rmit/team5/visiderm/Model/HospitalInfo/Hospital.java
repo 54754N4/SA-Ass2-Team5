@@ -5,6 +5,7 @@ import rmit.team5.visiderm.Model.CountryMapInfo.CountryMap;
 
 import javax.persistence.*;
 
+import static org.hibernate.annotations.CascadeType.ALL;
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Entity
@@ -35,7 +36,7 @@ public class Hospital {
 
     @ManyToOne
     @JoinColumn(name= "mapID")
-    @Cascade(SAVE_UPDATE)
+    @Cascade({ALL})
     private CountryMap map;
 
     public Long getId() {

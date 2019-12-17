@@ -7,8 +7,7 @@ import rmit.team5.visiderm.Model.HospitalInfo.Hospital;
 import javax.persistence.*;
 import java.util.List;
 
-import static org.hibernate.annotations.CascadeType.MERGE;
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
+import static org.hibernate.annotations.CascadeType.*;
 
 @Entity
 @Table(name = "map")
@@ -19,12 +18,12 @@ public class CountryMap {
     private Long id;
 
     @Lob
-    @Column(name="mapImage", nullable=false)
+    @Column(nullable=false)
     @Type(type="org.hibernate.type.BinaryType")
     private byte[] map;
 
     @OneToMany(mappedBy = "map", fetch = FetchType.LAZY, orphanRemoval = true)
-    @Cascade({SAVE_UPDATE, MERGE})
+    @Cascade({ALL})
     private List<Hospital> hospitalList;
 
     public Long getId() {

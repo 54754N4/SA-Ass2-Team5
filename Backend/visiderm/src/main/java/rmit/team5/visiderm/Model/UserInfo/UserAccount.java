@@ -5,8 +5,7 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.util.List;
 
-import static org.hibernate.annotations.CascadeType.MERGE;
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
+import static org.hibernate.annotations.CascadeType.*;
 
 @Entity
 @Table(name = "account")
@@ -26,7 +25,7 @@ public class UserAccount {
     private Boolean enable;     // what is this boolean for btw ? =o i saw in class diagram so i added it but i'm confused
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, orphanRemoval = true)
-    @Cascade({SAVE_UPDATE, MERGE})
+    @Cascade({ALL})
     private List<UserRole> userRoleList;
 
     public Long getId() {

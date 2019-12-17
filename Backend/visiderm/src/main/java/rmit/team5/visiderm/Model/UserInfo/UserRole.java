@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
+import static org.hibernate.annotations.CascadeType.ALL;
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Entity
@@ -19,7 +20,7 @@ public class UserRole {
 
     @ManyToOne
     @JoinColumn(name= "accountID")
-    @Cascade(SAVE_UPDATE)
+    @Cascade({ALL})
     private UserAccount account;
 
     public UserAccount getAccount() {
