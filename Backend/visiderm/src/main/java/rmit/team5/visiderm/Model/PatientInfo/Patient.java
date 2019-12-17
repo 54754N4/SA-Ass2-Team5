@@ -36,13 +36,13 @@ public class Patient {
     @Column(name = "email")
     private String email;
 
-    @OneToOne(cascade = {CascadeType.MERGE}, mappedBy = "patient")
+    @OneToOne(cascade = {CascadeType.ALL}, mappedBy = "patient")
     private Address homeAddress;
 
-    @OneToOne(cascade = {CascadeType.MERGE}, mappedBy = "patient")
+    @OneToOne(cascade = {CascadeType.ALL}, mappedBy = "patient")
     private NextToKin nextToKin;
 
-    @OneToOne(cascade = {CascadeType.MERGE}, mappedBy = "patient")
+    @OneToOne(cascade = {CascadeType.ALL}, mappedBy = "patient")
     private ContactInfo contactInfo;
 
     // constructors
