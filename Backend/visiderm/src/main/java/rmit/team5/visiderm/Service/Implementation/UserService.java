@@ -74,7 +74,7 @@ public class UserService implements IUserService {
     public UserAccount getUser(long id) {
         Optional<UserAccount> result = userDAO.findById(id);
         if (result.isPresent()) return result.get();
-        else return null;
+        return null;
     }
 
     @Override
