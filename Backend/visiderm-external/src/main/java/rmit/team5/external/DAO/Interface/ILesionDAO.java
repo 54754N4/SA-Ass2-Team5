@@ -19,7 +19,4 @@ public interface ILesionDAO extends JpaRepository<Lesion, Long> {
             "or l.doctorNote like %?1%")
     Page<Lesion> getLesionsMatching(String keyword, Pageable pageable);
 
-    @Query("select lesion from Lesion lesion")
-    Page<Lesion> getLesions(Pageable pageable);
-
 }
