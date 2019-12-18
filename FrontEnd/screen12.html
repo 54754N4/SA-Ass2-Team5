@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom styles for this template -->
+    <link href="./css/form-validation.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+    />
+
+    <title>Screen 12</title>
+    <style>
+     /* Set the size of the div element that contains the map */
+     #map {
+            height: 400px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+        #map1 {
+            height: 300px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+        </style>
+        
+  </head>
+
+  <body class="bg-light">
+    <div class="container">
+      <!-- jumbotron update -->
+      <div class="py-5 text-center">
+        <h2>CONNECT TO EXTERNAL HOSPTALS</h2>
+        <h2>SIR JOHN MONASH HOSPITAL</h2>
+      </div>
+
+      <div class="row">
+        <div class="col md-8">
+          <h2>World System Map</h2>
+          <div class="card">
+            <div class="card-header">
+              Region
+            </div>
+            <div class="card-body">
+                    <div id="map"></div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col md-4">
+          <h3>Manual Search</h3>
+          <div class="row">
+            <div class="col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01"
+                    >Country</label
+                  >
+                </div>
+                <select class="custom-select" id="countryHospitalSelect" onchange="onCountryChoose()">
+                  <option selected>Choose...</option>
+                  <option value="vn">Vietnam</option>
+                  <option value="us">US</option>
+                  <option value="aus">Australia</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary">Search</button>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+              <div class="card" style="width: 100%">
+                  <div class="card-header">
+                    Region
+                  </div>
+                  <div class="card-body">
+                      <div id="map1"></div>
+                
+                  </div>
+                </div>
+          </div>
+          <br>
+          <div class="row">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="countrySelect"
+                      >Country</label
+                    >
+                  </div>
+                  <select class="custom-select" id="countrySelect" onchange="onCountryChange()">
+                    <option selected>Choose...</option>
+                    <option value="vn">Vietnam</option>
+                    <option value="us">US</option>
+                    <option value="aus">Australia</option>
+                  </select>
+                </div>
+                <div class="input-group" style="padding-top: 10px">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="hospitalSelect"
+                        >Hospital</label
+                      >
+                    </div>
+                    <select class="custom-select" id="hospitalSelect" onchange="onChangeHospital()">
+                      <option selected>Choose...</option>
+                      <option value="hcmHospital">Ho Chi Minh Hospital</option>
+                      <option value="texasHospital">Texas Hospital</option>
+                      <option value="rmitHospital">RMIT Hospital</option>
+                    </select>
+                  </div>
+            </div>
+            <div class="input-group" style="padding-top: 10px">
+                <button class="btn btn-block btn-primary">Search</button>
+        </div>
+        </div>
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small"></footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"
+  ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"
+      integrity="sha256-ifihHN6L/pNU1ZQikrAb7CnyMBvisKG3SUAab0F3kVU="
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+    ></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxb2O-Z7JbM2eUgwrLecjg4ijfbR23ujo&callback=initMap">
+    </script>
+    <script src="/js/mapFunction.js"></script>
+    <script>
+        var map, detailMap;
+         var marker;
+         function initMap() {
+           map = new google.maps.Map(document.getElementById("map"), {
+             zoom: 1,
+             center: { lat: 10.8231, lng: 106.6297 }
+           });
+
+           detailMap = new google.maps.Map(document.getElementById("map1"), {
+             zoom: 1,
+             center: { lat: 10.8231, lng: 106.6297 }
+           });
+         
+           setMarker(map, detailMap);
+         }
+       </script>
+
+  </body>
+</html>
