@@ -34,35 +34,35 @@
 
                 <form class="needs-validation" novalidate>
                     <!-- Date -->
-                    <div class="form-group row">
+                    <div class="row">
                         <label for="date" class="col-sm-3 col-form-label">Date:</label>
-                        <label for="date" class="col-sm-9 col-form-label">25/05/1995</label>
+                        <label for="date" class="col-sm-9 col-form-label" id="visitDate">25/05/1995</label>
                       </div>
                       
                       <!-- Time -->
-                      <div class="form-group row">
+                      <div class="row">
                         <label for="time" class="col-sm-3 col-form-label">Time:</label>
-                        <label for="time" class="col-sm-9 col-form-label">02:00 PM - 03:00 PM (US/Eastern)</label>
+                        <label for="time" class="col-sm-9 col-form-label" id="visitTime">02:00 PM - 03:00 PM (US/Eastern)</label>
                       </div>
                       <!-- Doctor -->
-                      <div class="form-group row">
+                      <div class="row">
                         <label for="doctor" class="col-sm-3 col-form-label">Doctor:</label>
-                        <label for="doctor" class="col-sm-9 col-form-label">Jim Boyce</label>
+                        <label for="doctor" class="col-sm-9 col-form-label" id="doctorName">Jim Boyce</label>
                       </div>
                       <!-- Clinic -->
-                      <div class="form-group row">
+                      <div class="row">
                         <label for="clinic" class="col-sm-3 col-form-label">Clinic:</label>
-                        <label for="clinic" class="col-sm-9 col-form-label">Clayton Medical Center</label>
+                        <label for="clinic" class="col-sm-9 col-form-label" id="clinic">Ho Chi Minh Hospital</label>
                       </div>
                       <!-- Patient Name -->
-                      <div class="form-group row">
+                      <div class="row">
                         <label for="patientname" class="col-sm-3 col-form-label">Patient Name:</label>
-                        <label for="patientname" class="col-sm-9 col-form-label">Mr Anthony Hopkin</label>
+                        <label for="patientname" class="col-sm-9 col-form-label" id="patientName">Mr Anthony Hopkin</label>
                       </div>
                       <!-- Patient ID -->
-                      <div class="form-group row">
+                      <div class="row">
                         <label for="patientid" class="col-sm-3 col-form-label">Patient ID:</label>
-                        <label for="patientid" class="col-sm-9 col-form-label">12345678</label>
+                        <label for="patientid" class="col-sm-9 col-form-label" id= "patientID">12345678</label>
                       </div>
                    
                 </form>
@@ -71,19 +71,15 @@
 
             <div class="col-md-3 order-md-2 mb-1">
                 <div class="form-group row">
-                    <button class="btn btn-primary btn-block" type="submit">Create New Visit Record</button>
-
+                    <button class="btn btn-primary btn-block" type="submit">Update Record</button>
                   </div>
 
                   <div class="form-group row">
-                    <button class="btn btn-primary btn-block" type="submit">Create New Visit Record</button>
-
+                    <button class="btn btn-primary btn-block" type="submit">Make new Record</button>
                   </div>
 
-                
-
                   <div class="form-group row">
-                    <button class="btn btn-primary btn-block" type="submit">Create New Visit Record</button>
+                    <button class="btn btn-primary btn-block" type="submit">Go to next Record</button>
 
                   </div>
                 <br class="mb-4">
@@ -106,26 +102,33 @@
         </div>
 
         <div class="row">
-            <div class="col-md-8 order-md-1">
+            <div class="col-md-8 order-md-1 mb-1">
 
                 <form class="needs-validation" novalidate>
-                    <!-- Date -->
-                    
-                    <div class="form-group row">
-                        <label for="exampleFormControlTextarea1">Example textarea</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                    <!-- visit note and lesion -->
+                    <div class="row">
+                        <textarea class="form-control" id="visitnote" rows="4" disabled></textarea>
                       </div>
 
-                    <div class="form-group row">
-                        <label for="date" class="col-sm-3 col-form-label">Lesion ED1389</label>
-                        <label for="date" class="col-sm-9 col-form-label">Taken: 02:00 PM</label>
-                        <!-- insert image -->
+                    <div class="row mt-2">
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <label for="date" class=" col-form-label">Lesion ED1389</label>
+                            </div>
+                            <div class="row">
+                                <label for="date" class="col-form-label">Taken: 02:00 PM</label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                            <img style="min-height: 100px; height: 100px;" src="./images/lesion.png" class="rounded mx-auto d-block" alt="...">
+                        </div>
                       </div>
                 </form>
             </div>
             <div class="col-md-1 order-md-1"></div>
     
-            <!-- Body Image ???? -->
             <div class="col-md-3 order-md-2 mb-1">
                 <img style="min-height: 325px; height: 325px;" src="./images/picture.png" class="rounded mx-auto d-block" alt="...">
 
@@ -159,6 +162,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="/js/visitDetailInfo.js"></script>
     <script>
         $(function () {
             $('input[name="birthday"]').daterangepicker({
@@ -168,9 +172,9 @@
                 maxYear: parseInt(moment().format('YYYY'), 10)
             }, function (start, end, label) {
                 var years = moment().diff(start, 'years');
-                alert("You are " + years + " years old!");
             });
         });
+        getVisitDetailInfo();
     </script>
 </body>
 

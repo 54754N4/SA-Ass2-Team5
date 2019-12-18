@@ -16,7 +16,7 @@ function setMarker (map, detailMap) {
         detailMarker = new google.maps.Marker({ map: detailMap});
     }
     // hcm city marker world map click will open the focus view on country map
-    // the same principle is applied for text and australias hospitals
+    // the same principle is applied for texas and australias hospitals
     hcmHospitalMaker.addListener('click', function() {
         detailMarker.setPosition(hcmHospital);
         detailMap.setCenter(detailMarker.getPosition());

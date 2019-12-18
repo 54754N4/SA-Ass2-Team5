@@ -45,19 +45,21 @@ public class VisitService implements IVisitService {
             Pageable pageRequest = PageRequest.of(page, PAGE_LIMIT, Sort.by("visitDate").ascending());
             Page<Visit> queryResult = visitDAO.getVisitByPatientID(patientID, pageRequest);
             List<Visit> patientVisitList = queryResult.getContent(); // get query result
-            // construct the date range of visit
-            int listLength = patientVisitList.size();
-            Date startDate = patientVisitList.get(0).getVisitDate();
-            Date endDate = patientVisitList.get(listLength - 1).getVisitDate();
-            String visitDateStr = startDate + " - " + endDate;
-            returnResult.put("visitDateRange", visitDateStr);
-            // add data of visit list
             List<HashMap<String, Object>> visitSumData = new ArrayList<>();
-            for (Visit v : patientVisitList) {
-                visitSumData.add(constructVisitSum(v));
+            if (patientVisitList.size() > 0) {
+                // construct the date range of visit
+                int listLength = patientVisitList.size();
+                Date startDate = patientVisitList.get(0).getVisitDate();
+                Date endDate = patientVisitList.get(listLength - 1).getVisitDate();
+                String visitDateStr = startDate + " - " + endDate;
+                returnResult.put("visitDateRange", visitDateStr);
+                // add data of visit list
+                for (Visit v : patientVisitList) {
+                    visitSumData.add(constructVisitSum(v));
+                }
             }
             returnResult.put("data", visitSumData);
-            returnResult.put("currentPage", queryResult.getPageable().getPageNumber());
+            returnResult.put("currentPage", queryResult.getPageable().getPageNumber() + 1);
             returnResult.put("totalPage", queryResult.getTotalPages());
         }else {
             returnResult.put("error", "Patient ID not found");
@@ -75,6 +77,7 @@ public class VisitService implements IVisitService {
             String patientName = patient.getTitle() + " " + patient.getFirstName() + " " + patient.getLastName();
             visitDetail = constructVisitSum(visit);
             visitDetail.put("patientName", patientName);
+            visitDetail.put("patientID", patient.getPatientID());
             visitDetail.put("doctorNote", visit.getVisitNote());
         }else visitDetail.put("error", "Visit is not found");
         return visitDetail;
@@ -134,6 +137,7 @@ public class VisitService implements IVisitService {
         visitSum.put("doctor", v.getDoctorName());
         visitSum.put("reason", v.getReason());
         visitSum.put("clinic", v.getClinic());
+        visitSum.put("id", v.getId());
         return visitSum;
     }
 
