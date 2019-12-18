@@ -72,9 +72,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserAccount getUser(long id) {
-        Optional<UserAccount> result = userDAO.findById(id);
-        if (result.isPresent()) return result.get();
-        return null;
+        return userDAO.findById(id).orElse(null);
     }
 
     @Override
