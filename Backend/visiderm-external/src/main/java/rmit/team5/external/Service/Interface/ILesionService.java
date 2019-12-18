@@ -8,7 +8,7 @@ import java.util.HashMap;
 public interface ILesionService {
     HashMap<String, Object> getLesionsBySize(int page, boolean desc);
     HashMap<String, Object> getLesionsByDate(int page, boolean desc);
-    HashMap<String, Object> getLesionsOfVisit(int page);
+    HashMap<String, Object> getLesionsOfVisit(String visitID, int page);
     Lesion getLesion(long lesionID);
 
     boolean add(LesionDTO lesionDTO);
