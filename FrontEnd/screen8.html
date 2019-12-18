@@ -43,54 +43,67 @@
                 <form class="needs-validation" novalidate>
                     <!-- Date -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="date">Date</label>
-                            <input type="text" class="form-control" name="date" value="10/24/1984" />
+                        </div>
+                        <div class="col-md-9 mb-1">
+                            <input type="text" class="form-control" name="date" value="" />
                         </div>
                     </div>
                     <!-- Time -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="time">Time</label>
-                            <input type="text" class="form-control" id="time" placeholder="" value="" required>
+                        </div>
+                        <div class="col-md-9 mb-1">
+                            <input type="text" class="form-control" name="time" value="" />
                         </div>
                     </div>
 
                     <!-- Doctor -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="doctor">Doctor</label>
-                            <input type="text" class="form-control" id="patientID" placeholder="" value="" required>
+                        </div>
+                        <div class="col-md-9 mb-1">
+                            <input type="text" class="form-control" name="doctor" value="" />
                         </div>
                     </div>
 
                     <!-- Clinic -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="clinic">Clinic</label>
-                            <input type="text" class="form-control" id="clinic" placeholder="" value="" required>
+                        </div>
+                        <div class="col-md-9 mb-1">
+                            <input type="text" class="form-control" name="Clinic" value="" />
                         </div>
                     </div>
 
                     <!-- Patient Name & ID -->
                     <div class="row">
-                        <div class="col-md-8 mb-1">
-                            <label for="patientname">Patient Name</label>
-                            <input type="text" class="form-control" id="patientname" placeholder="" value="" required>
-
+                        <div class="col-md-3 mb-1">
+                            <label for="name">Patient Name</label>
                         </div>
-                        <div class="col-md-4 mb-1">
-                            <label for="patientID">Patient ID Number</label>
-                            <input type="text" class="form-control" id="patientID" placeholder="" value="" required>
+                        <div class="col-md-9 mb-1">
+                            <input type="text" class="form-control" id="patientname" placeholder="" value="" required>
+                        </div>
 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-1">
+                            <label for="patientID">Patient ID Number</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
+                            <input type="text" class="form-control" id="patientID" placeholder="" value="" required>
                         </div>
                     </div>
                 </form>
             </div>
 
             <div class="col-md-3 order-md-2 mb-1">
-                <br>
-                <img style="min-height: 325px; height: 325px;" src="./images/picture.png" class="rounded mx-auto d-block" alt="...">
+                <img style="min-height: 250px; height: 250px; width: inherit;" src="./images/picture.png" class="rounded mx-auto d-block" alt="...">
                 <small style="color: red; text-align: center;">Click on the body image to locate the new lesion</small>
 
             </div>  
@@ -112,28 +125,39 @@
                 <form class="needs-validation" novalidate>
                     <!-- Date -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="date">Date</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" name="date" value="10/24/1984" />
                         </div>
+                        
                     </div>
                     <!-- Time -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="time">Time</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" id="time" placeholder="" value="" required>
                         </div>
                     </div>
 
                     <!-- Lesion ID & size -->
                     <div class="row">
-                        <div class="col-md-8 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="lesionid">Lesion ID</label>
-                            <input type="text" class="form-control" id="lesionid" placeholder="" value="" required>
-
                         </div>
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-9 mb-1">
+                            <input type="text" class="form-control" id="lesionid" placeholder="" value="" required>
+                        </div>
+                    </div> 
+
+                    <div class="row">
+                        <div class="col-md-3 mb-1">
                             <label for="size">Lesion Size</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" id="size" placeholder="" value="" required>
                         </div>
                     </div> 
@@ -141,8 +165,10 @@
 
                     <!-- Lesion Location -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="location">Lesion Location</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" id="location" placeholder="" value="" required>
                         </div>
                     </div>
@@ -169,7 +195,7 @@
 
             </div>
         </div>
-        <footer class="my-5 pt-5 text-muted text-center text-small">
+        <footer class="my-2 pt-2 text-muted text-center text-small">
 
         </footer>
     </div>
