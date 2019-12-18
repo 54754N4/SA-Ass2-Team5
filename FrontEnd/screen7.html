@@ -36,33 +36,33 @@
                     <!-- Date -->
                     <div class="row">
                         <label for="date" class="col-sm-3 col-form-label">Date:</label>
-                        <label for="date" class="col-sm-9 col-form-label">25/05/1995</label>
+                        <label for="date" class="col-sm-9 col-form-label" id="visitDate">25/05/1995</label>
                       </div>
                       
                       <!-- Time -->
                       <div class="row">
                         <label for="time" class="col-sm-3 col-form-label">Time:</label>
-                        <label for="time" class="col-sm-9 col-form-label">02:00 PM - 03:00 PM (US/Eastern)</label>
+                        <label for="time" class="col-sm-9 col-form-label" id="visitTime">02:00 PM - 03:00 PM (US/Eastern)</label>
                       </div>
                       <!-- Doctor -->
                       <div class="row">
                         <label for="doctor" class="col-sm-3 col-form-label">Doctor:</label>
-                        <label for="doctor" class="col-sm-9 col-form-label">Jim Boyce</label>
+                        <label for="doctor" class="col-sm-9 col-form-label" id="doctorName">Jim Boyce</label>
                       </div>
                       <!-- Clinic -->
                       <div class="row">
                         <label for="clinic" class="col-sm-3 col-form-label">Clinic:</label>
-                        <label for="clinic" class="col-sm-9 col-form-label">Clayton Medical Center</label>
+                        <label for="clinic" class="col-sm-9 col-form-label" id="clinic">Ho Chi Minh Hospital</label>
                       </div>
                       <!-- Patient Name -->
                       <div class="row">
                         <label for="patientname" class="col-sm-3 col-form-label">Patient Name:</label>
-                        <label for="patientname" class="col-sm-9 col-form-label">Mr Anthony Hopkin</label>
+                        <label for="patientname" class="col-sm-9 col-form-label" id="patientName">Mr Anthony Hopkin</label>
                       </div>
                       <!-- Patient ID -->
                       <div class="row">
                         <label for="patientid" class="col-sm-3 col-form-label">Patient ID:</label>
-                        <label for="patientid" class="col-sm-9 col-form-label">12345678</label>
+                        <label for="patientid" class="col-sm-9 col-form-label" id= "patientID">12345678</label>
                       </div>
                    
                 </form>
@@ -108,7 +108,7 @@
 
                     <!-- visit note and lesion -->
                     <div class="row">
-                        <textarea class="form-control" id="visitnote" rows="4"></textarea>
+                        <textarea class="form-control" id="visitnote" rows="4" disabled></textarea>
                       </div>
 
                     <div class="row mt-2">
@@ -162,6 +162,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="/js/visitDetailInfo.js"></script>
     <script>
         $(function () {
             $('input[name="birthday"]').daterangepicker({
@@ -173,6 +174,7 @@
                 var years = moment().diff(start, 'years');
             });
         });
+        getVisitDetailInfo();
     </script>
 </body>
 
