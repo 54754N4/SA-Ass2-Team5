@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import rmit.team5.visiderm.Model.PatientInfo.Patient;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,12 +52,13 @@ public class Visit {
     @JoinColumn(name = "patientID", referencedColumnName = "patientID")
     private Patient patient;
 
-
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<LesionCoordinates> lesionCoordinates; // use for storing lesion location on body pictures
     //private List<Lesion> listOfLesion;
 
     // constructors
     public Visit() {
-
+        lesionCoordinates = new ArrayList<>();
     }
 
     // getters and setters
@@ -139,4 +141,13 @@ public class Visit {
 //    public void setListOfLesion(List<Lesion> listOfLesion) {
 //        this.listOfLesion = listOfLesion;
 //    }
+
+
+    public List<LesionCoordinates> getLesionCoordinates() {
+        return lesionCoordinates;
+    }
+
+    public void setLesionCoordinates(List<LesionCoordinates> lesionCoordinates) {
+        this.lesionCoordinates = lesionCoordinates;
+    }
 }

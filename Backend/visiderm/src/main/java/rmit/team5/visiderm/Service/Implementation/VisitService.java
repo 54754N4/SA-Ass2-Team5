@@ -13,6 +13,7 @@ import rmit.team5.visiderm.Exception.AllFieldValuedException;
 import rmit.team5.visiderm.Exception.PatientNotFoundException;
 import rmit.team5.visiderm.Exception.VisitNotFoundException;
 import rmit.team5.visiderm.Model.PatientInfo.Patient;
+import rmit.team5.visiderm.Model.VisitInfo.LesionCoordinates;
 import rmit.team5.visiderm.Model.VisitInfo.Visit;
 import rmit.team5.visiderm.Service.Interface.IVisitService;
 
@@ -79,6 +80,7 @@ public class VisitService implements IVisitService {
             visitDetail.put("patientName", patientName);
             visitDetail.put("patientID", patient.getPatientID());
             visitDetail.put("doctorNote", visit.getVisitNote());
+            visitDetail.put("locationPoints", visit.getLesionCoordinates());
         }else visitDetail.put("error", "Visit is not found");
         return visitDetail;
     }
@@ -95,6 +97,10 @@ public class VisitService implements IVisitService {
             Optional<Patient> patientCheck = patientDAO.findById(patientID);
             Patient patient = patientCheck.get();
             newVisit.setPatient(patient);
+            if (visitDTO.getLesionCoordinates().size() > 0) {
+                List<LesionCoordinates> lesionCoordinates = visitDTO.getLesionCoordinates();
+                newVisit.setLesionCoordinates(lesionCoordinates);
+            }
 //            if (!visitDTO.getLesionLocation().trim().isEmpty()) {
 //                Lesion lesion = addNewLesion(visitDTO);
 //                lesion.setVisit(newVisit);

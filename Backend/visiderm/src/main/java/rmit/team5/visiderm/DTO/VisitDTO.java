@@ -2,6 +2,7 @@ package rmit.team5.visiderm.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
+import rmit.team5.visiderm.Model.VisitInfo.LesionCoordinates;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
+import java.util.List;
 
 public class VisitDTO {
 
@@ -45,6 +47,8 @@ public class VisitDTO {
     private String visitReason;
 
     private String visitNote;
+
+    private List<LesionCoordinates> lesionCoordinates;
 
     // lesion information
     private Date lesionDate;
@@ -164,5 +168,13 @@ public class VisitDTO {
 
     public void setLesionNote(String lesionNote) {
         this.lesionNote = lesionNote;
+    }
+
+    public List<LesionCoordinates> getLesionCoordinates() {
+        return lesionCoordinates;
+    }
+
+    public void setLesionCoordinates(List<LesionCoordinates> lesionCoordinates) {
+        this.lesionCoordinates = lesionCoordinates;
     }
 }
