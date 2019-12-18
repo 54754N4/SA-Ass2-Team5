@@ -1,0 +1,1 @@
+Since it's just a spring application, update the run.bat file to include absolute path to .war file and just run.
