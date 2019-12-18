@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.team5.external.DTO.LesionDTO;
+import rmit.team5.external.Model.LesionInfo.Lesion;
 import rmit.team5.external.Service.Interface.ILesionService;
 
 import javax.validation.Valid;
 import javax.xml.ws.Response;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/lesion")
@@ -42,13 +45,21 @@ public class LesionController {
         return ResponseEntity.ok(lesionService.getLesionsOfVisit(visitID, page));
     }
 
-    @GetMapping
+    @GetMapping("/search")
     public ResponseEntity<?> getLesions(
             @RequestParam String keyword,
             @RequestParam(required = false) Boolean sizeDesc,
             @RequestParam(required = false) Boolean dateDesc,
             @RequestParam(required = false, defaultValue = "1") Integer page) {
         return ResponseEntity.ok(lesionService.getLesionsMatching(keyword, dateDesc, sizeDesc, page));
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getLesionById(@RequestParam(name = "id") List<Long> ids) {
+        List<Lesion> lesions = new ArrayList<>();
+        for (Long id : ids)
+            lesions.add(lesionService.getLesion(id));    // can add null, that way frontend knows which id doesn't exist
+        return ResponseEntity.ok(lesions);
     }
 
     private static HashMap<String, String> createMessage(String msg) {
