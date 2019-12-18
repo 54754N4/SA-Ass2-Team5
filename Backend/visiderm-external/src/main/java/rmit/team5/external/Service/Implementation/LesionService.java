@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import rmit.team5.external.DAO.Interface.ILesionDAO;
 import rmit.team5.external.DTO.LesionDTO;
@@ -62,21 +63,18 @@ public class LesionService implements ILesionService {
     }
 
     @Override
-    public HashMap<String, Object> getLesionsBySize(int page, boolean desc) {
-        Pageable pageable = PageRequest.of(page-1, PAGE_LIMIT);
-        Page<Lesion> pagedResults = desc ?
-                lesionDAO.getLesionsBySizeDesc(pageable)
-                : lesionDAO.getLesionsBySizeAsc(pageable);
-        return createQueryResultHashMap(pagedResults);
-    }
-
-    @Override
-    public HashMap<String, Object> getLesionsByDate(int page, boolean desc) {
-        Pageable pageable = PageRequest.of(page-1, PAGE_LIMIT);
-        Page<Lesion> pagedResults = desc ?
-                lesionDAO.getLesionsByDateDesc(pageable)
-                : lesionDAO.getLesionsByDateAsc(pageable);
-        return createQueryResultHashMap(pagedResults);
+    public HashMap<String, Object> getLesionsMatching(String keyword, Boolean dateDesc, Boolean sizeDesc, int page) {
+        Sort sort = null;
+        if (dateDesc != null)
+            if (dateDesc) sort = Sort.by("timeTaken").descending();
+            else sort = Sort.by("timeTaken");
+        else if (sizeDesc != null)
+            if (sizeDesc) sort = Sort.by("size").descending();
+            else sort = Sort.by("size");
+        Pageable pageable = (sort == null) ?
+                PageRequest.of(page-1, PAGE_LIMIT):
+                PageRequest.of(page-1, PAGE_LIMIT, sort);
+        return createQueryResultHashMap(lesionDAO.getLesionsMatching(keyword, pageable));
     }
 
     @Override

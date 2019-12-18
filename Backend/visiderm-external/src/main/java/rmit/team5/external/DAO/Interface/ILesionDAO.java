@@ -9,22 +9,17 @@ import rmit.team5.external.Model.LesionInfo.Lesion;
 
 @Repository
 public interface ILesionDAO extends JpaRepository<Lesion, Long> {
+
     @Query("select lesion from Lesion lesion where lesion.visitID like ?1")
     Page<Lesion> getLesionsOfVisit(String visitID, Pageable pageable);
 
+    @Query("select l from Lesion l where cast(?1 as int) = l.size " +
+            "or l.location like %?1% " +
+            "or l.status like %?1% " +
+            "or l.doctorNote like %?1%")
+    Page<Lesion> getLesionsMatching(String keyword, Pageable pageable);
+
     @Query("select lesion from Lesion lesion")
     Page<Lesion> getLesions(Pageable pageable);
-
-    @Query("select lesion from Lesion lesion order by date(timeTaken) desc")
-    Page<Lesion> getLesionsByDateDesc(Pageable pageable);
-
-    @Query("select lesion from Lesion lesion order by date(timeTaken)")
-    Page<Lesion> getLesionsByDateAsc(Pageable pageable);
-
-    @Query("select lesion from Lesion lesion order by size desc")
-    Page<Lesion> getLesionsBySizeDesc(Pageable pageable);
-
-    @Query("select lesion from Lesion lesion order by size")
-    Page<Lesion> getLesionsBySizeAsc(Pageable pageable);
 
 }
