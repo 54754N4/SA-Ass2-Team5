@@ -3,9 +3,9 @@ package rmit.team5.external.Validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class SizeValidator implements ConstraintValidator<ValidGender, Double> {
+public class SizeValidator implements ConstraintValidator<ValidSize, Double> {
     @Override
-    public void initialize(ValidGender constraintAnnotation) {
+    public void initialize(ValidSize constraintAnnotation) {
 
     }
 
