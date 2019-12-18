@@ -1,13 +1,19 @@
 var baseURL = "http://localhost:5000";
+var visitData;
+// use for screen 7
 function getVisitDetailInfo() {
   var visitID = sessionStorage.getItem("visitID");
-  $.ajax({
-    type: "GET",
-    url: baseURL + "/visit/detail/" + visitID,
-    success: function(data) {
-      plotVisitDetailData(data);
-    }
-  });
+  if (visitID !== null) {
+    $.ajax({
+        type: "GET",
+        url: baseURL + "/visit/detail/" + visitID,
+        success: function(data) {
+          plotVisitDetailData(data);
+          visitData = data;
+        }
+      });
+  }
+  
 }
 
 function plotVisitDetailData(data) {
@@ -39,4 +45,31 @@ function plotBodyPicture(locationPoint) {
       context.fillText("\uf05c", singlePoint.xCor, singlePoint.yCor);
     }
   }, 500);
+}
+
+function setUpBtnEvent () {
+    $("#updateBtn").click (function () {
+        sessionStorage.setItem("updateVisit", JSON.stringify(visitData));
+        window.location.pathname = "screen8.html";
+    });
+    $("#addBtn").click(function () {
+        sessionStorage.removeItem("updateVisit");
+        window.location.pathname = "screen8.html";
+    });
+    var listOfVisitID = JSON.parse(sessionStorage.getItem("visitList"));
+    if (listOfVisitID.length == 1) {
+        $("#iterateBtn").css("display", "none");
+    }
+    var visitID = sessionStorage.getItem("visitID");
+    $("#iterateBtn").click(function () {
+       var currentIndex = listOfVisitID.indexOf(parseInt(visitID));
+       visitID = listOfVisitID[currentIndex + 1];
+       if (visitID === undefined) {
+        $("#iterateBtn").css("display", "none");
+        sessionStorage.setItem("visitID", visitID);
+       }else {
+        sessionStorage.setItem("visitID", visitID);
+        getVisitDetailInfo();
+       }
+    });
 }

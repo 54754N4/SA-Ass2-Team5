@@ -13,9 +13,16 @@
     <!-- Custom styles for this template -->
     <!-- <link href="./css/form-validation.css" rel="stylesheet"> -->
 
-
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+    <style>
+            @font-face {
+      font-family: 'FontAwesome';
+      src: url('/fonts/fontawesome-webfont.ttf');
+      font-weight: normal;
+      font-style: normal;
+     }
+     #stage{font-family:FontAwesome;} 
+        </style>
     <title>Screen8</title>
 </head>
 
@@ -47,7 +54,7 @@
                             <label for="date">Date</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="date" value="" />
+                            <input type="text" class="form-control" name="date" value="" id="visitDate" />
                         </div>
                     </div>
                     <!-- Time -->
@@ -56,7 +63,7 @@
                             <label for="time">Time</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="time" value="" />
+                            <input type="text" class="form-control" name="time" value="" id="visitTime" />
                         </div>
                     </div>
 
@@ -66,7 +73,7 @@
                             <label for="doctor">Doctor</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="doctor" value="" />
+                            <input type="text" class="form-control" name="doctor" value="" id="doctorName" />
                         </div>
                     </div>
 
@@ -76,7 +83,7 @@
                             <label for="clinic">Clinic</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="Clinic" value="" />
+                            <input type="text" class="form-control" name="Clinic" value="Ho Chi Minh Hospital" disabled/>
                         </div>
                     </div>
 
@@ -86,7 +93,7 @@
                             <label for="name">Patient Name</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" id="patientname" placeholder="" value="" required>
+                            <input type="text" class="form-control" id="patientName" placeholder="" value="" >
                         </div>
 
                     </div>
@@ -103,7 +110,10 @@
             </div>
 
             <div class="col-md-3 order-md-2 mb-1">
-                <img style="min-height: 250px; height: 250px; width: inherit;" src="./images/picture.png" class="rounded mx-auto d-block" alt="...">
+                    <div id="stage">
+                            <canvas id="newBodyPicture">
+                    </div>
+                <!-- <img style="min-height: 250px; height: 250px; width: inherit;" src="./images/picture.png" class="rounded mx-auto d-block" alt="..."> -->
                 <small style="color: red; text-align: center;">Click on the body image to locate the new lesion</small>
 
             </div>  
@@ -179,7 +189,7 @@
             <div class="col-md-4 order-md-2">
                 <div class="form-group row">
                     <label for="note">Note</label>
-                    <textarea class="form-control" id="note" rows="3"></textarea>
+                    <textarea class="form-control" id="visitNote" rows="3"></textarea>
                   </div>
             </div>
         </div>
@@ -191,7 +201,7 @@
 
             </div>
             <div class="col-md-6">
-                <button class="btn btn-primary btn-block" type="submit">Cancel</button>
+                <button class="btn btn-primary btn-block" type="button" id="cancelBtn">Cancel</button>
 
             </div>
         </div>
@@ -218,6 +228,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="/js/addUpdateVisit.js"></script>
     <script>
         $(function () {
             $('input[name="date"]').daterangepicker({
@@ -227,9 +238,11 @@
                 maxYear: parseInt(moment().format('YYYY'), 10)
             }, function (start, end, label) {
                 var years = moment().diff(start, 'years');
-                // alert("You are " + years + " years old!");
             });
         });
+        setUpForm();
+        setUpBodyPicture();
+        setUpBtnEvent();
     </script>
 </body>
 

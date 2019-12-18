@@ -97,7 +97,7 @@ function getVisitListByPage () {
         }
     }
 }
-
+var visitDataArr = [];
 function plotVisitData (response) {
     $("#visitList tr").remove();
     $("#patientName").html (response.patientName);
@@ -110,8 +110,7 @@ function plotVisitData (response) {
         $("#pageVisitTotal").html("of " + visitmaxPage);
         $("#currentVisitPage").val(response.currentPage);
         for (var i = 0; i <  visitData.length; i ++) {
-            console.log(visitData[i]);
-            $('#visitList tbody').append(constructVisitList(visitData[i], i +1));
+            $('#visitList tbody').append(constructVisitList(visitData[i]));
         }
     }else {
         $("#infoVisitText").css("display", "block");
@@ -121,10 +120,11 @@ function plotVisitData (response) {
    
 }
 
-function constructVisitList (data, index) {
+function constructVisitList (data) {
+    visitDataArr.push(data.id);
     var visitInfo = '<tr>' +
     '<th scope="col-8">' +
-       '<p id="visitIndex">' + stringifyNumber(index) + " visit" + '</p>' +
+       '<p id="visitIndex">' + stringifyNumber(data.id) + " visit" + '</p>' +
         '<p id="date">' + data.date  + '</p>' +
         '<p id="time">' + data.time + '</p>' +
         '<p id="reason">' + data.reason +'</p>' +
@@ -140,6 +140,7 @@ function constructVisitList (data, index) {
 function showVisitDetail (id) {
     sessionStorage.setItem("visitID", id);
     console.log(sessionStorage.getItem("visitID"));
+    console.log(sessionStorage.setItem("visitList",JSON.stringify(visitDataArr)));
     window.location.pathname = "screen7.html";
 }
 
