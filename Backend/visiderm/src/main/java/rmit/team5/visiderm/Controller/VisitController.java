@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping(path = "/visit")
+@CrossOrigin
 public class VisitController {
 
     private final IVisitService visitService;

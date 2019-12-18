@@ -1,172 +1,246 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
 
     <!-- Custom styles for this template -->
-    <link href="./css/form-validation.css" rel="stylesheet">
+    <link href="./css/form-validation.css" rel="stylesheet" />
 
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+    />
 
     <title>Screen2</title>
-</head>
+    <style>
+    .active {
+    background-color: #00C851;
+}</style>
+  </head>
 
-<body class="bg-light">
-
+  <body class="bg-light">
     <div class="container">
-        <!-- jumbotron update -->
-        <div class="py-5 text-center">
-            <h2>INTERNAL CENTRAL PATIENT RECORD SIR JOHN MONASH HOSPITAL</h2>
+      <!-- jumbotron update -->
+      <div class="py-5 text-center">
+        <h2>INTERNAL CENTRAL PATIENT RECORD SIR JOHN MONASH HOSPITAL</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 order-md-1">
+          <h4 class="mb-3">Patient List</h4>
+          <hr class="mb-4" />
+        </div>
+      </div>
+
+      <form class="form-inline">
+        <div class="form-group mb-4">
+          <label for="sdate" id="todayDate"></label>
+        </div>
+        <div class="form-group mx-sm-3 mb-4">
+          <label for="page" class="mr-2 ml-4">Page</label>
+          <input
+            type="number"
+            class="form-control"
+            id="currentPage"
+            value="1"
+            min="1"
+            onchange="getPatientValidPage()"
+          />
+          <label id="pageTotal" class="mr-2 ml-3">of 2</label>
         </div>
 
-        <div class="row">
-            <div class="col-md-12 order-md-1">
-                <h4 class="mb-3">Patient List</h4>
-                <hr class="mb-4">
-            </div>
+        <button type="submit" class="btn btn-primary mb-4 ml-4">Search</button>
+
+        <div class="form-group mx-sm-3 mb-4">
+          <input
+            type="text"
+            class="form-control"
+            id="searchKeyWord"
+            placeholder="Name/ID"
+          />
         </div>
 
-        
-        <form class="form-inline">
-            <div class="form-group mb-4">
-                <label for="sdate">Mon 04/04/2006</label>
-              </div>
-              <div class="form-group mx-sm-3 mb-4">
-                <label for="page" class="mr-2 ml-4">Page</label>
-                <input type="number" class="form-control" id="page" value="1">
-              </div>
+        <div class="form-group mx-sm-3 mb-4">
+          <label for="search" class="mr-2 ml-4">By</label>
+          <select class="form-control" id="search" required>
+            <option value="">Name</option>
+            <option value="">ID</option>
+          </select>
+        </div>
+      </form>
 
-              <button type="submit" class="btn btn-primary mb-4 ml-4">Search</button>
-              
-            <div class="form-group mx-sm-3 mb-4">
-              <input type="text" class="form-control" id="search" placeholder="Name/ID">
+      <div class="row">
+        <!-- Patient List -->
+        <div class="col-md-12">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <!-- DETAILS OF PATIENT TABLE -->
+                <table
+                  class="table text-center table-bordered table-hover"
+                  id="patientList"
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">ID</th>
+                      <th scope="col">Sex</th>
+                      <th scope="col">Date of Birth</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Phone</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
             </div>
 
-            <div class="form-group mx-sm-3 mb-4">
-                <label for="search" class="mr-2 ml-4">By</label>
-                <select class="form-control" id="search" required>
-                    <option value="">Name</option>
-                    <option value="">ID</option>
+            <!-- Button -->
+          </form>
+        </div>
+      </div>
+
+      <!-- Visit Summary -->
+      <br />
+      <div class="row">
+        <div class="col-md-12 order-md-1">
+          <h4 class="mb-3">Visit Summary</h4>
+          <hr class="mb-4" />
+        </div>
+      </div>
+      <h5 id="infoVisitText" class="text-center">
+        Please select a patient record
+      </h5>
+      <div id="visitArea" style="display: none">
+        <div class="row mb-4">
+          <div class="col-md-7 order-md-1">
+            <li class="list-group-item">
+              <label
+                for="name"
+                class="col-sm-12 col-form-label"
+                id="patientName"
+                >Mr Anthony Hopkin</label
+              >
+              <label
+                for="date"
+                class="col-sm-12 col-form-label"
+                id="visitDateRange"
+                >25/05/1995 - 12/02/1997</label
+              >
+            </li>
+          </div>
+          <div class="col-md-2 order-md-1"></div>
+
+          <div class="col-md-3 order-md-2">
+            <div class="row">
+            
+              <div class="col-md-3 mb-1">
+                <label for="page">Page</label>
+              </div>
+              <div class="col-md-4 mb-1">
+                <input
+                type="number"
+                class="form-control"
+                id="currentVisitPage"
+                value="1"
+                min="1"
+                onchange="getVisitListByPage()"
+                />
+              </div>
+              <label id="pageVisitTotal" class="mr-2 ml-3">of 2</label>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-1">
+                <label for="sortvisit">Sort By</label>
+              </div>
+              <div class="col-md-6 mb-1">
+                <select class="form-control" id="sortvisit" required>
+                  <option value="">Name</option>
+                  <option value="">ID</option>
                 </select>
               </div>
-          </form>
-
+            </div>
+            <br class="mb-4" />
+            <br />
+          </div>
+        </div>
         <div class="row">
-            <!-- Patient List -->
-            <div class="col-md-12">
-                <form>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- DETAILS OF PATIENT TABLE -->
-                            <table class="table text-center table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="cl">Name</th>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Sex</th>
-                                        <th scope="col">Date of Birth</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Phone</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Anthony Taylor</td>
-                                        <td>123456789</td>
-                                        <td>M</td>
-                                        <td>23/09/1964</td>
-                                        <td>29 Irwin Street Clayton</td>
-                                        <td>0421567888</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Button -->
-                </form>
-            </div>
+          <table class="table table-bordered" id="visitList">
+            <colgroup>
+              <col span="1" style="width: 65%;" />
+              <col span="1" style="width: 35%;" />
+            </colgroup>
+            <tbody>
+              
+            </tbody>
+          </table>
         </div>
+      </div>
 
-        <!-- Visit Summary -->
-        <br>
-        <div class="row">
-            <div class="col-md-12 order-md-1">
-                <h4 class="mb-3">Visit Summary</h4>
-                <hr class="mb-4">
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-md-7 order-md-1">
-                    <li class="list-group-item">
-                        <label for="name" class="col-sm-12 col-form-label">Mr Anthony Hopkin</label>
-                        <label for="date" class="col-sm-12 col-form-label">25/05/1995 - 12/02/1997</label>
-                    </li>
-            </div>
-            <div class="col-md-2 order-md-1">
-
-            </div>
-    
-            <div class="col-md-3 order-md-2">
-                <div class="row">
-                    <div class="col-md-6 mb-1">
-                        <label for="page">Page</label>
-                    </div>
-                    <div class="col-md-6 mb-1">
-                        <input type="number" class="form-control" name="status" value="1" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 mb-1">
-                        <label for="sortvisit">Sort By</label>
-                    </div>
-                    <div class="col-md-6 mb-1">
-                        <select class="form-control" id="sortvisit" required>
-                            <option value="">Name</option>
-                            <option value="">ID</option>
-                        </select>                    
-                    </div>
-                </div>
-                <br class="mb-4">
-                <br>
-            </div>  
-        </div>
-        
-            
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-
-        </footer>
+      <footer class="my-5 pt-5 text-muted text-center text-small"></footer>
     </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"
-        integrity="sha256-ifihHN6L/pNU1ZQikrAb7CnyMBvisKG3SUAab0F3kVU=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"
+      integrity="sha256-ifihHN6L/pNU1ZQikrAb7CnyMBvisKG3SUAab0F3kVU="
+      crossorigin="anonymous"
+    ></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+    ></script>
+    <script src="/js/patientInfo.js"></script>
 
-</body>
-
+    <script>
+      $(document).ready(function() {
+        // set an element
+        $("#todayDate").html(moment().format("ddd DD/MM/YYYY"));
+        console.log(moment().format("MMM Do YY"));
+        queryPatientList();
+      });
+    </script>
+  </body>
 </html>
