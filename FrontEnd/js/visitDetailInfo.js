@@ -1,6 +1,7 @@
 var baseURL = "http://localhost:5000";
 function getVisitDetailInfo () {
     var visitID = sessionStorage.getItem("visitID");
+    plotBodyPicture();
     $.ajax({
         type: "GET",
         url: baseURL + "/visit/detail/" + visitID,
@@ -22,5 +23,16 @@ function plotVisitDetailData (data) {
 }
 
 function plotBodyPicture () {
+var canvas = document.getElementById("bodyPicture"),
+ctx = canvas.getContext("2d");
+
+canvas.height = 325;
+
+
+var background = new Image();
+background.src = "./images/picture.png";
+background.onload = function(){
+    ctx.drawImage(background,0,0);   
+}
 
 }

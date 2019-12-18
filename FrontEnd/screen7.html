@@ -17,6 +17,15 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <title>Screen7</title>
+    <style>
+        @font-face {
+  font-family: 'FontAwesome';
+  src: url('/fonts/fontawesome-webfont.ttf');
+  font-weight: normal;
+  font-style: normal;
+ }
+ #stage{font-family:FontAwesome;} 
+    </style>
 </head>
 
 <body class="bg-light">
@@ -130,7 +139,15 @@
             <div class="col-md-1 order-md-1"></div>
     
             <div class="col-md-3 order-md-2 mb-1">
-                <img style="min-height: 325px; height: 325px;" src="./images/picture.png" class="rounded mx-auto d-block" alt="...">
+                <!-- <canvas style="background-image:url('./images/picture.png'); height: 325px;" class="rounded mx-auto d-block"></canvas> -->
+                <div id="stage">
+                        <canvas id="bodyPicture">
+
+                </div>
+                <div >
+                        <canvas id="lesionDot">
+                </div>
+                <!-- <img style="min-height: 325px; height: 325px;" src="./images/picture.png" class="rounded mx-auto d-block" alt="..."> -->
 
                 <br class="mb-4">
                 <br>
@@ -175,6 +192,34 @@
             });
         });
         getVisitDetailInfo();
+    </script>
+    <script>
+    //Getting canvas context and clearing out.
+var canvas = document.getElementById("bodyPicture");
+var context = canvas.getContext("2d");
+context.clearRect(0, 0, canvas.width, canvas.height);
+
+ 
+// Why setTimeout - Because it takes time to load FontAwesome Fonts file.
+setTimeout(function(){
+context.fillStyle = "#ff0000";
+context.font = '20px FontAwesome';// You can use any font size of your size.  
+// Motorcycle Icon at x = 80(from the left) and y = 200(from the top)
+context.fillText("\uf05c",80,200);
+context.fillText("\uf05c",10,200); 
+},100);
+canvas.onclick = onCanvasClicked;
+function onCanvasClicked (event) {
+    var rect = event.target.getBoundingClientRect();
+    var x = event.clientX - rect.left; //x position within the element.
+    var y = event.clientY - rect.top;  //y position within the element.
+    setTimeout(function(){
+context.fillStyle = "#ff0000";
+context.font = '20px FontAwesome';// You can use any font size of your size.  
+// Motorcycle Icon at x = 80(from the left) and y = 200(from the top)
+context.fillText("\uf05c",x ,y ); 
+},100);
+}
     </script>
 </body>
 
