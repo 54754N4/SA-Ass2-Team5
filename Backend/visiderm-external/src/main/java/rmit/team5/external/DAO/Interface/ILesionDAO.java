@@ -14,7 +14,8 @@ public interface ILesionDAO extends JpaRepository<Lesion, Long> {
     Page<Lesion> getLesionsOfVisit(String visitID, Pageable pageable);
 
     @Query("select l from Lesion l where " +
-            "l.location like %?1% " +
+            "concat(l.size, '') like %?1% " +
+            "or l.location like %?1% " +
             "or l.status like %?1% " +
             "or l.doctorNote like %?1%")
     Page<Lesion> getLesionsMatching(String keyword, Pageable pageable);
