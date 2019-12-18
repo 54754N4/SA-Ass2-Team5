@@ -35,88 +35,46 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4 order-md-2 mb-1">
-
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <button class="btn btn-primary btn-block" type="submit">Create New Visit Record</button>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <button class="btn btn-primary btn-block" type="submit">Edit Patient Record</button>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <button class="btn btn-primary btn-block" type="submit">Create New Patient Record</button>
-                    </li>
-                </ul>
-
-                <br class="mb-4">
-                <br>
-
-                <div class="col-md-12">
-                    <h4 class="mb-3">Visit Entries</h4>
-                    <hr class="mb-4">
-                </div>
-
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Third item</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Third item</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Third item</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
             <!-- Patient Record -->
             <div class="col-md-8 order-md-1">
 
                 <form class="needs-validation" novalidate>
                     <!-- First Name -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="firstName">First name</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
                         </div>
                     </div>
+
                     <!-- Last Name -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="lastName">Last name</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
                         </div>
                     </div>
 
                     <!-- Patient ID -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="patientID">Patient ID Number</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" id="patientID" placeholder="" value="" required>
-
                         </div>
                     </div>
 
                     <!-- Title  -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="title">Title</label>
+                        </div>
+                        <div class="col-md-3 mb-1">
                             <select class="custom-select d-block w-100" id="title" required>
                                 <option value="">Title...</option>
                                 <option>Mr</option>
@@ -124,13 +82,14 @@
                                 <option>Ms</option>
 
                             </select>
-
                         </div>
-                        <div class="col-md-1 mb-1">
 
+                        <div class="col-md-1 mb-1">
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <label for="gender">Gender</label>
                         </div>
                         <div class="col-md-3 mb-1">
-                            <label for="gender">Gender</label>
                             <select class="custom-select d-block w-80" id="gender" required>
                                 <option value="">Gender...</option>
                                 <option>Male</option>
@@ -141,17 +100,20 @@
 
                     <!-- Date of birth -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="dob">Date of Birth</label>
+                        </div>
+                        <div class="col-md-5 mb-1">
                             <input type="text" class="form-control" name="birthday" value="10/24/1984" />
                         </div>
                     </div>
 
-
                     <!-- Marial Status -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="title">Marial Status</label>
+                        </div>
+                        <div class="col-md-5 mb-1">
                             <select class="custom-select d-block w-100" id="title" required>
                                 <option value="">Status...</option>
                                 <option>Single</option>
@@ -162,31 +124,39 @@
 
                     <!-- Address -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="address">Street Address</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" id="address" placeholder="" value="" required>
                         </div>
                     </div>
 
                     <!-- suburd & postcode -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="suburd">Suburd</label>
+                        </div>
+                        <div class="col-md-3 mb-1">
                             <input type="text" class="form-control" id="suburd" placeholder="" value="" required>
                         </div>
+
                         <div class="col-md-1 mb-1">
                         </div>
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-2 mb-1">
                             <label for="postcode">Postcode</label>
+                        </div>
+                        <div class="col-md-3 mb-1">
                             <input type="text" class="form-control" id="postcode" placeholder="" value="" required>
-
                         </div>
                     </div>
 
                     <!-- Country -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="country">Country</label>
+                        </div>
+                        <div class="col-md-5 mb-1">
                             <select class="custom-select d-block w-100" id="title" required>
                                 <option value="">Country...</option>
                                 <option>China</option>
@@ -197,45 +167,64 @@
 
                     <!-- Home phone -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="hphone">Home Phone</label>
+                        </div>
+                        <div class="col-md-5 mb-1">
                             <input type="text" class="form-control" id="hphone" placeholder="" value="" required>
+
                         </div>
                     </div>
+
                     <!-- Office phone -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="ophone">Office Phone</label>
+                        </div>
+                        <div class="col-md-5 mb-1">
                             <input type="text" class="form-control" id="ophone" placeholder="" value="" required>
+
                         </div>
                     </div>
                     <!-- Mobile Phone -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="mphone">Mobile Phone</label>
+                        </div>
+                        <div class="col-md-5 mb-1">
                             <input type="text" class="form-control" id="mphone" placeholder="" value="" required>
+
                         </div>
                     </div>
+
                     <!-- Fax Number -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="fax">Fax Number</label>
+                        </div>
+                        <div class="col-md-5 mb-1">
                             <input type="text" class="form-control" id="fax" placeholder="" value="" required>
+
                         </div>
                     </div>
 
                     <!-- Email -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="email">Email Address</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" id="email" placeholder="" value="" required>
+
                         </div>
                     </div>
 
                     <!-- Occupation -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="occupation">Occupation</label>
+                        </div>
+                        <div class="col-md-5 mb-1">
                             <select class="custom-select d-block w-100" id="title" required>
                                 <option value="">Occupation...</option>
 
@@ -245,34 +234,95 @@
 
                     <!-- Next to Kin -->
                     <div class="row">
-                        <div class="col-md-12 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="kin">Next to Kin</label>
+                        </div>
+                        <div class="col-md-9 mb-1">
                             <input type="text" class="form-control" id="kin" placeholder="Ms Samanthan">
-
                         </div>
                     </div>
 
                     <!-- Contact -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="contact">Contact Number</label>
+                        </div>
+                        <div class="col-md-5 mb-1">
                             <input type="text" class="form-control" id="contact" placeholder="">
-
                         </div>
                     </div>
 
                     <hr class="mb-4">
                     <div class="row">
                         <div class="col-md-6">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
+                            <button class="btn btn-primary btn-block" type="submit">Update</button>
 
                         </div>
                         <div class="col-md-6">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Cancel</button>
+                            <button class="btn btn-primary btn-block" type="submit">Cancel</button>
 
                         </div>
                     </div>
                 </form>
+            </div>
+
+            <div class="col-md-4 order-md-2 mb-1">
+
+                <div class="col-md-3"></div>
+                <div class="col-md-9">
+                    <button class="btn btn-primary btn-block" type="submit">Create New Visit Record</button>
+                    <button class="btn btn-primary btn-block" type="submit">Edit Patient Record</button>
+                    <button class="btn btn-primary btn-block" type="submit">Create New Patient Record</button>
+                </div>
+
+
+                <br class="mb-4">
+                <br class="mb-4">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="mb-3">Visit Entries</h4>
+                    </div>
+
+                </div>   
+                
+                <div class="row">
+                    <div class="col-md-1 mb-1">
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <label for="page">Page</label>
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <input type="number" class="form-control" id="lastName" placeholder="" value="1" required>
+                    </div>
+                </div>
+
+
+                
+
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <label for="visit" class="col-sm-4 col-form-label">First Visit</label>
+                            <label for="date" class="col-sm-8 col-form-label">25/05/1995</label>
+                        </div>
+                        <div class="row">
+                            <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
+                            <label for="doctorname" class="col-sm-8 col-form-label">Jim Boyce</label>
+                        </div>
+                        <div class="row">
+                            <label for="clinic" class="col-sm-4 col-form-label">Clinic</label>
+                            <label for="clinicname" class="col-sm-8 col-form-label">Clayton Center</label>
+                        </div>
+                        <div class="row">
+                            <label for="clinic" class="col-sm-9 col-form-label"></label>
+                            <a href="#" class="btn btn-primary stretched-link col-sm-2">Edit</a>
+                        </div>
+                        <hr class="mb-4">
+
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -308,7 +358,6 @@
                 maxYear: parseInt(moment().format('YYYY'), 10)
             }, function (start, end, label) {
                 var years = moment().diff(start, 'years');
-                alert("You are " + years + " years old!");
             });
         });
     </script>
