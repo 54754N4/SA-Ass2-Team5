@@ -58,7 +58,7 @@ public class LesionService implements ILesionService {
 
     @Override
     public HashMap<String, Object> getLesionsOfVisit(String visitID, int page) {
-        Pageable pageable = PageRequest.of(page-1, PAGE_LIMIT, Sort.by("timeTaken"));
+        Pageable pageable = PageRequest.of(page-1, PAGE_LIMIT, Sort.by("timeTaken").descending());
         return createQueryResultHashMap(lesionDAO.getLesionsOfVisit(visitID, pageable));
     }
 
