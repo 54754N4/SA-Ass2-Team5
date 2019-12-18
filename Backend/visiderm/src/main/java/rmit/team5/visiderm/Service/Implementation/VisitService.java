@@ -77,6 +77,7 @@ public class VisitService implements IVisitService {
             String patientName = patient.getTitle() + " " + patient.getFirstName() + " " + patient.getLastName();
             visitDetail = constructVisitSum(visit);
             visitDetail.put("patientName", patientName);
+            visitDetail.put("patientID", patient.getPatientID());
             visitDetail.put("doctorNote", visit.getVisitNote());
         }else visitDetail.put("error", "Visit is not found");
         return visitDetail;
