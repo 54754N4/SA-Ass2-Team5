@@ -14,4 +14,17 @@ public interface ILesionDAO extends JpaRepository<Lesion, Long> {
 
     @Query("select lesion from Lesion lesion")
     Page<Lesion> getLesions(Pageable pageable);
+
+    @Query("select lesion from Lesion lesion order by date(timeTaken) desc")
+    Page<Lesion> getLesionsByDescDate(Pageable pageable);
+
+    @Query("select lesion from Lesion lesion order by date(timeTaken)")
+    Page<Lesion> getLesionsByAscDate(Pageable pageable);
+
+    @Query("select lesion from Lesion lesion order by size desc")
+    Page<Lesion> getLesionsByDescSize(Pageable pageable);
+
+    @Query("select lesion from Lesion lesion order by size")
+    Page<Lesion> getLesionsByAscSize(Pageable pageable);
+
 }
