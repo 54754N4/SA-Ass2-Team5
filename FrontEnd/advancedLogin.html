@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AdvancedLogin</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css" />
+                <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+                integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+                crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.js"
+                integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+       
+</head>
+<body class="bg">
+    <!-- Ref: https://startbootstrap.com/snippets/sign-in-split/ -->
+    <div class="container-fluid">
+        <div class="row no-gutter">
+          <div class="d-none d-md-flex col-md-4 col-lg-6">
+
+          </div>
+          <div class="col-md-8 col-lg-6">
+            <div class="d-flex align-items-center py-5" style="min-height: 100vh">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-9 col-lg-8 mx-auto login-box" style="padding: 50px">
+                    <h3 class="login-heading mb-4">Welcome</h3>
+                    <form id="login-form">
+                        <div class="alert alert-danger" role="alert" id="erroMess" style="display: none">
+                            <strong>Invalid: </strong>Please enter the right username or password!
+                          </div>
+                            <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="server">Server</label>
+                                    <select class="custom-select d-block w-100" id="server" required>
+                                        <option value="">Server...</option>
+                                        <option>Dermatologist</option>
+                                        <option>Doctor</option>        
+                                    </select>                                  </div>
+                      <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+<script>
+  $('#login-form').submit(function (event) {
+             event.preventDefault();
+            // checkReservationForm('#reservation-form');
+            // if ($("#reservation-form").valid()) {
+            //     submitForm();
+            // }
+            sendLoginRequest ();
+        });
+</script>
+</html>
