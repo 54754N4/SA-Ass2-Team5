@@ -48,6 +48,8 @@ public class PatientDTO {
     private String suburd;
     @NotBlank(message = "country is required")
     private String country;
+    @NotBlank(message = "postalCode is required")
+    private String postalCode;
 
     // contact information
     @ValidPhone(message = "Home phone is invalid")
@@ -139,6 +141,14 @@ public class PatientDTO {
 
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getSuburd() {

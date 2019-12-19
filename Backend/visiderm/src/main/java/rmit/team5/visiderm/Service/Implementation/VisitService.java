@@ -86,6 +86,14 @@ public class VisitService implements IVisitService {
     }
 
     @Override
+    public List<Long> getAllVisitIDOfPatient(long patientID) {
+        Optional<Patient> patientCheck = patientDAO.findById(patientID);
+        if (patientCheck.isPresent()) {
+            return visitDAO.getAllVisitListOfPatient(patientID);
+        }else  throw new PatientNotFoundException("Patient with ID: " + patientID + " is not found");
+    }
+
+    @Override
     public boolean addNewVisit(VisitDTO visitDTO) {
         boolean visitPatientValidator = validatePatientVisitInfo(visitDTO);
         boolean visitLesionValidator = validateLesionVisitInfo(visitDTO);

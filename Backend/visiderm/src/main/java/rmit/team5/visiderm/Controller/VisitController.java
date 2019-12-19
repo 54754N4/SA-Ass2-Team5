@@ -9,6 +9,7 @@ import rmit.team5.visiderm.Service.Interface.IVisitService;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/visit")
@@ -44,6 +45,14 @@ public class VisitController {
         }else {
             return ResponseEntity.ok(visitDetail);
         }
+    }
+
+    @GetMapping(path = "/all/{patientID}")
+    public ResponseEntity<?> getVisitListIDByPatient (@PathVariable long patientID) {
+        List<Long> visitIDList = visitService.getAllVisitIDOfPatient(patientID);
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("idList", visitIDList);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping(path = "/add")

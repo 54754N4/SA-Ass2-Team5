@@ -7,9 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import rmit.team5.visiderm.Model.VisitInfo.Visit;
 
+import java.util.List;
+
 @Repository
 public interface IVisitDAO extends JpaRepository<Visit, Long> {
 
     @Query("select v from Visit v where v.patient.patientID = ?1")
     Page<Visit> getVisitByPatientID  (long patientID, Pageable pageable);
+
+    @Query("select v.id from Visit v where v.patient.patientID = ?1")
+    List<Long> getAllVisitListOfPatient (long patientID);
 }

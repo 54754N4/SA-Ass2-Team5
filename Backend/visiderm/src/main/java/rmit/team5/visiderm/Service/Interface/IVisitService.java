@@ -10,6 +10,7 @@ public interface IVisitService {
     // retrieve visit information
     HashMap<String, Object> getVisitOfPatient (long patientID, int page);
     HashMap<String, Object> getVisitDetail (long visitID);
+    List<Long> getAllVisitIDOfPatient (long patientID);
     boolean addNewVisit (VisitDTO visitDTO);
     boolean updateVisit (VisitDTO visitDTO, long visitID);
 }

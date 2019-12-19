@@ -66,9 +66,10 @@ public class PatientController {
 
     @PostMapping(path = "/add")
     public ResponseEntity<?> addNewPatient (@Valid @RequestBody PatientDTO patientDTO) {
-        patientService.addNewPatient(patientDTO);
+        long newPatientID = patientService.addNewPatient(patientDTO);
         HashMap<String, String> message = new HashMap<>(); // use for ajax success message
         message.put("message", "success");
+        message.put("patientID", String.valueOf(newPatientID));
         return ResponseEntity.ok(message);
     }
 

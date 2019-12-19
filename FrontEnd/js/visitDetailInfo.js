@@ -1,5 +1,7 @@
 var baseURL = "http://localhost:5000";
 var visitData;
+var listOfVisitID;
+
 // use for screen 7
 function getVisitDetailInfo() {
   var visitID = sessionStorage.getItem("visitID");
@@ -10,6 +12,7 @@ function getVisitDetailInfo() {
         success: function(data) {
           plotVisitDetailData(data);
           visitData = data;
+          getPatientVisitList(data.patientID);
         }
       });
   }
@@ -36,6 +39,7 @@ function plotBodyPicture(locationPoint) {
     context.drawImage(background, 0, 0);
   };
   context.clearRect(0, 0, canvas.width, canvas.height);
+  context.save();
   // Why setTimeout - Because it takes time to load FontAwesome Fonts file.
   setTimeout(function() {
     context.fillStyle = "#ff0000";
@@ -56,8 +60,16 @@ function setUpBtnEvent () {
         sessionStorage.removeItem("updateVisit");
         window.location.pathname = "screen8.html";
     });
-    var listOfVisitID = JSON.parse(sessionStorage.getItem("visitList"));
-    if (listOfVisitID.length == 1) {
+    
+}
+
+function getPatientVisitList (patientID) {
+  $.ajax({
+    type: "GET",
+    url: baseURL + "/visit/all/" + patientID,
+    success: function(data) {
+      listOfVisitID = data.idList;
+      if (listOfVisitID.length == 1) {
         $("#iterateBtn").css("display", "none");
     }
     var visitID = sessionStorage.getItem("visitID");
@@ -71,4 +83,6 @@ function setUpBtnEvent () {
         getVisitDetailInfo();
        }
     });
+    }
+  });
 }

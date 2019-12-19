@@ -21,6 +21,10 @@ function setUpForm() {
     oldPointsArr = data.locationPoints;
   }else {
     $("#staticVisitTimeRow").css("display", "none");
+    var updatePatient = sessionStorage.getItem("visitPatient");
+    data = JSON.parse(updatePatient);
+    $("#patientID").val(data.patientID).prop("disabled", true);
+    $("#patientName").val(data.patientName).prop("disabled", true);
   }
 }
 

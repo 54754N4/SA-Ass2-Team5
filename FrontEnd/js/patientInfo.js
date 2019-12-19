@@ -8,9 +8,16 @@ var selectedPatientName;
 function queryPatientList() {
     var page = $('#currentPage').val();
     detectPagePatient = page;
+    var requestURI;
+    if (searchKeyWord === "") {
+        requestURI = baseURL + "/patient/all?page=" + page
+    }else {
+        var searchKeyWord = $("#searchKeyWord").val().trim();
+        requestURI = baseURL + "/patient/name?patientName=" + searchKeyWord  +"&page=" + page;
+    }
     $.ajax({
         type: "GET",
-        url: baseURL + "/patient/all?page=" + page,
+        url: requestURI,
         success: function(data) {
           console.log(data);
           plotPatientData(data);
@@ -23,6 +30,10 @@ function plotPatientData (response) {
     $("#patientList tbody tr").remove();
     $("#pageTotal").html("of " + response.totalPage);
     $("#currentPage").val(response.currentPage);
+    $("#currentPage").prop("disabled", false);
+    if (response.totalPage === 0) {
+        $("#currentPage").val(1).prop("disabled", true);
+    }
     var patientData = response.data;
     patientmaxPage = response.totalPage;
     for (var i = 0; i <  patientData.length; i ++) {
@@ -40,6 +51,7 @@ function getPatientValidPage () {
             $("#currentPage").val(patientmaxPage);
         }
         if (currentPage !== detectPagePatient) {
+
             queryPatientList();
             detectPagePatient = currentPage;
         }
@@ -66,6 +78,7 @@ function getPatientVisitID(selDataID, selDataName) {
     if (selectedPatient !== selDataID ){
         var page = $("currentVisitPage").val();
         if (page === undefined) page = 1;
+        
         $.ajax({
             type: "GET",
             url: baseURL + "/visit/summary/" + selDataID + "?page=" + page,
@@ -85,18 +98,20 @@ function getVisitListByPage () {
     else 
     {
         if (currentPage > visitmaxPage) {
-            $("#currentPage").val(visitmaxPage);
-        }
-        if (currentPage !== detectPageVisit) {
-            $.ajax({
-                type: "GET",
-                url: baseURL + "/visit/summary/" + selectedPatient + "?page=" + currentPage,
-                success: function(data) {
-                    plotVisitData(data);
-                }
-              });
-            detectPageVisit = currentPage;
-        }
+            $("#currentVisitPage").val(visitmaxPage);
+        }else {
+            if (currentPage !== detectPageVisit) {
+                
+                $.ajax({
+                    type: "GET",
+                    url: baseURL + "/visit/summary/" + selectedPatient + "?page=" + currentPage,
+                    success: function(data) {
+                        plotVisitData(data);
+                    }
+                  });
+                detectPageVisit = currentPage;
+            }
+        }    
     }
 }
 var visitDataArr = [];
@@ -117,7 +132,8 @@ function plotVisitData (response) {
     }else {
         $("#infoVisitText").css("display", "block");
         $("#infoVisitText").html("This patient does not have any visit record");
-        $("#visitArea").css("display", "none");
+        $("#pageVisitTotal").html("N/a");
+        $("#currentVisitPage").val("").prop("disabled", true);
     }
    
 }
@@ -142,7 +158,6 @@ function constructVisitList (data) {
 function showVisitDetail (id) {
     sessionStorage.setItem("visitID", id);
     console.log(sessionStorage.getItem("visitID"));
-    console.log(sessionStorage.setItem("visitList",JSON.stringify(visitDataArr)));
     window.location.pathname = "screen7.html";
 }
 
@@ -166,4 +181,54 @@ function setUpEventBtn () {
         sessionStorage.setItem("selectedPatient", JSON.stringify(patientData));
         window.location.pathname = "/screen2.html";
     })
+    $("#searchBtn").click(function () {
+        console.log("search btn");
+        var searchKeyWord = $("#searchKeyWord").val().trim();
+        console.log(searchKeyWord);
+        if(searchKeyWord === "") {
+            queryPatientList();
+        }else {
+            var selectOption = $("#searchOption").val();
+            if (selectOption === "name") {
+                console.log("name");
+                searchForName(searchKeyWord);
+            }else if (selectOption == "id") {
+                console.log("id");
+                searchForID(searchKeyWord);
+            }
+        }
+    })
+}
+
+function searchForName (name) {
+    var page = $('#currentPage').val();
+    detectPagePatient = page;
+    var uri = baseURL + "/patient/name?patientName=" + name  +"&page=" + page;
+    $.ajax({
+        type: "GET",
+        url: uri,
+        success: function(data) {
+          console.log(data);
+          plotPatientData(data);
+        }
+      });
+}
+
+function searchForID (ID) {
+    $('#currentPage').val("").prop("disabled", true);
+    $("#patientList tbody tr").remove();
+    $("#pageTotal").html("");
+    var patientID = parseInt(ID);
+    console.log(patientID);
+    if (isNaN(patientID)) alert("Error: Invalid format for ID number");
+    else {
+        $.ajax({
+            type: "GET",
+            url: baseURL + "/patient/single?ID=" + patientID,
+            success: function(data) {
+              console.log(data);
+              $('#patientList tbody').append(constructPatientRow(data));
+            }
+          }); 
+    }
 }

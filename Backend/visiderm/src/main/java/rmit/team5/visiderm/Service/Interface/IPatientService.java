@@ -16,7 +16,7 @@ public interface IPatientService {
     Patient getPatientDetail (long patientID);
 
     // add new patient information
-    boolean addNewPatient (PatientDTO patientDTO);
+    long addNewPatient (PatientDTO patientDTO);
     boolean updateNewPatient (PatientDTO patientDTO, long ID);
 
 }

@@ -21,6 +21,9 @@ public class Address {
     @Column(name = "country")
     private String country;
 
+    @Column(name = "postal")
+    private String postalCode;
+
     @MapsId
     @OneToOne
     @JoinColumn(name = "patientID")
@@ -62,6 +65,14 @@ public class Address {
 
     public Patient getPatient() {
         return patient;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     @JsonIgnore

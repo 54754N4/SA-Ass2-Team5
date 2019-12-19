@@ -89,7 +89,7 @@
           <label id="pageTotal" class="mr-2 ml-3">of 2</label>
         </div>
 
-        <button type="submit" class="btn btn-primary mb-4 ml-4">Search</button>
+        <button type="button" class="btn btn-primary mb-4 ml-4" id="searchBtn" >Search</button>
 
         <div class="form-group mx-sm-3 mb-4">
           <input
@@ -102,9 +102,9 @@
 
         <div class="form-group mx-sm-3 mb-4">
           <label for="search" class="mr-2 ml-4">By</label>
-          <select class="form-control" id="search" required>
-            <option value="">Name</option>
-            <option value="">ID</option>
+          <select class="form-control" id="searchOption">
+            <option value="name">Name</option>
+            <option value="id">ID</option>
           </select>
         </div>
       </form>
@@ -192,7 +192,7 @@
 
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-6 mb-1">
                 <label for="sortvisit">Sort By</label>
               </div>
@@ -202,7 +202,7 @@
                   <option value="">ID</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <br class="mb-4" />
             <br />
           </div>

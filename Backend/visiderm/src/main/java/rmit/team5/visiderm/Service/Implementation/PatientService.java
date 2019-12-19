@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import rmit.team5.visiderm.DAO.Intereface.IPatientDAO;
 import rmit.team5.visiderm.DTO.PatientDTO;
@@ -34,7 +35,7 @@ public class PatientService implements IPatientService {
     @Override
     public HashMap<String, Object> getListOfPatient(int page) {
         page = page -1; // the page request in JPA is started from 0 not 1
-        Pageable pageRequest = PageRequest.of(page, PAGE_LIMIT);
+        Pageable pageRequest = PageRequest.of(page, PAGE_LIMIT,Sort.by("patientID").ascending());
         Page<Patient> queryResult = patientDAO.findAll(pageRequest);
         return constructPatientSumQuery(queryResult);
     }
@@ -42,7 +43,7 @@ public class PatientService implements IPatientService {
     @Override
     public HashMap<String, Object> getPatientByName(String patientName, int page) {
         page = page -1; // the page request in JPA is started from 0 not 1
-        Pageable pageRequest = PageRequest.of(page, PAGE_LIMIT);
+        Pageable pageRequest = PageRequest.of(page, PAGE_LIMIT, Sort.by("patientID").ascending());
         Page<Patient> queryResult = patientDAO.findAllPatientWithName(patientName, pageRequest);
         return constructPatientSumQuery(queryResult);
     }
@@ -65,7 +66,7 @@ public class PatientService implements IPatientService {
 
 
     @Override
-    public boolean addNewPatient(PatientDTO patientDTO) {
+    public long addNewPatient(PatientDTO patientDTO) {
         Patient newPatient = new Patient();
         getPatientInfoFromDTO(patientDTO, newPatient);
 
@@ -81,8 +82,8 @@ public class PatientService implements IPatientService {
         address.setPatient(newPatient);
         newPatient.setHomeAddress(address);
 
-        patientDAO.save(newPatient);
-        return true;
+        Patient patient = patientDAO.save(newPatient);
+        return patient.getPatientID();
     }
 
     @Override
@@ -199,6 +200,7 @@ public class PatientService implements IPatientService {
         address.setCountry(patientDTO.getCountry().trim());
         address.setStreetAddress(patientDTO.getStreetAddress().trim());
         address.setSuburd(patientDTO.getSuburd().trim());
+        address.setPostalCode(patientDTO.getPostalCode().trim());
     }
 
     // set the contact information from the DTO

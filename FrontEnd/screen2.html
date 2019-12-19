@@ -98,7 +98,6 @@
                         </div>
                         <div class="col-md-3 mb-1">
                             <select class="custom-select d-block w-100" id="title" required>
-                                <option value="">Title...</option>
                                 <option value="Mr">Mr</option>
                                 <option value="Mrs">Mrs</option>
                                 <option value="Ms">Ms</option>
@@ -112,7 +111,6 @@
                         </div>
                         <div class="col-md-3 mb-1">
                             <select class="custom-select d-block w-80" id="gender" required>
-                                <option value="G">Gender...</option>
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
                             </select>
@@ -300,13 +298,17 @@
                         <label for="page">Page</label>
                     </div>
                     <div class="col-md-3 mb-1">
-                        <input type="number" class="form-control" id="lastName" placeholder="" value="1" required>
+                        <input type="number" class="form-control" id="currentPage" placeholder="" value="1"
+                        min="1" onchange="getVisitListByPage()">
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <label id="totalPage">of 2</label>
                     </div>
                 </div>
 
 <!-- Visit Entries details -->
-                <div class="row mt-2">
-                    <div class="col-sm-12">
+                <div class="row mt-2" style="height: 600px;   overflow: scroll;" id="visitEntries">
+                    <!-- <div class="col-sm-12">
                         <div class="row">
                             <label for="visit" class="col-sm-4 col-form-label">First Visit</label>
                             <label for="date" class="col-sm-8 col-form-label">25/05/1995</label>
@@ -325,7 +327,67 @@
                         </div>
                         <hr class="mb-4">
 
-                    </div>
+                    </div> -->
+                    <!-- <div class="col-sm-12">
+                            <div class="row">
+                                <label for="visit" class="col-sm-4 col-form-label">First Visit</label>
+                                <label for="date" class="col-sm-8 col-form-label">25/05/1995</label>
+                            </div>
+                            <div class="row">
+                                <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
+                                <label for="doctorname" class="col-sm-8 col-form-label">Jim Boyce</label>
+                            </div>
+                            <div class="row">
+                                <label for="clinic" class="col-sm-4 col-form-label">Clinic</label>
+                                <label for="clinicname" class="col-sm-8 col-form-label">Clayton Center</label>
+                            </div>
+                            <div class="row">
+                                <label for="clinic" class="col-sm-9 col-form-label"></label>
+                                <a href="#" class="btn btn-primary stretched-link col-sm-2">Edit</a>
+                            </div>
+                            <hr class="mb-4">
+    
+                        </div> -->
+                        <!-- <div class="col-sm-12">
+                                <div class="row">
+                                    <label for="visit" class="col-sm-4 col-form-label">First Visit</label>
+                                    <label for="date" class="col-sm-8 col-form-label">25/05/1995</label>
+                                </div>
+                                <div class="row">
+                                    <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
+                                    <label for="doctorname" class="col-sm-8 col-form-label">Jim Boyce</label>
+                                </div>
+                                <div class="row">
+                                    <label for="clinic" class="col-sm-4 col-form-label">Clinic</label>
+                                    <label for="clinicname" class="col-sm-8 col-form-label">Clayton Center</label>
+                                </div>
+                                <div class="row">
+                                    <label for="clinic" class="col-sm-9 col-form-label"></label>
+                                    <a href="#" class="btn btn-primary stretched-link col-sm-2">Edit</a>
+                                </div>
+                                <hr class="mb-4">
+        
+                            </div> -->
+                            <!-- <div class="col-sm-12">
+                                    <div class="row">
+                                        <label for="visit" class="col-sm-4 col-form-label">First Visit</label>
+                                        <label for="date" class="col-sm-8 col-form-label">25/05/1995</label>
+                                    </div>
+                                    <div class="row">
+                                        <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
+                                        <label for="doctorname" class="col-sm-8 col-form-label">Jim Boyce</label>
+                                    </div>
+                                    <div class="row">
+                                        <label for="clinic" class="col-sm-4 col-form-label">Clinic</label>
+                                        <label for="clinicname" class="col-sm-8 col-form-label">Clayton Center</label>
+                                    </div>
+                                    <div class="row">
+                                        <label for="clinic" class="col-sm-9 col-form-label"></label>
+                                        <a href="#" class="btn btn-primary stretched-link col-sm-2">Edit</a>
+                                    </div>
+                                    <hr class="mb-4">
+            
+                                </div> -->
                 </div>
 
             </div>
