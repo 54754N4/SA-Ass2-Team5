@@ -10,9 +10,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <!-- Custom styles for this template -->
+    <!-- <link href="./css/form-validation.css" rel="stylesheet"> -->
+
+
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-    <title>Screen16</title>
+    <title>Screen15</title>
 </head>
 
 <body class="bg-light">
@@ -24,7 +28,7 @@
              
             </div>
             <div class="col-md-8">
-              <h1 align="center">EXTERNAL SEARCH FOR LESION SIR JOHN MONASH HOSPITAL </h1>
+              <h1 align="center">EXTERNAL CENTRAL PATIENT SIR JOHN MONASH HOSPITAL </h1>
             </div>
             <div class="col-md-2">
             </div>
@@ -32,63 +36,91 @@
     
           <div class="row">
             <div class="col-md-3">
-              <button class="btn btn-light btn-block" id="internalAccess" type="submit">Back to internal system</button>
+              <button class="btn btn-light btn-block" id="externalAccess" type="submit">Access other hospitals in system</button>
     
             </div>
             <div class="col-md-6">
             </div>
             <div class="col-md-3">
-              <button class="btn btn-light btn-block" id="exAccess" type="submit">Access other hospitals in system</button>
+              <button class="btn btn-light btn-block" id="searchlesion" type="submit">Search for Lesion</button>
             </div>
           </div>
         </div>
       </div>
 
     <div class="container">
-        
-        <form class="needs-validation" novalidate style="border: 3px solid; padding: 30px 30px;">
+        <div class="row">
+            <div class="col-md-12 order-md-1">
+                <h4 class="mb-3">Patient List</h4>
+                <hr class="mb-4">
+            </div>
+        </div>
 
+        
+        <form class="needs-validation" novalidate>
+
+            <!-- suburd & postcode -->
             <div class="row">
-                <div class="col-md-7 mb-1">
-                    <label>Click here to access External Central Lesion Database</label>
+                <div class="col-md-1 mb-1">
+                    <button type="submit" class="btn btn-primary">Search</button>
+
                 </div>
                 <div class="col-md-3 mb-1">
-                    <button type="submit" class="btn btn-primary">Manual Browsing</button>
-                </div>
-
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-1 mb-1">
-                    <label>Keyword</label>
-                </div>
-                <div class="col-md-2 mb-1">
                     <input type="text" class="form-control" id="suburd" placeholder="" value="" required>
                 </div>
-                <div class="col-md-1 mb-1">
-                    <label>In term</label>
-                </div>
+
+                    <label>By</label>
                 <div class="col-md-2 mb-1">
                     <select id="inputState" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
-                      </select>
-                </div>
-            
-                <div class="col-md-1 mb-1">
-           
+                      </select>                
                 </div>
 
-                <div class="col-md-3 mb-1">
-                    <button type="submit" class="btn btn-primary">Search Keyword</button>
-           
+                    <label>Page</label>
+                <div class="col-md-2 mb-1">
+                    <input type="text" class="form-control" id="page" placeholder="" value="1" required>
                 </div>
-
             </div>
         </form>
 
+        
+
+        <div class="row  mt-3">
+            <!-- Patient List -->
+            <div class="col-md-12">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- DETAILS OF PATIENT TABLE -->
+                            <table class="table text-center table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient ID Number</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Sex</th>
+                                        <th scope="col">Date of Birth</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Anthony Taylor</td>
+                                        <td>123456789</td>
+                                        <td>M</td>
+                                        <td>23/09/1964</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                </form>
+            </div>
+        </div>
+
             
-        <footer class="my-1 pt-1 text-muted text-center text-small">
+        <footer class="my-5 pt-5 text-muted text-center text-small">
 
         </footer>
     </div>

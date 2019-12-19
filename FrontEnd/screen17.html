@@ -24,7 +24,7 @@
              
             </div>
             <div class="col-md-8">
-              <h1 align="center">EXTERNAL SEARCH FOR LESION SIR JOHN MONASH HOSPITAL </h1>
+              <h1 align="center">EXTERNAL CENTRAL LESION DATABASE SIR JOHN MONASH HOSPITAL </h1>
             </div>
             <div class="col-md-2">
             </div>
@@ -45,47 +45,68 @@
       </div>
 
     <div class="container">
-        
-        <form class="needs-validation" novalidate style="border: 3px solid; padding: 30px 30px;">
 
-            <div class="row">
-                <div class="col-md-7 mb-1">
-                    <label>Click here to access External Central Lesion Database</label>
-                </div>
-                <div class="col-md-3 mb-1">
-                    <button type="submit" class="btn btn-primary">Manual Browsing</button>
-                </div>
-
+        <div class="row">
+            <div class="col-md-12 order-md-1">
+                <h4 class="mb-3">Lesion Visit</h4>
+                <hr class="mb-4">
             </div>
+        </div>
 
-            <div class="row mt-3">
+        <form class="needs-validation" novalidate >
+            <div class="row">
+                <div class="col-md-3 mb-1">
+                </div>
+                <label for="">Page</label>
                 <div class="col-md-1 mb-1">
-                    <label>Keyword</label>
-                </div>
-                <div class="col-md-2 mb-1">
-                    <input type="text" class="form-control" id="suburd" placeholder="" value="" required>
+                    <input type="number" class="form-control" id="page" placeholder="" value="1" required>
                 </div>
                 <div class="col-md-1 mb-1">
-                    <label>In term</label>
                 </div>
+                <label for="">Sorted by</label>
                 <div class="col-md-2 mb-1">
                     <select id="inputState" class="form-control">
                         <option selected>Choose...</option>
-                        <option>...</option>
+                        <option>Date</option>
+                        <option>Size</option>
+
                       </select>
                 </div>
-            
-                <div class="col-md-1 mb-1">
-           
-                </div>
-
-                <div class="col-md-3 mb-1">
-                    <button type="submit" class="btn btn-primary">Search Keyword</button>
-           
-                </div>
-
             </div>
+
         </form>
+
+        <div class="row mt-4">
+            <div class="col-md-2 mb-1">
+                <div class="row">
+                    <img style="min-height: 100px; height: 100px;" src="./images/lesion.png" class="rounded mx-3 d-block" alt="...">
+                </div>
+                <div class="row">
+                    <label for="size" class="col-sm-3 col-form-label">Size:</label>
+                    <label for="size" class="col-sm-3 col-form-label">10cm</label>
+                </div>
+                <div class="row">
+                    <label for="date" class="mx-3 col-form-label">10/05/1994</label>
+                </div>
+            </div>
+
+            <div class="col-md-2 mb-1">
+                <div class="row">
+                    <img style="min-height: 100px; height: 100px;" src="./images/lesion.png" class="rounded mx-3 d-block" alt="...">
+                </div>
+                <div class="row">
+                    <label for="size" class="col-sm-3 col-form-label">Size:</label>
+                    <label for="size" class="col-sm-3 col-form-label">10cm</label>
+                </div>
+                <div class="row">
+                    <label for="date" class="mx-3 col-form-label">10/05/1994</label>
+                </div>
+            </div>
+
+        </div>
+
+
+
 
             
         <footer class="my-1 pt-1 text-muted text-center text-small">
