@@ -76,10 +76,9 @@
                         <div class="col-md-3 mb-1">
                             <select class="custom-select d-block w-100" id="title" required>
                                 <option value="">Title...</option>
-                                <option>Mr</option>
-                                <option>Mrs</option>
-                                <option>Ms</option>
-
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Ms">Ms</option>
                             </select>
                         </div>
 
@@ -90,9 +89,9 @@
                         </div>
                         <div class="col-md-3 mb-1">
                             <select class="custom-select d-block w-80" id="gender" required>
-                                <option value="">Gender...</option>
-                                <option>Male</option>
-                                <option>Female</option>
+                                <option value="G">Gender...</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
                             </select>
                         </div>
                     </div>
@@ -115,8 +114,8 @@
                         <div class="col-md-5 mb-1">
                             <select class="custom-select d-block w-100" id="marryStatus" required>
                                 <option value="">Status...</option>
-                                <option>Single</option>
-                                <option>Married</option>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
                             </select>
                         </div>
                     </div>
@@ -246,10 +245,10 @@
                     <hr class="mb-4">
                     <div class="row">
                         <div class="col-md-6">
-                            <button class="btn btn-primary btn-block" type="submit">Update</button>
+                            <button class="btn btn-primary btn-block" id="updatePCBtn" type="button" disabled>Update</button>
                         </div>
                         <div class="col-md-6">
-                            <button class="btn btn-primary btn-block" type="submit">Cancel</button>
+                            <button class="btn btn-primary btn-block" id="cancelPCBtn" type="button">Cancel</button>
                         </div>
                     </div>
                 </form>
@@ -259,9 +258,9 @@
 
                 <div class="col-md-3"></div>
                 <div class="col-md-9">
-                    <button class="btn btn-primary btn-block" type="submit">Create New Visit Record</button>
-                    <button class="btn btn-primary btn-block" type="submit">Edit Patient Record</button>
-                    <button class="btn btn-primary btn-block" type="submit">Create New Patient Record</button>
+                    <button class="btn btn-primary btn-block" id="createNewVisit" type="submit">Create New Visit Record</button>
+                    <button class="btn btn-primary btn-block" id="editPC" type="submit">Edit Patient Record</button>
+                    <button class="btn btn-primary btn-block" id="createNewPC" type="submit">Create New Patient Record</button>
                 </div>
                 <br class="mb-4">
                 <br class="mb-4">
@@ -348,6 +347,7 @@
             });
         });
         getPatientDetailAPI();
+        setUpBtnEvent();
     </script>
 </body>
 
