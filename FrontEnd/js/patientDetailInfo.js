@@ -19,29 +19,31 @@ function plotPatientInfoData (data) {
     $("#lastName").val(data.firstName).prop("disabled", true);
     $("#patientID").val(data.patientID).prop("disabled", true);
     $("#title").val(data.title).prop("disabled", true);
-    $("#birthday").val(data.birthday).prop("disabled", true);
+    var responseDate = moment(data.birthday).format('MM/DD/YYYY');
+    $("#birthday").val(responseDate).prop("disabled", true);
     $("#email").val(data.email).prop("disabled", true);
+    $("#occupation").val(data.occupation).prop("disabled", true);
     if(data.homeAddress === null) {
         $("#address").val("N/A").prop("disabled", true);
         $("#suburd").val("N/A").prop("disabled", true);
         $("#postcode").val("N/A").prop("disabled", true);
-        $("#country").val("N/A").prop("disabled", true);
+        $("#locality-dropdown").val("N/A").prop("disabled", true);
     }else {
         $("#address").val(data.homeAddress.streetAddress).prop("disabled", true);
         $("#suburd").val(data.homeAddress.suburd).prop("disabled", true);
         $("#postcode").val(data.homeAddress.postCode).prop("disabled", true);
-        $("#country").val(data.homeAddress.country).prop("disabled", true);
+        $("#locality-dropdown").val(data.homeAddress.country).prop("disabled", true);
     }
     if (data.contactInfo === null) {
         $("#hphone").val("N/A").prop("disabled", true);
         $("#ophone").val("N/A").prop("disabled", true);
         $("#mphone").val("N/A").prop("disabled", true);
-        $("#fax").val("N/A").prop("disabled", true);
+        $("#faxNum").val("N/A").prop("disabled", true);
     }else {
         $("#hphone").val(data.contactInfo.homePhone).prop("disabled", true);
         $("#ophone").val(data.contactInfo.officePhone).prop("disabled", true);
         $("#mphone").val(data.contactInfo.mobilePhone).prop("disabled", true);
-        $("#fax").val(data.contactInfo.faxNumber.prop("disabled", true));
+        $("#faxNum").val(data.contactInfo.faxNumber).prop("disabled", true);
     }
     if (data.nextToKin === null) {
         $("#kinName").val("N/A").prop("disabled", true);
@@ -58,9 +60,12 @@ function plotPatientInfoData (data) {
 
 function setGenderAndMS (gender, marryStatus) { 
     $("#gender").val(gender).change();
+    $("#gender").prop("disabled", true);
+
     if (marryStatus === true) marryStatus = "married";
     else marryStatus = "single"
     $("#marryStatus").val(marryStatus).change();
+    $("#marryStatus").prop("disabled", true)
 }
 
 function setUpBtnEvent () {
@@ -68,7 +73,7 @@ function setUpBtnEvent () {
         if (currentAction === "update") {
             sendUpdatePCRequest();
         }else if (currentAction === "add") {
-            sendAddPCRequest();
+            sendAddNewPCRequest();
         }
     });
 
@@ -84,6 +89,7 @@ function setUpBtnEvent () {
         console.log("edit PC");
         $("#updatePCBtn").prop("disabled", false);
         currentAction = "update";
+        setUpEditForm();
     })
 
     $("#createNewPC").click (function () {
@@ -96,7 +102,8 @@ function setUpBtnEvent () {
 
 
 function constuctPCRequestBody () {
-
+    var country = $("#locality-dropdown").val();
+    console.log(country);
     var PCRequest =
     {
         "lastName": "Hoang",
@@ -122,34 +129,34 @@ function constuctPCRequestBody () {
 
 function sendUpdatePCRequest () {
     var requestData = constuctPCRequestBody();
-    $.ajax ({
-      type: "PUT",
-      url: baseURL + "/update",
-      data: JSON.stringify(requestData),
-      contentType: "application/json",
-      success: function (data) {
-        console.log(data);
-      },
-      error: function (data) {
-        console.log(data)
-      }
-    }) 
+    // $.ajax ({
+    //   type: "PUT",
+    //   url: baseURL + "/update",
+    //   data: JSON.stringify(requestData),
+    //   contentType: "application/json",
+    //   success: function (data) {
+    //     console.log(data);
+    //   },
+    //   error: function (data) {
+    //     console.log(data)
+    //   }
+    // }) 
 }
 
 function sendAddNewPCRequest () {
     var requestData = constuctPCRequestBody();
-  $.ajax ({
-    type: "POST",
-    url: baseURL + "visit/add",
-    data : JSON.stringify(requestData), 
-    contentType: "application/json",
-    success: function (data) {
-      console.log(data);
-    },
-    error: function (data) {
-      console.log(data)
-    }
-  })
+//   $.ajax ({
+//     type: "POST",
+//     url: baseURL + "visit/add",
+//     data : JSON.stringify(requestData), 
+//     contentType: "application/json",
+//     success: function (data) {
+//       console.log(data);
+//     },
+//     error: function (data) {
+//       console.log(data)
+//     }
+//   })
 }
 
 
@@ -160,17 +167,45 @@ function setUpCreateForm () {
         $("#title").val("").prop("disabled", false);
         $("#birthday").val(new Date()).prop("disabled", false);
         $("#email").val("").prop("disabled", false);
+        $("#occupation").val("").prop("disabled", false);
         // contry info
         $("#address").val("").prop("disabled", false);
         $("#suburd").val("").prop("disabled", false);
         $("#postcode").val("").prop("disabled", false);
-        $("#country").val("").prop("disabled", false);
+        $("#locality-dropdown").val("").prop("disabled", false);
         // contact info
         $("#hphone").val("").prop("disabled", false);
         $("#ophone").val("").prop("disabled", false);
         $("#mphone").val("").prop("disabled", false);
-        $("#fax").val("").prop("disabled", false);
+        $("#faxNum").val("").prop("disabled", false);
         $("#editPC").prop("disabled", true);
         $("#createNewVisit").prop("disabled", true);
+        // next to kin
+        $("#kinName").val("").prop("disabled", false);
+        $("#contactKin").val("").prop("disabled", false);
+}
+
+function setUpEditForm () {
+    $("#firstName").prop("disabled", false);
+    $("#lastName").prop("disabled", false);
+    $("#patientID").prop("disabled", true);
+    $("#title").prop("disabled", false);
+    $("#birthday").prop("disabled", false);
+    $("#email").prop("disabled", false);
+    $("#occupation").prop("disabled", false);
+    // address info
+    $("#address").prop("disabled", false);
+    $("#suburd").prop("disabled", false);
+    $("#postcode").prop("disabled", false);
+    $("#locality-dropdown").prop("disabled", false);
+    // contact info
+    $("#hphone").prop("disabled", false);
+    $("#ophone").prop("disabled", false);
+    $("#mphone").prop("disabled", false);
+    $("#faxNum").prop("disabled", false);
+    $("#kinName").prop("disabled", false);
+    $("#contactKin").prop("disabled", false);
+    $("#createNewPC").prop("disabled", true);
+    $("#createNewVisit").prop("disabled", true);
 
 }
