@@ -29,17 +29,17 @@
       
                 <div class="row">
                     <div class="col-md-1 mb-1">
-                        <button type="submit" class="btn btn-primary" onclick="zoomin()">Zoom in</button>
+                        <button type="submit" class="btn btn-primary" id="plus">Zoom in</button>
                     </div>
                     <div class="col-md-1 mb-1">
-                        <button type="submit" class="btn btn-primary" onclick="zoomout()">Zoom out</button>
+                        <button type="submit" class="btn btn-primary" id="minus">Zoom out</button>
                     </div>
     
                     <div class="col-md-1 mb-1">         
                     </div>
 
                     <div class="col-md-2 mb-1">
-                        <button type="submit" class="btn btn-primary">Whole Lesion Window</button>
+                        <button type="submit" class="btn btn-primary" onclick="openFullscreen()">Whole Lesion Window</button>
                     </div>
                     
     
@@ -67,14 +67,17 @@
             <div class="col-md-11 order-md-1">
                     <canvas id="myCanvas" height="600px" width="1000px">
                     </canvas>
-                    <div id="buttonWrapper">
-                        <input type="button" id="plus" value="+"><input type="button" id="minus" value="-">
-                    </div>
+            </div>
+        </div>
 
+        <div class="row mt-2">
+            <div class="col-md-9 order-md-1">
+            </div>
+            <div class="col-md-2 order-md-1">
+                <button OnClick=" location.href='screen7.html' " class="btn btn-primary">Back to Lesion Record</button>
             </div>
 
         </div>
-
        
         <footer class="my-1 pt-1 text-muted text-center text-small">
 
@@ -134,8 +137,25 @@
     } 
 </script>  -->
 
+<!-- full window -->
 
 
+<script>
+    var elem = document.getElementById("myCanvas");
+    function openFullscreen() {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+    }
+    </script>
+
+<!-- zoom in out -->
 <script>
     var canvas = document.getElementById("myCanvas");
             var context = canvas.getContext("2d");
@@ -147,7 +167,7 @@
           
             
             background = new Image();
-            background.src = "./images/lesion.png";
+            background.src = "./images/detail.png";
             background.onload = function () {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.save();
@@ -165,7 +185,6 @@
         window.onload = function () {
             var canvas = document.getElementById("myCanvas");
         
-
             var translatePos = {
                 x: 0,
                 y: 0
