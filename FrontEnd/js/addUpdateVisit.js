@@ -7,14 +7,20 @@ function setUpForm() {
   if (updateItem !== null) {
     data = JSON.parse(updateItem);
     console.log(data);
-    $("#visitDate").val(data.date);
-    $("#visitTime").val(data.time);
+    var responseDate = moment(data.date).format('MM/DD/YYYY');
+    console.log(responseDate);
+    $("#visitDate").val(responseDate);
+    $("#staticVisitTime").val(data.time).prop("disabled", true);
+    $("#newVisitTimeRow").css("display", "none");
+    $("#visitReason").val(data.reason).prop("disabled", true);
     $("#patientName").val(data.patientName);
     $("#patientID").val(data.patientID);
     $("#doctorName").val(data.doctor);
     $("#visitNote").val(data.doctorNote);
     plotBodyPicture(data.locationPoints);
     oldPointsArr = data.locationPoints;
+  }else {
+    $("#staticVisitTimeRow").css("display", "none");
   }
 }
 
@@ -110,9 +116,10 @@ function checkWithOldPoint(newX, newY) {
 function setUpBtnEvent () {
     $("#updateVisitBtn").click (function () {
         addOrUpdate();
+        console.log("clicked")
     });
     $("#cancelBtn").click(function () {
-        sessionStorage.removeItem("updateVisit");
+       //sessionStorage.removeItem("updateVisit");
         window.location.pathname = "screen7.html";
     })
 }
@@ -120,16 +127,72 @@ function setUpBtnEvent () {
 function addOrUpdate () {
     var updateItem = sessionStorage.getItem("updateVisit");
     if (updateItem === null) {
+      console.log("add new item");
         sendAddRequest();
     }else {
         sendUpdateRequest();
     }
 }
+var baseURL = "http://localhost:5000/";
+function constuctRequestBody () {
+  var visitDate = $("#visitDate").val();
+  console.log(visitDate);
+  var responseDate = moment(new Date(visitDate)).format('YYYY-MM-DD');
+
+  var visitTime = $("#visitTime").val();
+  var patientName = $("#patientName").val();
+  var patientID = $("#patientID").val();
+  var doctorName = $("#doctorName").val();
+  console.log(doctorName);
+  var visitNote = $("#visitNote").val();
+  var sendData = {
+    "patientID" : patientID,
+	"startTime": "09:00",
+	"endTime": "11:00",
+	"visitDate": responseDate,
+	"doctorName": doctorName,
+	"clinic": "Ho Chi Minh City",
+	"visitReason": "as",
+	"visitNote": visitNote,
+	"lesionDate": "",
+	"lesionTime": "",
+	"lesionSize": "",
+	"lesionLocation": "",
+	"lesionNote": "",
+	"lesionCoordinates": locationTrack
+  }
+  console.log(sendData);
+  return sendData;
+}
 
 function sendAddRequest () {
-
+  var requestData = constuctRequestBody();
+  $.ajax ({
+    type: "POST",
+    url: baseURL + "visit/add",
+    data : JSON.stringify(requestData), 
+    contentType: "application/json",
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (data) {
+      console.log(data)
+    }
+  })
 }
 
 function sendUpdateRequest () {
-
+  var requestData = constuctRequestBody();
+  $.ajax ({
+    type: "PUT",
+    url: baseURL + "visit/update",
+    data: JSON.stringify(requestData),
+    contentType: "application/json",
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (data) {
+      console.log(data)
+    }
+  }) 
 }

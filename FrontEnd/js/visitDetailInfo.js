@@ -63,11 +63,10 @@ function setUpBtnEvent () {
     var visitID = sessionStorage.getItem("visitID");
     $("#iterateBtn").click(function () {
        var currentIndex = listOfVisitID.indexOf(parseInt(visitID));
-       visitID = listOfVisitID[currentIndex + 1];
-       if (visitID === undefined) {
+       if (listOfVisitID[currentIndex + 1] === undefined) {
         $("#iterateBtn").css("display", "none");
-        sessionStorage.setItem("visitID", visitID);
        }else {
+        visitID = listOfVisitID[currentIndex + 1];
         sessionStorage.setItem("visitID", visitID);
         getVisitDetailInfo();
        }

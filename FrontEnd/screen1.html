@@ -17,7 +17,7 @@
     />
 
     <!-- Custom styles for this template -->
-    <link href="./css/form-validation.css" rel="stylesheet" />
+    <!-- <link href="./css/form-validation.css" rel="stylesheet" /> -->
 
     <link
       rel="stylesheet"
@@ -133,14 +133,15 @@
                 for="name"
                 class="col-sm-12 col-form-label"
                 id="patientName"
-                >Mr Anthony Hopkin</label
+                ></label
               >
               <label
                 for="date"
                 class="col-sm-12 col-form-label"
                 id="visitDateRange"
-                >25/05/1995 - 12/02/1997</label
+                ></label
               >
+              <button class="btn btn-primary" id="editBtn">Edit Patient Record</button>  <button class="btn btn-primary">Edit Visit Entry</button>
             </li>
           </div>
           <div class="col-md-2 order-md-1"></div>
@@ -238,8 +239,8 @@
       $(document).ready(function() {
         // set an element
         $("#todayDate").html(moment().format("ddd DD/MM/YYYY"));
-        console.log(moment().format("MMM Do YY"));
         queryPatientList();
+        setUpEventBtn();
       });
     </script>
   </body>

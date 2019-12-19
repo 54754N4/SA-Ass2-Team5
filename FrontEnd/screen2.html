@@ -11,7 +11,6 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="./css/form-validation.css" rel="stylesheet">
 
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -111,10 +110,10 @@
                     <!-- Marial Status -->
                     <div class="row">
                         <div class="col-md-3 mb-1">
-                            <label for="title">Marial Status</label>
+                            <label for="marryStatus">Marial Status</label>
                         </div>
                         <div class="col-md-5 mb-1">
-                            <select class="custom-select d-block w-100" id="title" required>
+                            <select class="custom-select d-block w-100" id="marryStatus" required>
                                 <option value="">Status...</option>
                                 <option>Single</option>
                                 <option>Married</option>
@@ -157,7 +156,7 @@
                             <label for="country">Country</label>
                         </div>
                         <div class="col-md-5 mb-1">
-                            <select class="custom-select d-block w-100" id="title" required>
+                            <select class="custom-select d-block w-100" id="country" required>
                                 <option value="">Country...</option>
                                 <option>China</option>
                                 <option>Vietnam</option>
@@ -230,20 +229,20 @@
                     <!-- Next to Kin -->
                     <div class="row">
                         <div class="col-md-3 mb-1">
-                            <label for="kin">Next to Kin</label>
+                            <label for="kinName">Next to Kin</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" id="kin" placeholder="Ms Samanthan">
+                            <input type="text" class="form-control" id="kinName" placeholder="Ms Samanthan">
                         </div>
                     </div>
 
                     <!-- Contact -->
                     <div class="row">
                         <div class="col-md-3 mb-1">
-                            <label for="contact">Contact Number</label>
+                            <label for="contactKin">Contact Number</label>
                         </div>
                         <div class="col-md-5 mb-1">
-                            <input type="text" class="form-control" id="contact" placeholder="">
+                            <input type="text" class="form-control" id="contactKin" placeholder="">
                         </div>
                     </div>
 
@@ -339,6 +338,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="/js/patientDetailInfo.js"></script>
     <script>
         $(function () {
             $('input[name="birthday"]').daterangepicker({
@@ -350,6 +350,7 @@
                 var years = moment().diff(start, 'years');
             });
         });
+        getPatientDetailAPI();
     </script>
 </body>
 

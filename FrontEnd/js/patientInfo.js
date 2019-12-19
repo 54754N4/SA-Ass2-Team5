@@ -4,6 +4,7 @@ var patientmaxPage;
 var detectPageVisit;
 var visitmaxPage;
 var selectedPatient; 
+var selectedPatientName;
 function queryPatientList() {
     var page = $('#currentPage').val();
     detectPagePatient = page;
@@ -46,7 +47,7 @@ function getPatientValidPage () {
 }
 
 function constructPatientRow (data) {
-    var patientInfo = '<tr class="clickable-row" onclick="getPatientVisitID(' + data.id + ')">' +
+    var patientInfo = '<tr class="clickable-row" onclick="getPatientVisitID(' + data.id + ',' + "'" +data.name+ "'"+ ')">' +
     '<td>' + data.name + '</td>' +
     '<td>' + data.id + '</td>' +
     '<td>' + data.gender + '</td>' +
@@ -61,19 +62,20 @@ function constructPatientRow (data) {
 
 }
 
-function getPatientVisitID(id) {
-    if (selectedPatient !== id ){
+function getPatientVisitID(selDataID, selDataName) {
+    if (selectedPatient !== selDataID ){
         var page = $("currentVisitPage").val();
         if (page === undefined) page = 1;
         $.ajax({
             type: "GET",
-            url: baseURL + "/visit/summary/" + id + "?page=" + page,
+            url: baseURL + "/visit/summary/" + selDataID + "?page=" + page,
             success: function(data) {
                 plotVisitData(data);
             }
             
           });
-          selectedPatient = id;
+          selectedPatient = selDataID;
+          selectedPatientName = selDataName;
     }
 }
 
@@ -153,4 +155,15 @@ function stringifyNumber(n) {
   if (n < 20) return special[n];
   if (n%10 === 0) return deca[Math.floor(n/10)-2] + 'ieth';
   return deca[Math.floor(n/10)-2] + 'y-' + special[n%10];
+}
+
+function setUpEventBtn () {
+    $("#editBtn").click(function () {
+        var patientData = {
+            id : selectedPatient,
+            name : selectedPatientName
+        }
+        sessionStorage.setItem("selectedPatient", JSON.stringify(patientData));
+        window.location.pathname = "/screen2.html";
+    })
 }
