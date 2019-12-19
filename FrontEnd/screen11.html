@@ -137,24 +137,29 @@
 
 
 <script>
-        function draw(scale, translatePos) {
-            var canvas = document.getElementById("myCanvas");
+    var canvas = document.getElementById("myCanvas");
             var context = canvas.getContext("2d");
+        function draw(scale, translatePos) {
+            
             //context.height = 600px;
             // context.width= 500;
             // clear canvas
           
             
             background = new Image();
-            background.src = "./images/test_image.jpg";
+            background.src = "./images/lesion.png";
             background.onload = function () {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.save();
+
                 //context.translate(translatePos.x, translatePos.y);
                 context.scale(scale, scale);
                 context.drawImage(background, translatePos.x, translatePos.y);
+
+
             };
             context.restore();
+
         }
 
         window.onload = function () {
@@ -162,8 +167,12 @@
         
 
             var translatePos = {
-                x: canvas.width / 2,
-                y: canvas.height / 2
+                x: 0,
+                y: 0
+            };
+            var zoomPos = {
+                x: 0,
+                y: 0
             };
 
             var scale = 1.0;
@@ -208,8 +217,16 @@
                     draw(scale, translatePos);
                 }
             });
-
-            draw(scale, translatePos);
+           
+           // draw(scale, translatePos);
+            background = new Image();
+            background.src = "./images/lesion.png";
+            background.onload = function () {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.save();
+                //context.translate(translatePos.x, translatePos.y);
+                context.drawImage(background, 0, 0);
+            };
         };
 
         jQuery(document).ready(function () {
