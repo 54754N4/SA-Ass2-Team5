@@ -1,0 +1,833 @@
+{
+	"info": {
+		"_postman_id": "18320d1c-23f5-4814-905e-04867cc12bd4",
+		"name": "Visiderm-Requests-Team5",
+		"description": "Covers all the requests that our backend can handle so front-end can independently code simultaneously their parts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "Get all information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Each page contains 10 records"
+					},
+					"response": []
+				},
+				{
+					"name": "Get list by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get patient detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "http://localhost:5000/patient/detail/{patientID}"
+					},
+					"response": []
+				},
+				{
+					"name": "Add new patient (Error)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"lastName\": \"Hoang\",\r\n\t\"firstName\": \"Tran\",\r\n\t\"occupation\": \"student\",\r\n\t\"email\": \"admin@gmail.com\",\r\n\t\"title\": \"Mr\",\r\n\t\"birthDay\": \"2019-09-24\",\r\n\t\"gender\": \"M\",\r\n\t\"married\": false,\r\n\t\"streetAddress\" : \"702 Nguyen Van Linh\",\r\n\t\"suburd\": \"District 10\",\r\n\t\"country\": \"Vietnam\",\r\n\t\"homePhone\": \"\",\r\n\t\"officePhone\": \"\",\r\n\t\"mobilePhone\": \"\",\r\n\t\"faxNumber\": \"\",\r\n\t\"ntkName\": \"Dinh Minh\",\r\n\t\"ntkContactInfo\": \"0906486787\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/patient/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"add"
+							]
+						},
+						"description": "The API will require the information of lastname, first name, occupation, email, title,\r\nbirthday, gender, married, street address, suburb, country. Other fields such as home phone,\r\noffice phone, fax number next to kin name and contact info will be optional\r\n\r\nError: I always get an error response of 415 (unsupported media type)\r\nor 500 (internal server error) so an exception + stack trace is returned =O"
+					},
+					"response": []
+				},
+				{
+					"name": "Update new patient (Error)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"lastName\": \"Hoang\",\r\n\t\"firstName\": \"Tran\",\r\n\t\"occupation\": \"student\",\r\n\t\"email\": \"hi\",\r\n\t\"title\": \"Mr\",\r\n\t\"birthDay\": \"2019-09-24\",\r\n\t\"gender\": \"M\",\r\n\t\"married\": false,\r\n\t\"streetAddress\" : \"702 Nguyen Van Linh\",\r\n\t\"suburd\": \"District 10\",\r\n\t\"country\": \"Vietnam\",\r\n\t\"homePhone\": \"\",\r\n\t\"officePhone\": \"\",\r\n\t\"mobilePhone\": \"\",\r\n\t\"faxNumber\": \"\",\r\n\t\"ntkName\": \"Dinh Minh\",\r\n\t\"ntkContactInfo\": \"0906486787\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/patient/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"add"
+							]
+						},
+						"description": "The API will require the information of lastname, first name, occupation, email, title,\r\nbirthday, gender, married, street address, suburb, country. Other fields such as home phone,\r\noffice phone, fax number next to kin name and contact info will be optional\r\n\r\nError: I keep getting 405 (method not allowed) error response"
+					},
+					"response": []
+				}
+			],
+			"description": "All patient requests",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Visits",
+			"item": [
+				{
+					"name": "Add new visit (Error)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"patientID\" : 1,\r\n\t\"startTime\": \"09:00\",\r\n\t\"endTime\": \"11:00\",\r\n\t\"visitDate\": \"2019-12-13\",\r\n\t\"doctorName\": \"Minh Dinh\",\r\n\t\"clinic\": \"RMIT University\",\r\n\t\"visitReason\": \"Stress due to this course\",\r\n\t\"visitNote\": \"Should be HD\",\r\n\t\"lesionDate\": \"\",\r\n\t\"lesionTime\": \"\",\r\n\t\"lesionSize\": \"\",\r\n\t\"lesionLocation\": \"\",\r\n\t\"lesionNote\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/visit/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"visit",
+								"add"
+							]
+						},
+						"description": "Error: I get 400 (bad request)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get visit info of patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/visit/summary/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"visit",
+								"summary",
+								"1"
+							]
+						},
+						"description": "Replace PatientID with actual id:\nhttp://localhost:5000/visit/summary/{PatientID}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get visit detail of patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/visit/detail/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"visit",
+								"detail",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update visit info",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"patientID\" : 1,\r\n\t\"startTime\": \"09:00\",\r\n\t\"endTime\": \"11:00\",\r\n\t\"visitDate\": \"2019-12-13\",\r\n\t\"doctorName\": \"Minh Dinh\",\r\n\t\"clinic\": \"RMIT University\",\r\n\t\"visitReason\": \"Stress due to this course\",\r\n\t\"visitNote\": \"Should be HD\",\r\n\t\"lesionDate\": \"\",\r\n\t\"lesionTime\": \"\",\r\n\t\"lesionSize\": \"\",\r\n\t\"lesionLocation\": \"\",\r\n\t\"lesionNote\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/visit/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"visit",
+								"update",
+								"1"
+							]
+						},
+						"description": "Replace {visitID} with a visit ID:\nhttp://localhost:5000/visit/update/{visitID}"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Lesions",
+			"item": [
+				{
+					"name": "Add lesion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"timeTaken\":\"23:59\",\n\t\"size\": 99.9,\n\t\"location\": \"Brain\",\n\t\"status\": \"Critical\",\n\t\"visitID\": \"HCM_1\",\n\t\"doctorNote\": \"Needs immediate attention, referred to mental hospital\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/lesion/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"lesion",
+								"add"
+							]
+						},
+						"description": "visitID = HOSPITAL-SHORTNAME_VISIT-ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update lesion",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"timeTaken\":\"00:01\",\n\t\"size\": 9999.9,\n\t\"location\": \"Brain + hands\",\n\t\"status\": \"Critically Critical\",\n\t\"visitID\": \"HCM_1\",\n\t\"doctorNote\": \"Needs immediate attention, referred to mental hospital\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/lesion/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"lesion",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get lesions of visit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/lesion/visit/HCM_1?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"lesion",
+								"visit",
+								"HCM_1"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Optional"
+								}
+							]
+						},
+						"description": "Replace visitID with the correct visit ID :\nhttp://localhost:5001/lesion/visit/{visitID}"
+					},
+					"response": []
+				},
+				{
+					"name": "Search lesions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/lesion/search?keyword=Brain&sizeDesc=false&dateDesc=true&page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"lesion",
+								"search"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "Brain",
+									"description": "Required"
+								},
+								{
+									"key": "sizeDesc",
+									"value": "false",
+									"description": "Optional"
+								},
+								{
+									"key": "dateDesc",
+									"value": "true",
+									"description": "Optional (date is taken into account if size is true too)"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Optional"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get lesion(s) by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/lesion?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"lesion"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Can be used in multiple ways :\n`http://localhost:5001/lesion?id=1`\n`http://localhost:5001/lesion?id=1,2,3`\n`http://localhost:5001/lesion?id=1&id=2&id=3`"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Validate credentials",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"doc0\",\n\t\"password\": \"doc0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/user/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"astupiduser\",\n\t\"password\": \"astupidpassword\",\n\t\"enable\": true,\n\t\"userRoleList\": [\n\t\t{\n\t\t\t\"name\": \"admin\"\n\t\t}\n\t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/user/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"astupiduser\",\n\t\"password\": \"anewstupidpassword\",\n\t\"enable\": true,\n\t\"userRoleList\": [\n\t\t{\n\t\t\t\"name\": \"admin\"\n\t\t}\n\t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/user/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"update",
+								"1"
+							]
+						},
+						"description": "http://localhost:5000/user/update/{ID}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/user/roles?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"roles"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Optional"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/user/roles/1?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"roles",
+								"1"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						},
+						"description": "http://localhost:5000/user/roles/{ID}"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CBIR",
+			"item": [
+				{
+					"name": "Get all images",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "18.136.207.121:9999/api/images",
+							"host": [
+								"18",
+								"136",
+								"207",
+								"121"
+							],
+							"port": "9999",
+							"path": [
+								"api",
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get image thumb",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "18.136.207.121:9999/thumb/1576760758089",
+							"host": [
+								"18",
+								"136",
+								"207",
+								"121"
+							],
+							"port": "9999",
+							"path": [
+								"thumb",
+								"1576760758089"
+							]
+						},
+						"description": "`GET /thumb/{id}`\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new image",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/D:/Users/Satsana/Desktop/Media/Images/DPs/BigCuteGuy.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "18.136.207.121:9999/api/images?",
+							"host": [
+								"18",
+								"136",
+								"207",
+								"121"
+							],
+							"port": "9999",
+							"path": [
+								"api",
+								"images"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "666",
+									"description": "Optional",
+									"disabled": true
+								},
+								{
+									"key": "storage",
+									"value": "default",
+									"description": "Optional",
+									"disabled": true
+								},
+								{
+									"key": "keys",
+									"value": "key1;key2",
+									"description": "semicolon separated list of key names. Optional",
+									"disabled": true
+								},
+								{
+									"key": "values",
+									"value": "value1;value2",
+									"description": "semicolon separated list of values. Optional",
+									"disabled": true
+								},
+								{
+									"key": "async",
+									"value": "true",
+									"description": "Default false. Optional",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search matching image",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"description": "the file from input form",
+									"type": "file",
+									"src": "/D:/Users/Satsana/Desktop/Media/Images/DPs/CuteGuy.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "18.136.207.121:9999/api/search?max=5&saveImage=true",
+							"host": [
+								"18",
+								"136",
+								"207",
+								"121"
+							],
+							"port": "9999",
+							"path": [
+								"api",
+								"search"
+							],
+							"query": [
+								{
+									"key": "max",
+									"value": "5",
+									"description": "default: 30, the max number of similar images. Optional"
+								},
+								{
+									"key": "storages",
+									"value": "default",
+									"description": "semicolon separated list of storages. Optional",
+									"disabled": true
+								},
+								{
+									"key": "saveImage",
+									"value": "true",
+									"description": "save the given image as well. default: false. Optional"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
