@@ -1,0 +1,8 @@
+The backend contains 4 different folders:
+- visiderm: which is the hospital server, and that should be duplicated for other hospitals
+- visiderm-external: server that's used by everyone to store and retrieve Lesions
+- visiderm-other: is a duplication of the first folder to simulate a second hospital and it's own DB
+- cbir-server: is the code of the CBIR server that we deployed at IP 18.136.207.121:9999/
+
+The Front-end is the javascript and htlm that can be found in that folder.
+The Postman collection is stored in it's respective folder as well.
