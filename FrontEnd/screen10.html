@@ -63,12 +63,12 @@
                 <form class="needs-validation" novalidate>
                     <!-- Lesion ID -->
                     <div class="row">
-                        <div class="col-md-3 mb-1">
-                            <label for="lesion">Lesion ID</label>
-                        </div>
-                        <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="lesionid" value="" />
-                        </div>
+                            <div class="col-md-3 mb-1">
+                                    <label for="lesioni">Lesion ID</label>
+                                </div>
+                                <div class="col-md-9 mb-1">
+                                    <input type="text" class="form-control" name="lesionid" id="lesionid" value="" disabled style="opacity: 1" />
+                                </div>
                     </div>
                     <!-- Doctor -->
                     <div class="row">
@@ -76,7 +76,7 @@
                             <label for="doctor">Doctor</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="doctor" value="" />
+                            <input type="text" class="form-control" name="doctor" id="doctor" value="" disabled />
                         </div>
                     </div>
 
@@ -86,7 +86,7 @@
                             <label for="patient">Patient</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="patient" value="" />
+                            <input type="text" class="form-control" name="patient" id="patient" value="" disabled/>
                         </div>
                     </div>
 
@@ -96,7 +96,7 @@
                             <label for="location">Lesion Location</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="location" value="" />
+                            <input type="text" class="form-control" name="location" id="location" value="" disabled/>
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@
                             <label for="status">Status</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="status" value="" />
+                            <input type="text" class="form-control" name="status" id="status" value="" />
                         </div>
                     </div>
                 </form>
@@ -115,10 +115,10 @@
             <div class="col-md-1 order-md-1 mb-1"></div>
             <div class="col-md-3 order-md-2 mb-1">
                 <div class="form-group row">
-                    <button class="btn btn-primary btn-block" type="submit">Update record</button>
+                    <button class="btn btn-primary btn-block" type="button" id="addOrUpdateBtn">Update record</button>
                 </div>
                 <div class="form-group row">
-                    <button class="btn btn-primary btn-block" type="submit">Cancel</button>
+                    <button class="btn btn-primary btn-block" type="button" id="cancelBtn">Cancel</button>
                 </div>
 
             </div>
@@ -242,10 +242,12 @@
     <script type="text/javascript" src="/js/addUpdateLesion.js"></script>
     <script>
         setUpLesionForm();
+        setBtnEvent();
+
         var input = document.querySelector('input');
         var preview = document.querySelector('.preview');
 
-        input.style.opacity = 0; input.addEventListener('change', updateImageDisplay); function updateImageDisplay() {
+        input.addEventListener('change', updateImageDisplay); function updateImageDisplay() {
             while (preview.firstChild) {
                 preview.removeChild(preview.firstChild);
             }

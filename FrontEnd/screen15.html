@@ -1,149 +1,190 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
 
     <!-- Custom styles for this template -->
-    <!-- <link href="./css/form-validation.css" rel="stylesheet"> -->
+    <!-- <link href="./css/form-validation.css" rel="stylesheet" /> -->
 
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+    />
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <title>Screen1</title>
+    <style>
+    .active {
+    background-color: #00C851;
+}</style>
+  </head>
 
-    <title>Screen15</title>
-</head>
-
-<body class="bg-light">
-
+  <body class="bg-light">
     <div class="jumbotron bg-primary text-white rounded-0">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-2">
-             
-            </div>
-            <div class="col-md-8">
-              <h1 align="center">EXTERNAL CENTRAL PATIENT SIR JOHN MONASH HOSPITAL </h1>
-            </div>
-            <div class="col-md-2">
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+           
           </div>
-    
-          <div class="row">
-            <div class="col-md-3">
-              <button class="btn btn-light btn-block" id="externalAccess" type="submit">Access other hospitals in system</button>
-    
-            </div>
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-3">
-              <button class="btn btn-light btn-block" id="searchlesion" type="submit">Search for Lesion</button>
-            </div>
+          <div class="col-md-8">
+            <h1 align="center">EXTERNAL CENTRAL PATIENT SIR JOHN MONASH HOSPITAL </h1>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <button class="btn btn-light btn-block" id="searchlesion" type="submit">Back to internal system</button>
+          </div>
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-light btn-block" id="externalAccess" type="submit">Access other hospitals in system</button>
           </div>
         </div>
       </div>
+    </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 order-md-1">
-                <h4 class="mb-3">Patient List</h4>
-                <hr class="mb-4">
-            </div>
+
+      <div class="row">
+        <div class="col-md-12 order-md-1">
+          <h4 class="mb-3">Patient List</h4>
+          <hr class="mb-4" />
+        </div>
+      </div>
+
+      <form class="form-inline">
+            <button type="button" class="btn btn-primary mb-4 ml-4" id="searchBtn" >Search</button>
+    
+
+        <div class="form-group mx-sm-3 mb-4">
+            <input
+              type="text"
+              class="form-control"
+              id="searchKeyWord"
+              placeholder="Name/ID"
+            />
+          </div>
+
+          <div class="form-group mx-sm-3 mb-4">
+            <label for="search" class="mr-2 ml-4">By</label>
+            <select class="form-control" id="searchOption">
+              <option value="name">Name</option>
+              <option value="id">ID</option>
+            </select>
+          </div>
+
+        <div class="form-group mx-sm-3 mb-4">
+          <label for="page" class="mr-2 ml-4">Page</label>
+          <input
+            type="number"
+            class="form-control"
+            id="currentPage"
+            value="1"
+            min="1"
+            onchange="getPatientValidPage()"
+          />
+          <label id="pageTotal" class="mr-2 ml-3">of 2</label>
         </div>
 
-        
-        <form class="needs-validation" novalidate>
 
-            <!-- suburd & postcode -->
+        
+      </form>
+
+      <div class="row">
+        <!-- Patient List -->
+        <div class="col-md-12">
+          <form>
             <div class="row">
-                <div class="col-md-1 mb-1">
-                    <button type="submit" class="btn btn-primary">Search</button>
-
-                </div>
-                <div class="col-md-3 mb-1">
-                    <input type="text" class="form-control" id="suburd" placeholder="" value="" required>
-                </div>
-
-                    <label>By</label>
-                <div class="col-md-2 mb-1">
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                      </select>                
-                </div>
-
-                    <label>Page</label>
-                <div class="col-md-2 mb-1">
-                    <input type="text" class="form-control" id="page" placeholder="" value="1" required>
-                </div>
+              <div class="col-md-12">
+                <!-- DETAILS OF PATIENT TABLE -->
+                <table
+                  class="table text-center table-bordered table-hover"
+                  id="patientList"
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">ID</th>
+                      <th scope="col">Sex</th>
+                      <th scope="col">Date of Birth</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Phone</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
             </div>
-        </form>
 
-        
-
-        <div class="row  mt-3">
-            <!-- Patient List -->
-            <div class="col-md-12">
-                <form>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- DETAILS OF PATIENT TABLE -->
-                            <table class="table text-center table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Patient ID Number</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Sex</th>
-                                        <th scope="col">Date of Birth</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Anthony Taylor</td>
-                                        <td>123456789</td>
-                                        <td>M</td>
-                                        <td>23/09/1964</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Button -->
-                </form>
-            </div>
+            <!-- Button -->
+          </form>
         </div>
+      </div>
 
-            
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-
-        </footer>
+      <footer class="my-5 pt-5 text-muted text-center text-small"></footer>
     </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"
-        integrity="sha256-ifihHN6L/pNU1ZQikrAb7CnyMBvisKG3SUAab0F3kVU=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"
+      integrity="sha256-ifihHN6L/pNU1ZQikrAb7CnyMBvisKG3SUAab0F3kVU="
+      crossorigin="anonymous"
+    ></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+    ></script>
+    <script src="/js/externalPatientInfo.js"></script>
 
-</body>
-
+    <script>
+      $(document).ready(function() {
+        // set an element
+        $("#todayDate").html(moment().format("ddd DD/MM/YYYY"));
+        queryPatientList();
+        setUpEventBtn();
+      });
+    </script>
+  </body>
 </html>

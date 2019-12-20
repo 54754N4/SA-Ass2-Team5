@@ -178,6 +178,7 @@ function sendAddRequest () {
     contentType: "application/json",
     success: function (data) {
       console.log(data);
+      console.log(data.visitID);
     },
     error: function (data) {
       console.log(data)
@@ -199,4 +200,20 @@ function sendUpdateRequest () {
       console.log(data)
     }
   }) 
+}
+
+function sendAddLesionRequest () {
+  $.ajax ({
+    type: "POST",
+    url: baseURL + "visit/add",
+    data : JSON.stringify(requestData), 
+    contentType: "application/json",
+    success: function (data) {
+      console.log(data);
+      console.log(data.visitID);
+    },
+    error: function (data) {
+      console.log(data)
+    }
+  })
 }

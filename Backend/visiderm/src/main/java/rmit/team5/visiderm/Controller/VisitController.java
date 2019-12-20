@@ -59,10 +59,11 @@ public class VisitController {
     public ResponseEntity<?> addNewVisit (@Valid @RequestBody VisitDTO visitDTO) {
         System.out.println("add new visit");
         HashMap<String, Object> returnResponse = new HashMap<>();
-        boolean addNewVisit = visitService.addNewVisit(visitDTO);
+        long addNewVisit = visitService.addNewVisit(visitDTO);
         System.out.println("check add new visit: " + addNewVisit);
-        if (addNewVisit) {
+        if (addNewVisit != -1) {
             returnResponse.put("message", "success");
+            returnResponse.put("visitID", addNewVisit);
             return ResponseEntity.ok(returnResponse);
         }else {
            // returnResponse.put("message", "success");
