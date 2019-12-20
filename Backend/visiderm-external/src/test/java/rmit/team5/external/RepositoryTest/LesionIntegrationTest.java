@@ -15,6 +15,7 @@ import rmit.team5.external.Service.Interface.ILesionService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -64,7 +65,26 @@ public class LesionIntegrationTest {
 
     /* Lesion service test cases */
 
+    @Test
+    public void whenLesionExists_thenReturnNotNull() {
+        List<Lesion> lesions = lesionDAO.getLesionsOfVisit(Default.VISIT_ID, getPageable()).getContent();
+        assertThat(lesions).isNotNull();
+        assertThat(lesions).isNotEmpty();
+    }
 
+    @Test
+    public void whenLesionExists_thenCorrectMatchFinds() {
+        // Search matching includes lesion size
+        String keyword = ""+Default.SIZE;
+        List<Lesion> lesions = lesionDAO.getLesionsMatching(keyword, getPageable()).getContent();
+        assertThat(lesions).isNotNull();
+        assertThat(lesions).isNotEmpty();
+        boolean found = false;
+        for (Lesion lesion : lesions)
+            if (lesion.getSize() == Default.SIZE)
+                found = true;
+        assertThat(found).isTrue();
+    }
 
     /* Convenience methods */
 
