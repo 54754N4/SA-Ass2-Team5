@@ -1,5 +1,6 @@
 package rmit.team5.visiderm.Service.Interface;
 
+import rmit.team5.visiderm.DTO.PatientDTO;
 import rmit.team5.visiderm.DTO.RoleDTO;
 import rmit.team5.visiderm.DTO.UserDTO;
 import rmit.team5.visiderm.Model.UserInfo.UserAccount;

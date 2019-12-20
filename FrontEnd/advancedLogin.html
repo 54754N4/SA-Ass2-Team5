@@ -58,14 +58,15 @@
         </div>
       </div>
 </body>
+<script src="js\login.js"></script>
 <script>
   $('#login-form').submit(function (event) {
-             event.preventDefault();
-            // checkReservationForm('#reservation-form');
-            // if ($("#reservation-form").valid()) {
-            //     submitForm();
-            // }
-            sendLoginRequest ();
-        });
+		 event.preventDefault();
+		// checkReservationForm('#reservation-form');
+		// if ($("#reservation-form").valid()) {
+		//     submitForm();
+		// }
+		advancedValidate();
+	});
 </script>
 </html>

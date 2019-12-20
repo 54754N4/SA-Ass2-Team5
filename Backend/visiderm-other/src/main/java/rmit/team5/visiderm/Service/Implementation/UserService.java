@@ -13,7 +13,6 @@ import rmit.team5.visiderm.Model.UserInfo.UserAccount;
 import rmit.team5.visiderm.Model.UserInfo.UserRole;
 import rmit.team5.visiderm.Service.Interface.IUserService;
 
-import javax.management.relation.Role;
 import java.util.*;
 
 @Service

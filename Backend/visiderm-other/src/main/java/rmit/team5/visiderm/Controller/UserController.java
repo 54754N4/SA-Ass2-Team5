@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import rmit.team5.visiderm.DTO.CredentialsDTO;
 import rmit.team5.visiderm.DTO.RoleDTO;
 import rmit.team5.visiderm.DTO.UserDTO;
-import rmit.team5.visiderm.Model.UserInfo.UserRole;
 import rmit.team5.visiderm.Service.Interface.IUserService;
 
 import javax.validation.Valid;
