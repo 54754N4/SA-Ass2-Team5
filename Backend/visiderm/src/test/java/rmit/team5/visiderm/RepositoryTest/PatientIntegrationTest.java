@@ -5,6 +5,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import rmit.team5.visiderm.DAO.Intereface.IPatientDAO;
 import rmit.team5.visiderm.DTO.PatientDTO;
@@ -16,6 +19,7 @@ import rmit.team5.visiderm.Service.Interface.IPatientService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,6 +42,8 @@ public class PatientIntegrationTest {
             createdDefaultPatient = true;
         }
     }
+
+    /* Patient repository test cases  */
 
     @Test
     public void whenPatientExists_thenVerifyRetrieval() {
@@ -65,6 +71,15 @@ public class PatientIntegrationTest {
         assertThat(nextToKin.getContactNum()).isEqualTo(Default.NTK_NUMBER);
     }
 
+    /* Patient service layer test cases  */
+    @Test
+    public void whenFindingExistingPatient_thenRetrieveByNameSuccessfully() {
+        List<Patient> patients = patientDAO.findAllPatientWithName(Default.FIRST_NAME, getPageable()).getContent();
+        assertThat(patients).isNotEmpty();
+        Patient patient = patients.get(0);
+        assertThat(patient.getFirstName()).isEqualTo(Default.FIRST_NAME);
+    }
+
     /* Convenience methods */
 
     private PatientDTO createDefaultPatient() {
@@ -88,6 +103,10 @@ public class PatientIntegrationTest {
         patient.setNtkName(Default.NTK_NAME);
         patient.setNtkContactInfo(Default.NTK_NUMBER);
         return patient;
+    }
+
+    private static Pageable getPageable() {
+        return PageRequest.of(0, 100);
     }
 
     private static final class Default {
