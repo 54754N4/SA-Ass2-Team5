@@ -1,6 +1,9 @@
 package rmit.team5.visiderm;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -26,9 +29,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserRepositoryIntegrationTest {
+public class UserIntegrationTest {
     private static final int RESULTS = 100;
     private static final String USERNAME = "user", PASSWORD = "pass", ROLE = "role";
+    private static boolean createdDefaultUser = false;
 
     @Autowired
     private IUserDAO userDAO;
@@ -37,15 +41,19 @@ public class UserRepositoryIntegrationTest {
     @Autowired
     private IUserService userService;
 
+    @Before
+    public void verifyDefaultUserCreated() {
+        // Create and store new user
+        if (!createdDefaultUser) {
+            userService.addUser(createDefaultUser());
+            createdDefaultUser = true;
+        }
+    }
+
+    /* User repository test case */
+
     @Test
     public void whenAddedUser_thenVerifyCreations() {
-        // Create and store new user
-        UserDTO newUser = new UserDTO();
-        newUser.setUsername(USERNAME);
-        newUser.setPassword(PASSWORD);
-        newUser.setEnable(true);
-        newUser.setUserRoleList(createRoleList());
-        userService.addUser(newUser);
         // Verify that account exists
         Page<UserAccount> results = userDAO.findMatchingUsername(USERNAME, getPageable());
         boolean found = false;
@@ -60,6 +68,29 @@ public class UserRepositoryIntegrationTest {
             if (role.getName().equals(ROLE))
                 found = true;
         assertThat(found).isTrue();
+    }
+
+    /* User service test cases */
+
+    @Test
+    public void whenValidated_thenReturnsRoles() {
+        List<RoleDTO> roles = userService.validate(USERNAME, PASSWORD);
+        boolean found = false;
+        for (RoleDTO role : roles)
+            if (role.getName().equals(ROLE))
+                found = true;
+        assertThat(found).isTrue();
+    }
+
+    /* Convenience methods */
+
+    private static UserDTO createDefaultUser() {
+        UserDTO newUser = new UserDTO();
+        newUser.setUsername(USERNAME);
+        newUser.setPassword(PASSWORD);
+        newUser.setEnable(true);
+        newUser.setUserRoleList(createRoleList());
+        return newUser;
     }
 
     private static List<RoleDTO> createRoleList() {
