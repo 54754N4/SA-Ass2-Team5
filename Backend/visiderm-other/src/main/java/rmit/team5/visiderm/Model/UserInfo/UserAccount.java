@@ -24,7 +24,7 @@ public class UserAccount {
 
     @OneToMany(
             mappedBy = "account",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             orphanRemoval = true,
             cascade = CascadeType.ALL
     )

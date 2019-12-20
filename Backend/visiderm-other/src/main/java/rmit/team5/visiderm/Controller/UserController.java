@@ -5,11 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.team5.visiderm.DTO.CredentialsDTO;
+import rmit.team5.visiderm.DTO.RoleDTO;
 import rmit.team5.visiderm.DTO.UserDTO;
 import rmit.team5.visiderm.Service.Interface.IUserService;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -25,8 +27,9 @@ public class UserController {
 
     @PostMapping(path = "/validate")
     public ResponseEntity<?> validateCredentials(@Valid @RequestBody CredentialsDTO credentials) {
-        if (userService.validate(credentials.getUsername(), credentials.getPassword()))
-            return okResponse();
+        List<RoleDTO> roles = userService.validate(credentials.getUsername(), credentials.getPassword());
+        if (roles != null)
+            return ResponseEntity.ok(roles);
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
                 .body(createMessage("Invalid username or password"));

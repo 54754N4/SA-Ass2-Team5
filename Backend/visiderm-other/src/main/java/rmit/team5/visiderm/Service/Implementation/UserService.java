@@ -60,14 +60,24 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean validate(String username, String password) {
+    public List<RoleDTO> validate(String username, String password) {
         Pageable pageable = PageRequest.of(0, PAGE_LIMIT);
         Page<UserAccount> page = userDAO.findMatchingUsername(username.trim(), pageable);
         List<UserAccount> accounts = page.getContent();
         for (UserAccount account : accounts)
             if (account.getPassword().equals(password.trim()))
-                return true;
-        return false;
+                return convertToDTO(account.getUserRoleList());
+        return null;
+    }
+
+    private List<RoleDTO> convertToDTO(List<UserRole> roles) {
+        List<RoleDTO> dtos = new ArrayList<>();
+        for (UserRole role : roles) {
+            RoleDTO dto = new RoleDTO();
+            dto.setName(role.getName());
+            dtos.add(dto);
+        }
+        return dtos;
     }
 
     @Override
