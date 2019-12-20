@@ -34,6 +34,12 @@ public class DBInit {
         u1.setEnable(true);
         u1.setUserRoleList(createRoleList(createRole("doctor")));
         userService.addUser(u1);
+        UserDTO u3 = new UserDTO();
+        u3.setUsername("general");
+        u3.setPassword("general");
+        u3.setEnable(true);
+        u3.setUserRoleList(createRoleList(createRole("general")));
+        userService.addUser(u3);
     }
 
     private static RoleDTO createRole(String name) {

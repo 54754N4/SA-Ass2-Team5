@@ -43,17 +43,17 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="hospital">Hospital</label>
-                                    <select class="custom-select d-block w-100" id="server" required>
-                                        <option value="">Hospital...</option>
-                                        <option>St Jame Park Hospital</option>
+                                    <select class="custom-select d-block w-100" id="hospital" disabled>
+                                        <option value="Texas Hospital">Texas Hospital</option>
+                                        <option value="RMIT Hospital">RMIT Hospital</option>
                                     </select>                                  
                                 </div>
                                 <div class="form-group">
                                     <label for="server">Server</label>
-                                    <select class="custom-select d-block w-100" id="server" required>
+                                    <select class="custom-select d-block w-100" id="server" disabled>
                                         <option value="">Server...</option>
-                                        <option>Dermatologist</option>
-                                        <option>Doctor</option>        
+                                        <option value="US">US</option>
+                                        <option value="Australia">Australia</option>        
                                     </select>                                  
                                 </div>
                       <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
@@ -67,13 +67,17 @@
       </div>
 </body>
 <script>
+  var server = sessionStorage.getItem("server");
+  console.log(server);
+  var hospitalName = sessionStorage.getItem("hospital");
+  $("#server").val(server).change();
+  $("#hospital").val(hospitalName).change();
   $('#login-form').submit(function (event) {
              event.preventDefault();
             // checkReservationForm('#reservation-form');
             // if ($("#reservation-form").valid()) {
             //     submitForm();
             // }
-            sendLoginRequest ();
         });
 </script>
 </html>

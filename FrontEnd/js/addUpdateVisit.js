@@ -132,9 +132,9 @@ function addOrUpdate () {
     var updateItem = sessionStorage.getItem("updateVisit");
     if (updateItem === null) {
       console.log("add new item");
-        sendAddRequest();
+      sendNewVisitRequest();
     }else {
-        sendUpdateRequest();
+      sendUpdateVisitRequest();
     }
 }
 var baseURL = "http://localhost:5000/";
@@ -169,7 +169,7 @@ function constuctRequestBody () {
   return sendData;
 }
 
-function sendAddRequest () {
+function sendAddRequest (callback) {
   var requestData = constuctRequestBody();
   $.ajax ({
     type: "POST",
@@ -179,6 +179,8 @@ function sendAddRequest () {
     success: function (data) {
       console.log(data);
       console.log(data.visitID);
+      sessionStorage.setItem("visitID", data.visitID);
+      callback();
     },
     error: function (data) {
       console.log(data)
@@ -186,15 +188,19 @@ function sendAddRequest () {
   })
 }
 
-function sendUpdateRequest () {
+function sendUpdateRequest (callback) {
   var requestData = constuctRequestBody();
+  var updateItem = JSON.parse(sessionStorage.getItem("updateVisit"));
+  var visitID = updateItem.patientID;
+  sessionStorage.setItem("visitID", visitID);
   $.ajax ({
     type: "PUT",
-    url: baseURL + "visit/update",
+    url: baseURL + "visit/update/" + visitID,
     data: JSON.stringify(requestData),
     contentType: "application/json",
     success: function (data) {
       console.log(data);
+      callback();
     },
     error: function (data) {
       console.log(data)
@@ -202,18 +208,98 @@ function sendUpdateRequest () {
   }) 
 }
 
-function sendAddLesionRequest () {
-  $.ajax ({
-    type: "POST",
-    url: baseURL + "visit/add",
-    data : JSON.stringify(requestData), 
-    contentType: "application/json",
-    success: function (data) {
-      console.log(data);
-      console.log(data.visitID);
-    },
-    error: function (data) {
-      console.log(data)
-    }
-  })
+var lesionBaseURL = "http://localhost:5001";
+function getLesionRequestData () {
+  var visitID = sessionStorage.getItem("visitID");
+  console.log(visitID);
+  var requestVisitID = "HCM_" + visitID;
+  var lesionDate = $("#lesionDate").val();
+  var responseDate = moment(new Date(lesionDate)).format('YYYY-MM-DD');
+  var lesionTime = $("#lesionTime").val();
+  var lesionSize = $("#lesionSize").val();
+  var lesionLocation = $("#lesionLocation").val();
+  var lesionNote = $("#lesionNote").val();
+  var lesionData = {
+    "timeTaken":lesionTime,
+    "date": responseDate,
+    "size": lesionSize,
+    "location": lesionLocation,
+    "status": lesionLocation,
+    "visitID": requestVisitID,
+    "doctorNote": lesionNote
+  }
+  return lesionData;
+}
+
+function sendNewVisitRequest () {
+  var validateLesionInput = checkForLesionRecord ();
+  if (validateLesionInput === "LESION_ADD") {
+    sendAddRequest(function () {
+      var requestData = getLesionRequestData();
+      $.ajax ({
+        type: "POST",
+        url: lesionBaseURL + "/lesion/add",
+        data : JSON.stringify(requestData), 
+        contentType: "application/json",
+        success: function (data) {
+          console.log(data);
+         window.location.pathname = "/screen7.html";
+        },
+        error: function (data) {
+          console.log(data)
+        }
+      })
+    })
+  }else if (validateLesionInput === "LESION_NO") {
+    sendAddRequest(function() {
+      window.location.pathname = "/screen7.html";
+    })
+  }else {
+    alert("INVALID ERROR FOR VALID INPUT");
+  }
+}
+
+function sendUpdateVisitRequest () {
+  var validateLesionInput = checkForLesionRecord ();
+  if (validateLesionInput === "LESION_ADD") {
+    sendUpdateRequest(function () {
+      var requestData = getLesionRequestData();
+      $.ajax ({
+        type: "POST",
+        url: lesionBaseURL + "/lesion/add",
+        data : JSON.stringify(requestData), 
+        contentType: "application/json",
+        success: function (data) {
+          console.log(data);
+         window.location.pathname = "/screen7.html";
+        },
+        error: function (data) {
+          console.log(data)
+          alert("can't create the lesion record");
+          window.location.pathname = "/screen7.html";
+        }
+      })
+    })
+  }else if (validateLesionInput === "LESION_NO") {
+    sendUpdateRequest(function() {
+      window.location.pathname = "/screen7.html";
+    })
+  }else {
+    alert("INVALID ERROR FOR VALID INPUT");
+  }
+}
+
+
+function checkForLesionRecord () {
+  var lesionTime = $("#lesionTime").val().trim();
+  var lesionSize = $("#lesionSize").val().trim();
+  var lesionLocation = $("#lesionLocation").val().trim();
+  var lesionNote = $("#lesionNote").val().trim();
+  if (lesionTime !== "" && lesionSize !== "" && lesionLocation !== "" && lesionNote !== "") {
+    return "LESION_ADD"; // if all field have values return true
+  }else if (lesionTime === "" && lesionSize === "" && lesionLocation === "" && lesionNote === "") {
+    return "LESION_NO"; // if all field does not have value return true
+  } else {
+    return "ERR";
+  }
 }

@@ -48,13 +48,13 @@
 
         <div class="row">
           <div class="col-md-3">
-            <button class="btn btn-light btn-block" id="externalAccess" type="submit">Access other hospitals in system</button>
+            <button class="btn btn-light btn-block" id="externalAccess" type="button" onclick="checkForExternal()">Access other hospitals in system</button>
 
           </div>
           <div class="col-md-6">
           </div>
           <div class="col-md-3">
-            <button class="btn btn-light btn-block" id="searchlesion" type="submit">Search for Lesion</button>
+            <a href="/screen12.html" class="btn btn-light btn-block" id="searchlesion" type="button">Search for Lesion</a>
           </div>
         </div>
       </div>
@@ -260,7 +260,7 @@
       src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
     ></script>
     <script src="/js/patientInfo.js"></script>
-
+    <script src="/js/login.js"></script>
     <script>
       $(document).ready(function() {
         // set an element

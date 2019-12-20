@@ -21,21 +21,21 @@ function setMarker (map, detailMap) {
         detailMarker.setPosition(hcmHospital);
         detailMap.setCenter(detailMarker.getPosition());
         getCountryBound("Vietnam", detailMap);
-        addInfoWindow(detailMarker, detailMap, hcmHospitalName);
+       // addInfoWindow(detailMarker, detailMap, hcmHospitalName);
 
     });
     texasHospitalMarker.addListener('click', function() {
         detailMarker.setPosition(texasHospital);
         detailMap.setCenter(detailMarker.getPosition());
         getCountryBound("US", detailMap);
-        addInfoWindow(detailMarker, detailMap, texasHospialName);
+        addInfoWindow(detailMarker, detailMap, texasHospialName, "us");
 
     });
     ausHospitalMarker.addListener('click', function() {
         detailMarker.setPosition(ausHospital);
         detailMap.setCenter(detailMarker.getPosition());
         getCountryBound("Australia", detailMap);
-        addInfoWindow(detailMarker, detailMap, ausHospitalName);
+        addInfoWindow(detailMarker, detailMap, ausHospitalName, "aus");
     });
 }
 
@@ -51,28 +51,28 @@ function onCountryChoose () {
         detailMarker.setPosition(hcmHospital);
         detailMap.setCenter(detailMarker.getPosition());
         getCountryBound("Vietnam", detailMap);
-        addInfoWindow(detailMarker, detailMap, hcmHospitalName);
+      //  addInfoWindow(detailMarker, detailMap, hcmHospitalName, "vn");
     }else if (countryValue === "us"){ 
      //   detailMarker = new google.maps.Marker({position: texasHospital, map: detailMap});
         detailMarker.setPosition(texasHospital);
 
         detailMap.setCenter(detailMarker.getPosition());
         getCountryBound("US", detailMap);
-        addInfoWindow(detailMarker, detailMap, texasHospialName);
+        addInfoWindow(detailMarker, detailMap, texasHospialName, "us");
     }else if (countryValue === "aus") {
      //   detailMarker = new google.maps.Marker({position: ausHospital, map: detailMap});
         detailMarker.setPosition(ausHospital);
 
         detailMap.setCenter(detailMarker.getPosition());
         getCountryBound("Australia", detailMap);
-        addInfoWindow(detailMarker, detailMap, ausHospitalName);
+        addInfoWindow(detailMarker, detailMap, ausHospitalName, "aus");
     }
 }
 
 // create infon view for each hospital
-function addInfoWindow (hosMarker, detailMap, name) {
+function addInfoWindow (hosMarker, detailMap, name, serverName) {
     var contentString = '<div id="content">'+ name +
-      '<div class="btn btn-danger">Access</div>'
+      '<div class="btn btn-danger" onclick="showAdvanceLogin('+ "'" +serverName +"'"+')">Access</div>'
       '</div>'; 
     var infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -83,6 +83,18 @@ function addInfoWindow (hosMarker, detailMap, name) {
       });
 } 
 
+function showAdvanceLogin (name) {
+    if (name === "us") {
+        sessionStorage.setItem("server", "US");
+        sessionStorage.setItem("hospital", "Texas Hospital");
+    }else if (name === "aus") {
+        sessionStorage.setItem("server", "Australia");
+        sessionStorage.setItem("hospital", "RMIT Hospital");
+    }
+   // console.log(name);
+    sessionStorage.setItem("locationName", name);
+    window.location.pathname = "/limitedLogin.html";
+}
 // when the selector for hospital change, the country selector will be changed
 function onChangeHospital () {
     var hospitalValue = $("#hospitalSelect").val();

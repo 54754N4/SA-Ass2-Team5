@@ -130,6 +130,10 @@ public class VisitService implements IVisitService {
             if (visitLesionValidator) {
                 Visit visit = checkVisit.get();
                 getVisitInfoFromDTO(visitDTO, visit);
+                if (visitDTO.getLesionCoordinates().size() > 0) {
+                    List<LesionCoordinates> lesionCoordinates = visitDTO.getLesionCoordinates();
+                    visit.getLesionCoordinates().addAll(lesionCoordinates);
+                }
                 visitDAO.save(visit);
 //                if (visitDTO.getLesionLocation().trim().isEmpty()) {
 //                    Lesion lesion = addNewLesion(visitDTO);

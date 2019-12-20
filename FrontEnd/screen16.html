@@ -32,13 +32,13 @@
     
           <div class="row">
             <div class="col-md-3">
-              <button class="btn btn-light btn-block" id="internalAccess" type="submit">Back to internal system</button>
+              <a href="/login.html" class="btn btn-light btn-block" id="internalAccess" type="button">Back to internal system</a>
     
             </div>
             <div class="col-md-6">
             </div>
             <div class="col-md-3">
-              <button class="btn btn-light btn-block" id="exAccess" type="submit">Access other hospitals in system</button>
+              <a href="/screen12.html" class="btn btn-light btn-block" id="exAccess" type="submit">Access other hospitals in system</a>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
                     <label>Click here to access External Central Lesion Database</label>
                 </div>
                 <div class="col-md-3 mb-1">
-                    <button type="submit" class="btn btn-primary">Manual Browsing</button>
+                    <a href="/screen17.html" type="submit" class="btn btn-primary">Manual Browsing</a>
                 </div>
 
             </div>
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="col-md-3 mb-1">
-                    <button type="submit" class="btn btn-primary">Search Keyword</button>
+                    <a href="/screen18.html" type="submit" class="btn btn-primary">Search Keyword</a>
            
                 </div>
 
@@ -111,7 +111,11 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
+    <script>
+        $("#internalAccess").click (function () {
+            window.location.pathname = "/login.html"
+        })
+    </script>
 </body>
 
 </html>

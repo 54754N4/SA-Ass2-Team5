@@ -242,6 +242,7 @@ function getVisitListByPage () {
 function setUpBtnEvent() {
   // update button (click this btn to create or update the patient record)
   $("#updatePCBtn").click(function() {
+    
     if (currentAction === "update") {
       sendUpdatePCRequest();
     } else if (currentAction === "add") {
@@ -262,24 +263,40 @@ function setUpBtnEvent() {
   });
   // create new visit button (click this btn will go to screen 8? I guess? I will edit later)
   $("#createNewVisit").click(function() {
-    sessionStorage.removeItem("updateVisit");
-    var patientName = currentPatientData.title + " " + currentPatientData.firstName + " " + currentPatientData.lastName;
-    var visitPatient = {
-        patientID : currentPatientData.patientID,
-        patientName : patientName
+    var currentRole = sessionStorage.getItem("currentRole");
+    console.log(currentRole);
+    if (currentRole === "general") {
+      sessionStorage.setItem("currentPage", "/screen2.html");
+      window.location.pathname = "/advancedLogin.html";
+    }else {
+      sessionStorage.removeItem("updateVisit");
+      var patientName = currentPatientData.title + " " + currentPatientData.firstName + " " + currentPatientData.lastName;
+      var visitPatient = {
+          patientID : currentPatientData.patientID,
+          patientName : patientName
+      }
+      sessionStorage.setItem("visitPatient", JSON.stringify(visitPatient));
+      window.location.pathname = "/screen8.html";
     }
-    sessionStorage.setItem("visitPatient", JSON.stringify(visitPatient));
-    window.location.pathname = "/screen8.html";
+   
   });
 
   // edit patient record btn, when click this all the field will be unlock for editing
   // however, both create new patient record and create new visit will be
   // disable when this button is clicked
   $("#editPC").click(function() {
-    console.log("edit PC");
-    $("#updatePCBtn").prop("disabled", false);
-    currentAction = "update";
-    setUpEditForm();
+    var currentRole = sessionStorage.getItem("currentRole");
+    console.log(currentRole);
+    if (currentRole === "general") {
+      sessionStorage.setItem("currentPage", "/screen2.html");
+      window.location.pathname = "/advancedLogin.html";
+    } else {
+      console.log("edit PC");
+      $("#updatePCBtn").prop("disabled", false);
+      currentAction = "update";
+      setUpEditForm();
+    }
+    
   });
 
   // create patient record btn, when click this all the field will be unlock for creating
@@ -287,9 +304,17 @@ function setUpBtnEvent() {
   // however, both edit new patient record and create new visit will be
   // disable when this button is clicked
   $("#createNewPC").click(function() {
-    $("#updatePCBtn").prop("disabled", false);
-    currentAction = "add";
-    setUpCreateForm();
+    var currentRole = sessionStorage.getItem("currentRole");
+    console.log(currentRole);
+    if (currentRole === "general") {
+      sessionStorage.setItem("currentPage", "/screen2.html");
+      window.location.pathname = "/advancedLogin.html";
+    }else {
+      $("#updatePCBtn").prop("disabled", false);
+      currentAction = "add";
+      setUpCreateForm();
+    }
+   
   });
 }
 

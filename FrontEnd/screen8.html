@@ -45,13 +45,13 @@
   
           <div class="row">
             <div class="col-md-3">
-              <button class="btn btn-light btn-block" id="externalAccess" type="submit">Access other hospitals in system</button>
+              <a href="/screen12.html" class="btn btn-light btn-block" id="externalAccess" type="submit">Access other hospitals in system</a>
   
             </div>
             <div class="col-md-6">
             </div>
             <div class="col-md-3">
-              <button class="btn btn-light btn-block" id="searchlesion" type="submit">Search for Lesion</button>
+              <a href="/screen12.html" class="btn btn-light btn-block" id="searchlesion" type="submit">Search for Lesion</a>
             </div>
           </div>
         </div>
@@ -181,7 +181,7 @@
                             <label for="date">Date</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" name="date" value="10/24/1984" />
+                            <input type="text" class="form-control" name="date"  id="lesionDate" />
                         </div>
                         
                     </div>
@@ -191,7 +191,7 @@
                             <label for="time">Time</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" id="time" placeholder="" value="" required>
+                            <input type="text" class="form-control timepicker" id="lesionTime" placeholder="" value="" required>
                         </div>
                     </div>
 
@@ -201,7 +201,7 @@
                             <label for="lesionid">Lesion ID</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" id="lesionid" placeholder="" value="" required>
+                            <input type="text" class="form-control" id="lesionID" placeholder="" value="Auto - generated" disabled>
                         </div>
                     </div> 
 
@@ -210,7 +210,7 @@
                             <label for="size">Lesion Size</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" id="size" placeholder="" value="" required>
+                            <input type="text" class="form-control" id="lesionSize" placeholder="" value="" required>
                         </div>
                     </div> 
 
@@ -221,7 +221,7 @@
                             <label for="location">Lesion Location</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" id="location" placeholder="" value="" required>
+                            <input type="text" class="form-control" id="lesionLocation" placeholder="" value="" required>
                         </div>
                     </div>
 
@@ -241,7 +241,7 @@
                             <label for="note">Lesion Note</label>
                         </div>
                         <div class="col-md-9 mb-1">
-                            <input type="text" class="form-control" id="note" placeholder="" value="" required>
+                            <input type="text" class="form-control" id="lesionNote" placeholder="" value="" required>
                         </div>
                     </div>
 
@@ -304,7 +304,7 @@
                 var years = moment().diff(start, 'years');
             });
             $('input.timepicker').timepicker({
-
+                timeFormat: 'HH:mm'
             });
         });
         setUpForm();

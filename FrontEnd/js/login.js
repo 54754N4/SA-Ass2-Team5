@@ -1,4 +1,6 @@
 var advancedURL = "http://localhost:5000/user/validate";
+var generalURL = "http://localhost:5000/user/validate";
+var limitedURL = "http://localhost:5002/user/validate";
 var validRole;
 
 function getUser() {
@@ -24,8 +26,12 @@ function validateRole(roles) {
 	});
 	if (!validRole)
 		cry("Account doesn't have role to use this server");
-	else 
-		alert("proceed to login");
+	else {
+		var previousPage = sessionStorage.getItem("currentPage");
+		sessionStorage.setItem("currentRole",requiredRole);
+		window.location.pathname = previousPage;
+	}
+		
 }
 
 function cry(msg="") {
@@ -35,8 +41,36 @@ function cry(msg="") {
 		element.innerHTML = "<strong>"+msg+"</strong>";
 }
 
+function externalValidate () {
+	var server = sessionStorage.getItem("locationName");
+	if (server === "aus") limitedURL = "http://localhost:5002/user/validate";
+	else if (server === "vn")limitedURL = "http://localhost:5002/user/validate";
+	else if (server === "us") limitedURL = "http://localhost:5002/user/validate";
+}
+
+
 function advancedValidate() {
 	post(advancedURL, getCredentials(), validateRole, cry)
+}
+
+function generalValidate () {
+	var input = {
+		username: getUser(),
+		password: getPass()
+	};
+	$.ajax ({
+		type: "POST",
+		url: generalURL,
+		data: JSON.stringify(input),
+		contentType: "application/json",
+		success: function(data) {
+			sessionStorage.setItem("currentRole", "general");
+			window.location.pathname = "/screen1.html";
+		},
+		error: function(data) {
+			$("#erroMess").css("display", "block");
+		}
+	})
 }
 
 function post(server, input, onSuccess, onError) {
@@ -50,4 +84,8 @@ function post(server, input, onSuccess, onError) {
 		},
 		error: onError
 	})
+}
+
+function checkForExternal () {
+	window.location.pathname = "/screen12.html";
 }

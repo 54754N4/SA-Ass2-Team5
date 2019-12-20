@@ -5,6 +5,7 @@ var allVisitLesion;
 // use for screen 7
 function getVisitDetailInfo() {
   var visitID = sessionStorage.getItem("visitID");
+  console.log(visitID);
   if (visitID !== null) {
     $.ajax({
         type: "GET",
@@ -13,9 +14,11 @@ function getVisitDetailInfo() {
           plotVisitDetailData(data);
           visitData = data;
           getPatientVisitList(data.patientID);
+          getLesionList();
         }
       });
-      getLesionList();
+  }else {
+    window.location.pathname = "/screen2.html";
   }
 }
 
@@ -30,6 +33,7 @@ function plotVisitDetailData(data) {
 }
 
 function plotBodyPicture(locationPoint) {
+  console.log(locationPoint);
   var canvas = document.getElementById("bodyPicture");
   var context = canvas.getContext("2d");
   canvas.height = 325;
@@ -116,8 +120,7 @@ function setUpBtnEvent () {
     $("#addBtn").click(function () {
         sessionStorage.removeItem("updateVisit");
         window.location.pathname = "screen8.html";
-    });
-    
+    }); 
 }
 
 function getPatientVisitList (patientID) {

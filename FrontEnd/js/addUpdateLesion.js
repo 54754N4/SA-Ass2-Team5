@@ -68,7 +68,6 @@ function setBtnEvent () {
     });
     $("#addOrUpdateBtn").click (function () {
         console.log("add or update");
-        uploadImages();
         // var action = sessionStorage.getItem("lesionAction");
         // if (action === "update") {
         //     sendUpdateRequest ();
