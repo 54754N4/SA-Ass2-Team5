@@ -64,6 +64,7 @@ public class PatientController {
         else return ResponseEntity.notFound().build();
     }
 
+    // add new patient
     @PostMapping(path = "/add")
     public ResponseEntity<?> addNewPatient (@Valid @RequestBody PatientDTO patientDTO) {
         long newPatientID = patientService.addNewPatient(patientDTO);
@@ -73,6 +74,7 @@ public class PatientController {
         return ResponseEntity.ok(message);
     }
 
+    // update patient
     @PutMapping(path = "/update/{ID}")
     public ResponseEntity<?> updatePatient (@Valid @RequestBody PatientDTO patientDTO, @PathVariable Long ID) {
         boolean updatePatient = patientService.updateNewPatient(patientDTO, ID);

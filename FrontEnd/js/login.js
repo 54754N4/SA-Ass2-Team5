@@ -46,7 +46,27 @@ function externalValidate () {
 	if (server === "aus") limitedURL = "http://localhost:5002/user/validate";
 	else if (server === "vn")limitedURL = "http://localhost:5002/user/validate";
 	else if (server === "us") limitedURL = "http://localhost:5002/user/validate";
+	var input = {
+		username: getUser(),
+		password: getPass()
+	};
+	$.ajax ({
+		type: "POST",
+		url: limitedURL,
+		data: JSON.stringify(input),
+		contentType: "application/json",
+		success: function(data) {
+			sessionStorage.setItem("currentRole", "external");
+			console.log(sessionStorage.getItem("externalNext"));
+			var nextScreen = sessionStorage.getItem("externalNext");
+			window.location.pathname = nextScreen;
+		},
+		error: function(data) {
+			$("#erroMess").css("display", "block");
+		}
+	})
 }
+
 
 
 function advancedValidate() {
@@ -87,5 +107,10 @@ function post(server, input, onSuccess, onError) {
 }
 
 function checkForExternal () {
+	sessionStorage.setItem("externalNext", "/screen15.html");
 	window.location.pathname = "/screen12.html";
+}
+
+function checkForSerach () {
+	sessionStorage.setItem("externalNext", "/screen16.html");
 }

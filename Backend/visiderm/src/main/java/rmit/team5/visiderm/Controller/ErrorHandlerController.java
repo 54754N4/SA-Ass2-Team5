@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ErrorHandlerController extends ResponseEntityExceptionHandler {
-
+    // return error when method argument is not valid
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
@@ -41,6 +41,7 @@ public class ErrorHandlerController extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, headers, status);
     }
 
+    //  return error when method type argument mismatch
     @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(
             MethodArgumentTypeMismatchException ex, WebRequest request) {

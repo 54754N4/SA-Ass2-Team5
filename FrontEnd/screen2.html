@@ -34,16 +34,16 @@
           </div>
   
           <div class="row">
-            <div class="col-md-3">
-              <a href="/screen12.html" class="btn btn-light btn-block" id="externalAccess" type="submit">Access other hospitals in system</a>
-  
-            </div>
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-3">
-              <a href="/screen12.html" class="btn btn-light btn-block" id="searchlesion" type="submit">Search for Lesion</a>
-            </div>
-          </div>
+                <div class="col-md-3">
+                  <button class="btn btn-light btn-block" id="externalAccess" type="button" onclick="checkForExternal()">Access other hospitals in system</button>
+      
+                </div>
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-3">
+                  <a href="/screen12.html" class="btn btn-light btn-block" id="searchlesion" type="button" onclick="checkForSerach()">Search for Lesion</a>
+                </div>
+              </div>
         </div>
       </div>
 
@@ -308,86 +308,7 @@
 
 <!-- Visit Entries details -->
                 <div class="row mt-2" style="height: 600px;   overflow: scroll;" id="visitEntries">
-                    <!-- <div class="col-sm-12">
-                        <div class="row">
-                            <label for="visit" class="col-sm-4 col-form-label">First Visit</label>
-                            <label for="date" class="col-sm-8 col-form-label">25/05/1995</label>
-                        </div>
-                        <div class="row">
-                            <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
-                            <label for="doctorname" class="col-sm-8 col-form-label">Jim Boyce</label>
-                        </div>
-                        <div class="row">
-                            <label for="clinic" class="col-sm-4 col-form-label">Clinic</label>
-                            <label for="clinicname" class="col-sm-8 col-form-label">Clayton Center</label>
-                        </div>
-                        <div class="row">
-                            <label for="clinic" class="col-sm-9 col-form-label"></label>
-                            <a href="#" class="btn btn-primary stretched-link col-sm-2">Edit</a>
-                        </div>
-                        <hr class="mb-4">
-
-                    </div> -->
-                    <!-- <div class="col-sm-12">
-                            <div class="row">
-                                <label for="visit" class="col-sm-4 col-form-label">First Visit</label>
-                                <label for="date" class="col-sm-8 col-form-label">25/05/1995</label>
-                            </div>
-                            <div class="row">
-                                <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
-                                <label for="doctorname" class="col-sm-8 col-form-label">Jim Boyce</label>
-                            </div>
-                            <div class="row">
-                                <label for="clinic" class="col-sm-4 col-form-label">Clinic</label>
-                                <label for="clinicname" class="col-sm-8 col-form-label">Clayton Center</label>
-                            </div>
-                            <div class="row">
-                                <label for="clinic" class="col-sm-9 col-form-label"></label>
-                                <a href="#" class="btn btn-primary stretched-link col-sm-2">Edit</a>
-                            </div>
-                            <hr class="mb-4">
-    
-                        </div> -->
-                        <!-- <div class="col-sm-12">
-                                <div class="row">
-                                    <label for="visit" class="col-sm-4 col-form-label">First Visit</label>
-                                    <label for="date" class="col-sm-8 col-form-label">25/05/1995</label>
-                                </div>
-                                <div class="row">
-                                    <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
-                                    <label for="doctorname" class="col-sm-8 col-form-label">Jim Boyce</label>
-                                </div>
-                                <div class="row">
-                                    <label for="clinic" class="col-sm-4 col-form-label">Clinic</label>
-                                    <label for="clinicname" class="col-sm-8 col-form-label">Clayton Center</label>
-                                </div>
-                                <div class="row">
-                                    <label for="clinic" class="col-sm-9 col-form-label"></label>
-                                    <a href="#" class="btn btn-primary stretched-link col-sm-2">Edit</a>
-                                </div>
-                                <hr class="mb-4">
-        
-                            </div> -->
-                            <!-- <div class="col-sm-12">
-                                    <div class="row">
-                                        <label for="visit" class="col-sm-4 col-form-label">First Visit</label>
-                                        <label for="date" class="col-sm-8 col-form-label">25/05/1995</label>
-                                    </div>
-                                    <div class="row">
-                                        <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
-                                        <label for="doctorname" class="col-sm-8 col-form-label">Jim Boyce</label>
-                                    </div>
-                                    <div class="row">
-                                        <label for="clinic" class="col-sm-4 col-form-label">Clinic</label>
-                                        <label for="clinicname" class="col-sm-8 col-form-label">Clayton Center</label>
-                                    </div>
-                                    <div class="row">
-                                        <label for="clinic" class="col-sm-9 col-form-label"></label>
-                                        <a href="#" class="btn btn-primary stretched-link col-sm-2">Edit</a>
-                                    </div>
-                                    <hr class="mb-4">
-            
-                                </div> -->
+                    
                 </div>
 
             </div>
@@ -417,6 +338,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script type="text/javascript" src="/js/patientDetailInfo.js"></script>
+    <script src="/js/login.js"></script>
     <script>
             let dropdown = document.getElementById('locality-dropdown');
             dropdown.length = 0;

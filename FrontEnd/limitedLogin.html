@@ -65,19 +65,22 @@
           </div>
         </div>
       </div>
+      <script src="/js/login.js"></script>
+      <script>
+          var server = sessionStorage.getItem("server");
+          console.log(server);
+          var hospitalName = sessionStorage.getItem("hospital");
+          $("#server").val(server).change();
+          $("#hospital").val(hospitalName).change();
+          $('#login-form').submit(function (event) {
+                     event.preventDefault();
+                    // checkReservationForm('#reservation-form');
+                    // if ($("#reservation-form").valid()) {
+                    //     submitForm();
+                    // }
+                    externalValidate();
+                });
+        </script>
 </body>
-<script>
-  var server = sessionStorage.getItem("server");
-  console.log(server);
-  var hospitalName = sessionStorage.getItem("hospital");
-  $("#server").val(server).change();
-  $("#hospital").val(hospitalName).change();
-  $('#login-form').submit(function (event) {
-             event.preventDefault();
-            // checkReservationForm('#reservation-form');
-            // if ($("#reservation-form").valid()) {
-            //     submitForm();
-            // }
-        });
-</script>
+
 </html>

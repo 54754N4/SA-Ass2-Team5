@@ -23,6 +23,7 @@ public class VisitController {
         this.visitService = visitService;
     }
 
+    // return the list of visit summary of patient
     @GetMapping(path = "/summary/{patientID}")
     public ResponseEntity<?> getVisitSumByPatient (
             @PathVariable long patientID,
@@ -37,6 +38,7 @@ public class VisitController {
         }
     }
 
+    // return detail visit list of patient
     @GetMapping(path = "/detail/{visitID}")
     public ResponseEntity<?> getDetailVisitByPatient (@PathVariable long visitID) {
         HashMap<String, Object> visitDetail = visitService.getVisitDetail(visitID);
@@ -47,6 +49,7 @@ public class VisitController {
         }
     }
 
+    // return patient all the visit ID of patient
     @GetMapping(path = "/all/{patientID}")
     public ResponseEntity<?> getVisitListIDByPatient (@PathVariable long patientID) {
         List<Long> visitIDList = visitService.getAllVisitIDOfPatient(patientID);
@@ -55,6 +58,7 @@ public class VisitController {
         return ResponseEntity.ok(response);
     }
 
+    // add new visit
     @PostMapping(path = "/add")
     public ResponseEntity<?> addNewVisit (@Valid @RequestBody VisitDTO visitDTO) {
         System.out.println("add new visit");
@@ -71,6 +75,7 @@ public class VisitController {
         }
     }
 
+    // update visit
     @PutMapping(path = "/update/{visitID}")
     public ResponseEntity<?> updateVisit (@Valid @RequestBody VisitDTO visitDTO, @PathVariable Long visitID) {
         HashMap<String, Object> returnResponse = new HashMap<>();

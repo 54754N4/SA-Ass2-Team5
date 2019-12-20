@@ -25,7 +25,7 @@ public class UserController {
     public UserController(IUserService userService) {
         this.userService = userService;
     }
-
+    // validate user cred
     @PostMapping(path = "/validate")
     public ResponseEntity<?> validateCredentials(@Valid @RequestBody CredentialsDTO credentials) {
         List<RoleDTO> roles = userService.validate(credentials.getUsername(), credentials.getPassword());
@@ -36,28 +36,32 @@ public class UserController {
                 .body(createMessage("Invalid username or password"));
     }
 
+    // add new user
     @PostMapping(path = "/add")
     public ResponseEntity<?> addNewUser(@Valid @RequestBody UserDTO userDTO) {
         if (userService.addUser(userDTO)) return okResponse();
         return badResponse();
     }
 
+    // update user
     @PutMapping(path = "/update/{ID}")
     public ResponseEntity<?> updateUser(@Valid @RequestBody UserDTO userDTO, @PathVariable Long ID) {
         if (ID != null && userService.updateUser(userDTO, ID)) return okResponse();
         return badResponse();
     }
 
+    // get user roles
     @GetMapping(path = "/roles")
     public ResponseEntity<?> getRoles(@RequestParam(required = false, defaultValue = "1") Integer page) {
         return ResponseEntity.ok(userService.getRoles(page));
     }
 
+    // get user roles by id
     @GetMapping(path = "/roles/{ID}")
     public ResponseEntity<?> getUserRoles(@RequestParam(required = false, defaultValue = "1") Integer page, @PathVariable Long ID) {
         return ResponseEntity.ok(userService.getUserRoles(ID, page));
     }
-
+    // create message for AJAX response
     private static HashMap<String, String> createMessage(String msg) {
         HashMap<String, String> map = new HashMap<>();
         map.put(MESSAGE, msg);
