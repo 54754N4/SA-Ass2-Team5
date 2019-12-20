@@ -39,18 +39,21 @@ public class UserRepositoryIntegrationTest {
 
     @Test
     public void whenAddedUser_thenVerifyCreations() {
+        // Create and store new user
         UserDTO newUser = new UserDTO();
         newUser.setUsername(USERNAME);
         newUser.setPassword(PASSWORD);
         newUser.setEnable(true);
         newUser.setUserRoleList(createRoleList());
         userService.addUser(newUser);
+        // Verify that account exists
         Page<UserAccount> results = userDAO.findMatchingUsername(USERNAME, getPageable());
         boolean found = false;
         for (UserAccount account : results.getContent())
             if (account.getUsername().equals(USERNAME))
                 found = true;
         assertThat(found).isTrue();
+        // Verify that role also exists
         List<UserRole> roles = roleDAO.findAll();  // get all created roles
         found = false;
         for (UserRole role : roles)
