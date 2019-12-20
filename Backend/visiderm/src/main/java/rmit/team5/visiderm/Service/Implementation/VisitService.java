@@ -94,7 +94,7 @@ public class VisitService implements IVisitService {
     }
 
     @Override
-    public boolean addNewVisit(VisitDTO visitDTO) {
+    public Long addNewVisit(VisitDTO visitDTO) {
         boolean visitPatientValidator = validatePatientVisitInfo(visitDTO);
         boolean visitLesionValidator = validateLesionVisitInfo(visitDTO);
         if (visitLesionValidator && visitPatientValidator) {
@@ -113,9 +113,9 @@ public class VisitService implements IVisitService {
 //                Lesion lesion = addNewLesion(visitDTO);
 //                lesion.setVisit(newVisit);
 //            }
-            visitDAO.save(newVisit);
-            return true;
-        }else return false;
+            Visit visit = visitDAO.save(newVisit);
+            return visit.getId();
+        }else return (long) -1;
     }
 
     @Override

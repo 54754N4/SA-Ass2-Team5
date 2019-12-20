@@ -315,7 +315,7 @@
         var input = document.querySelector('input');
     var preview = document.querySelector('.preview');
 
-    input.style.opacity = 0; input.addEventListener('change', updateImageDisplay); function updateImageDisplay() {
+    input.addEventListener('change', updateImageDisplay); function updateImageDisplay() {
         while (preview.firstChild) {
             preview.removeChild(preview.firstChild);
         }
