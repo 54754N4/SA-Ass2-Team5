@@ -1,14 +1,19 @@
 package rmit.team5.external.RepositoryTest;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import rmit.team5.external.DAO.Interface.ILesionDAO;
 import rmit.team5.external.DTO.LesionDTO;
+import rmit.team5.external.Model.LesionInfo.Lesion;
 import rmit.team5.external.Service.Interface.ILesionService;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +30,8 @@ public class LesionIntegrationTest {
         private static final Date DATE = new Date(),
                 TIME_TAKEN = new Date();
     }
-
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd"),
+        TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
     private static boolean createdDefaultLesion = false;
 
     @Autowired
@@ -44,10 +50,21 @@ public class LesionIntegrationTest {
 
     /* Lesion repository test cases */
 
+    @Test
+    public void whenLesionAdded_thenVerify() {
+        Lesion lesion = lesionDAO.getLesionsOfVisit(Default.VISIT_ID, getPageable()).getContent().get(0);
+        assertThat(lesion.getDoctorNote()).isEqualTo(Default.DOCTOR_NOTE);
+        assertThat(lesion.getLocation()).isEqualTo(Default.LOCATION);
+        assertThat(lesion.getSize()).isEqualTo(Default.SIZE);
+        assertThat(lesion.getStatus()).isEqualTo(Default.STATUS);
+        assertThat(lesion.getVisitID()).isEqualTo(Default.VISIT_ID);
+        assertThat(lesion.getDate().toString()).isEqualTo(DATE_FORMAT.format(Default.DATE));
+        assertThat(lesion.getTimeTaken().toString()).isEqualTo(TIME_FORMAT.format(Default.TIME_TAKEN));
+    }
 
     /* Lesion service test cases */
 
-    
+
 
     /* Convenience methods */
 
@@ -61,5 +78,9 @@ public class LesionIntegrationTest {
         lesionDTO.setTimeTaken(Default.TIME_TAKEN);
         lesionDTO.setVisitID(Default.VISIT_ID);
         return lesionDTO;
+    }
+
+    private static Pageable getPageable() {
+        return PageRequest.of(0, 100);
     }
 }
