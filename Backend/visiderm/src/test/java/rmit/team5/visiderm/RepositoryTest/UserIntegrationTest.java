@@ -2,6 +2,7 @@ package rmit.team5.visiderm.RepositoryTest;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,6 +24,7 @@ import rmit.team5.visiderm.Model.UserInfo.UserRole;
 import rmit.team5.visiderm.Service.Interface.IUserService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -79,6 +81,17 @@ public class UserIntegrationTest {
         boolean found = false;
         for (RoleDTO role : roles)
             if (role.getName().equals(ROLE))
+                found = true;
+        assertThat(found).isTrue();
+    }
+
+    @Test
+    public void whenRequestCreatedRoles_thenRoleFound() {
+        HashMap<String, Object> dict = userService.getRoles(1);
+        List<HashMap<String, Object>> rolesMap = (List<HashMap<String, Object>>) dict.get("data");
+        boolean found = false;
+        for (HashMap<String, Object> role : rolesMap)
+            if (role.get("name").equals(ROLE))
                 found = true;
         assertThat(found).isTrue();
     }
