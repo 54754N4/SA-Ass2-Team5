@@ -20,7 +20,7 @@ public interface ILesionDAO extends JpaRepository<Lesion, Long> {
     List<Lesion> getLesionListOfLocationVisit (String visitID, String location);
 
     @Query("select l from Lesion l where " +
-            "concat(l.size, '') like %?1% " +
+            "concat(l.size, '') like %?1% " +   // converts the char to str pre-comparison
             "or l.location like %?1% " +
             "or l.status like %?1% " +
             "or l.doctorNote like %?1%")
