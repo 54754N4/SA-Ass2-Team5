@@ -1,4 +1,4 @@
-package rmit.team5.visiderm;
+package rmit.team5.visiderm.RepositoryTest;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,6 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserIntegrationTest {
     private static final int RESULTS = 100;
     private static final String USERNAME = "user", PASSWORD = "pass", ROLE = "role";
+
     private static boolean createdDefaultUser = false;
 
     @Autowired
