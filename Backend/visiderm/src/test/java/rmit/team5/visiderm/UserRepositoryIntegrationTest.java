@@ -38,7 +38,7 @@ public class UserRepositoryIntegrationTest {
     private IUserService userService;
 
     @Test
-    public void whenAddedUser_thenReturnUser() {
+    public void whenAddedUser_thenVerifyCreations() {
         UserDTO newUser = new UserDTO();
         newUser.setUsername(USERNAME);
         newUser.setPassword(PASSWORD);
