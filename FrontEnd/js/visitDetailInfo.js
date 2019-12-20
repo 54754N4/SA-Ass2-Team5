@@ -87,7 +87,7 @@ function setUpLesionDisplay (data) {
   var lesionDisplay = '<div class="row" >' +
   '<div class="col-sm-3">' +
       '<div class="row">' +
-          '<h3 for="date" class=" col-form-label" onclick="displayLesionDetail(' + data.lesionID + ')" >Lesion ' + data.lesionID +'</h3>' +
+          '<h3 for="date" class=" col-form-label" onclick="displayLesionDetail(' + "'" + data.location + "'" + ')" >Lesion ' + data.lesionID +'</h3>' +
       '</div>' +
       '<div class="row">' + 
           '<label for="date" class="col-form-label">Taken: ' + data.timeTaken + '</label>' +
@@ -101,8 +101,8 @@ function setUpLesionDisplay (data) {
 return lesionDisplay;
 }
 
-function displayLesionDetail (id) {
-  sessionStorage.setItem("lesionID", id);
+function displayLesionDetail (location) {
+  sessionStorage.setItem("lesionLocation", location);
   sessionStorage.setItem("visitLesionList", JSON.stringify(allVisitLesion));
   sessionStorage.setItem("visitData", JSON.stringify(visitData));
   window.location.pathname = "/screen9.html";
