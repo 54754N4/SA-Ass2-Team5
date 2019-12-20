@@ -78,14 +78,12 @@ function getPatientVisitID(selDataID, selDataName) {
     if (selectedPatient !== selDataID ){
         var page = $("currentVisitPage").val();
         if (page === undefined) page = 1;
-        
         $.ajax({
             type: "GET",
             url: baseURL + "/visit/summary/" + selDataID + "?page=" + page,
             success: function(data) {
                 plotVisitData(data);
-            }
-            
+            } 
           });
           selectedPatient = selDataID;
           selectedPatientName = selDataName;

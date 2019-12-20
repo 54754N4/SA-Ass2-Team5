@@ -1,7 +1,7 @@
 var baseURL = "http://localhost:5000";
 var visitData;
 var listOfVisitID;
-
+var allVisitLesion;
 // use for screen 7
 function getVisitDetailInfo() {
   var visitID = sessionStorage.getItem("visitID");
@@ -15,8 +15,8 @@ function getVisitDetailInfo() {
           getPatientVisitList(data.patientID);
         }
       });
+      getLesionList();
   }
-  
 }
 
 function plotVisitDetailData(data) {
@@ -49,6 +49,63 @@ function plotBodyPicture(locationPoint) {
       context.fillText("\uf05c", singlePoint.xCor, singlePoint.yCor);
     }
   }, 500);
+}
+
+var lesionBaseURL = "http://localhost:5001"
+function getLesionList () {
+  var visitID = sessionStorage.getItem("visitID");
+  var requestVisitID = "HCM_" + visitID;
+  $.ajax({
+    type: "GET",
+    url: lesionBaseURL + "/lesion/visit/" + requestVisitID,
+    success: function(data) {
+     // console.log("lesion data");
+    //  console.log(data);
+      allVisitLesion = data.data;
+      checkLesionInfo(data.data);
+    }
+  });
+}
+
+var locationTrack = [];
+function checkLesionInfo (lesionData) {
+  $("#visitNoteAndLesion").empty();
+    for (var i = 0; i < lesionData.length; i ++) {
+      var singleLesionData = lesionData[i];
+      var currentLocation = singleLesionData.location;
+      if (!locationTrack.includes(currentLocation)) {
+        console.log(currentLocation);
+        locationTrack.push(currentLocation);
+        $("#visitNoteAndLesion").append(setUpLesionDisplay(singleLesionData));
+
+      }
+    }
+}
+
+function setUpLesionDisplay (data) {
+  var imageLink = "http://18.136.207.121:9999/thumb/" + data.lesionID;
+  var lesionDisplay = '<div class="row" >' +
+  '<div class="col-sm-3">' +
+      '<div class="row">' +
+          '<h3 for="date" class=" col-form-label" onclick="displayLesionDetail(' + data.lesionID + ')" >Lesion ' + data.lesionID +'</h3>' +
+      '</div>' +
+      '<div class="row">' + 
+          '<label for="date" class="col-form-label">Taken: ' + data.timeTaken + '</label>' +
+      '</div>' +
+  '</div>' +
+  
+  '<div class="col-sm-3">' +
+      '<img style="min-height: 100px; height: 100px;" src="' + imageLink+'" class="rounded mx-auto d-block" alt="...">' +
+  '</div>' +       
+'</div>'
+return lesionDisplay;
+}
+
+function displayLesionDetail (id) {
+  sessionStorage.setItem("lesionID", id);
+  sessionStorage.setItem("visitLesionList", JSON.stringify(allVisitLesion));
+  sessionStorage.setItem("visitData", JSON.stringify(visitData));
+  window.location.pathname = "/screen9.html";
 }
 
 function setUpBtnEvent () {
