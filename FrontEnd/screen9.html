@@ -58,28 +58,28 @@
                     <!-- Lesion ID -->
                     <div class="form-group row">
                         <label for="lesionid" class="col-sm-4 col-form-label">Lesion ID:</label>
-                        <label for="lesionid" class="col-sm-8 col-form-label">ED1389</label>
+                        <label id="lesionid" class="col-sm-8 col-form-label">ED1389</label>
                       </div>
                       
                       <!-- Doctor -->
                       <div class="form-group row">
                         <label for="doctor" class="col-sm-4 col-form-label">Doctor</label>
-                        <label for="doctor" class="col-sm-8 col-form-label">Jim Baye</label>
+                        <label id="doctor" class="col-sm-8 col-form-label">Jim Baye</label>
                       </div>
                       <!-- Patient -->
                       <div class="form-group row">
                         <label for="patient" class="col-sm-4 col-form-label">Patient:</label>
-                        <label for="patient" class="col-sm-8 col-form-label">Anthony Hopkin</label>
+                        <label id="patient" class="col-sm-8 col-form-label">Anthony Hopkin</label>
                       </div>
                       <!-- Lesion Location -->
                       <div class="form-group row">
                         <label for="location" class="col-sm-4 col-form-label">Leision Location:</label>
-                        <label for="location" class="col-sm-8 col-form-label">Lelt am</label>
+                        <label id="location" class="col-sm-8 col-form-label">Lelt am</label>
                       </div>
                       <!-- Status -->
                       <div class="form-group row">
                         <label for="status" class="col-sm-4 col-form-label">Status:</label>
-                        <label for="status" class="col-sm-8 col-form-label">Hamless Active</label>
+                        <label id="status" class="col-sm-8 col-form-label">Hamless Active</label>
                       </div>
                 </form>
             </div>
@@ -112,35 +112,11 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-3 order-md-1">
-                    <li class="list-group-item">
-                        <label for="date" class="col-sm-12 col-form-label">25/05/1995</label>
-                        <label for="time" class="col-sm-12 col-form-label">02:00PM</label>
-                        <label for="size" class="col-sm-12 col-form-label">50 cm in size</label>
-                    </li>
-            </div>
-            <div class="col-md-2 order-md-1">
-                <img style="min-height: 140px; height: 140px;" src="./images/lesion.png" class="rounded mx-auto d-block" alt="...">
-
-            </div>
-    
-            <!-- Body Image ???? -->
-            <div class="col-md-7 order-md-2">
-                <form class="form-inline">
-                    <label for="status" class="mb-2">Note:</label>
-
-                    <div class="form-group mx-sm-3 mb-2">
-                      <!-- <label for="inputPassword2" class="sr-only">Password</label> -->
-                      <textarea class="form-control" id="" rows="5" style="width: 500px;"></textarea>
-
-                      <!-- <input type="password" class="form-control" id="inputPassword2" placeholder="Password"> -->
-                    </div>
-                  </form>
-                <br class="mb-4">
-                <br>
-            </div>  
+        <div class="row" style="height: 500px; overflow: scroll" id="lesionHistory">
+            
         </div>
+       
+        
 <!-- CBIR Button -->
         <div class="row mt-2">
             <div class="col-md-9">
@@ -178,6 +154,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="/js/lesionDetail.js"></script>
     <script>
         $(function () {
             $('input[name="birthday"]').daterangepicker({
@@ -190,6 +167,7 @@
                 alert("You are " + years + " years old!");
             });
         });
+        loadLeisonDetail();
     </script>
 </body>
 
