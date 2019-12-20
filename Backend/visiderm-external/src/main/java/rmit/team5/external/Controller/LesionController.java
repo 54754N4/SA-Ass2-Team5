@@ -46,6 +46,11 @@ public class LesionController {
         return ResponseEntity.ok(lesionService.getLesionsOfVisit(visitID, page));
     }
 
+    @GetMapping(path = "/location")
+    public ResponseEntity<?> getVisitLocation (@RequestParam String visitID, @RequestParam String location) {
+        return ResponseEntity.ok(lesionService.getLesionHistory(visitID, location));
+    }
+
     @GetMapping("/search")
     public ResponseEntity<?> getLesions(
             @RequestParam String keyword,

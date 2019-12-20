@@ -1,3 +1,5 @@
+var lesionHistory = [];
+var lesionLocation;
 function loadLeisonDetail () {
     var visitLesionID = sessionStorage.getItem("lesionID");
     var lesionData = JSON.parse(sessionStorage.getItem("visitLesionList"));
@@ -16,15 +18,16 @@ function plotGeneralInfo (visitData, lesionID, lesiondata) {
     $("#lesionid").html(item.lesionID);
     $("#status").html(item.status);
     $("#location").html (item.location);
+    lesionLocation = item.location;
     plotHistoryInfo(item.location, lesiondata);
 }
 
 function plotHistoryInfo (location, lesionData) {
     $("#lesionHistory").empty();
-    var history = lesionData.filter(x => x.location === location);
+    lesionHistory = lesionData.filter(x => x.location === location);
     console.log(history);
-    for (var i = 0; i < history.length; i ++) {
-        $("#lesionHistory").append(constructLesionHistoryRow(history[i]));
+    for (var i = 0; i < lesionHistory.length; i ++) {
+        $("#lesionHistory").append(constructLesionHistoryRow(lesionHistory[i]));
     }
 }
 
@@ -53,5 +56,20 @@ function constructLesionHistoryRow (data) {
         '<br>' +
     '</div>' +   
 '</div>'
-return display;
+    return display;
+}
+
+function setUpEventBtn () {
+    $("#updateRecord").click(function  () {
+        console.log("update button");
+        sessionStorage.setItem("lesionLocation", lesionLocation)
+        sessionStorage.setItem("lesionList", JSON.stringify(lesionHistory));
+        sessionStorage.setItem("lesionAction", "update");
+        window.location.pathname = "/screen10.html";
+    });
+    $("#addNewRecord").click (function () {
+        console.log("add new button");
+        sessionStorage.setItem("lesionAction", "add");
+        window.location.pathname = "/screen10.html";
+    })
 }

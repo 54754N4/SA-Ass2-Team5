@@ -20,6 +20,10 @@ public class Lesion {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
     private Date timeTaken;
 
+    @Column(name = "dateTaken")
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
     @Column(name = "size")
     private double size;
 
@@ -91,4 +95,11 @@ public class Lesion {
         this.visitID = visitID;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

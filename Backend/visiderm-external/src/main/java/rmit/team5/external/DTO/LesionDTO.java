@@ -18,6 +18,10 @@ public class LesionDTO {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
     private Date timeTaken;
 
+    @NotNull(message = "Lesion analysis date is required")
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
     @NotNull(message = "Size should not be null")
     @ValidSize(message = "Size should be strictly positive")
     private double size;
@@ -84,5 +88,13 @@ public class LesionDTO {
 
     public void setDoctorNote(String doctorNote) {
         this.doctorNote = doctorNote;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

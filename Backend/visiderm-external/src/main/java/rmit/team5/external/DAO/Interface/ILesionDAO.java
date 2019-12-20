@@ -7,11 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import rmit.team5.external.Model.LesionInfo.Lesion;
 
+import java.util.List;
+
 @Repository
 public interface ILesionDAO extends JpaRepository<Lesion, Long> {
 
     @Query("select lesion from Lesion lesion where lesion.visitID like ?1")
     Page<Lesion> getLesionsOfVisit(String visitID, Pageable pageable);
+
+    @Query("select leision from Lesion leision where leision.visitID = ?1 AND leision.location = ?2 " +
+            "ORDER BY leision.date desc, leision.timeTaken desc ")
+    List<Lesion> getLesionListOfLocationVisit (String visitID, String location);
 
     @Query("select l from Lesion l where " +
             "concat(l.size, '') like %?1% " +

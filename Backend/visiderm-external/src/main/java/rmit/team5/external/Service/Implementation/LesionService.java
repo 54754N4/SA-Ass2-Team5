@@ -53,6 +53,7 @@ public class LesionService implements ILesionService {
         lesion.setStatus(lesionDTO.getStatus());
         lesion.setVisitID(lesionDTO.getVisitID());
         lesion.setDoctorNote(lesionDTO.getDoctorNote());
+        lesion.setDate(lesionDTO.getDate());
         return lesion;
     }
 
@@ -75,6 +76,14 @@ public class LesionService implements ILesionService {
                 PageRequest.of(page-1, PAGE_LIMIT):
                 PageRequest.of(page-1, PAGE_LIMIT, sort);
         return createQueryResultHashMap(lesionDAO.getLesionsMatching(keyword, pageable));
+    }
+
+    @Override
+    public HashMap<String, Object> getLesionHistory(String visitID, String location) {
+        HashMap<String, Object> resultList = new HashMap<>();
+        List<Lesion> lesionList = lesionDAO.getLesionListOfLocationVisit(visitID,location);
+        resultList.put("data", lesionList);
+        return resultList;
     }
 
     @Override
