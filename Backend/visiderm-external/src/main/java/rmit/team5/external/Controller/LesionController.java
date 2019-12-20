@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/lesion")
+@CrossOrigin
 public class LesionController {
     private static final String MESSAGE = "message";
     private ILesionService lesionService;

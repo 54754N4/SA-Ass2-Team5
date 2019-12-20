@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping(path = "/user")
+@CrossOrigin
 public class UserController {
     private static final String MESSAGE = "message";
     private IUserService userService;
