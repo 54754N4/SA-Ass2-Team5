@@ -134,7 +134,7 @@ public class PatientDTOTest {
 
         Object[][] data = new Object[][]{
                 // all field are null
-                {patientDTO, "All field invalid",12},
+                {patientDTO, "All field invalid",13},
                 // testing last name
                 {patientLastNameNull, "Last name invalid",2},
                 {patientLastNameBlank, "Last name invalid",2},
@@ -258,6 +258,7 @@ public class PatientDTOTest {
         patientDTO.setStreetAddress("702 Nguyen Van Linh");
         patientDTO.setSuburd("Hochiminh city");
         patientDTO.setOccupation("Retired");
+        patientDTO.setPostalCode("2213");
         patientDTO.setBirthDay(new Date(System.currentTimeMillis()));
         return patientDTO;
     }
@@ -275,6 +276,8 @@ public class PatientDTOTest {
         patientDTO.setOccupation("Retired");
         patientDTO.setBirthDay(new Date(System.currentTimeMillis()));
         patientDTO.setFirstName(firstName);
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -291,6 +294,8 @@ public class PatientDTOTest {
         patientDTO.setOccupation("Retired");
         patientDTO.setBirthDay(new Date(System.currentTimeMillis()));
         patientDTO.setFirstName("Bao");
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
     private static PatientDTO patientDTOForTEmailTest (String email) {
@@ -306,6 +311,8 @@ public class PatientDTOTest {
         patientDTO.setOccupation("Retired");
         patientDTO.setBirthDay(new Date(System.currentTimeMillis()));
         patientDTO.setFirstName("Bao");
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -322,6 +329,8 @@ public class PatientDTOTest {
         patientDTO.setOccupation("Retired");
         patientDTO.setBirthDay(birthDay);
         patientDTO.setFirstName("Bao");
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -338,6 +347,8 @@ public class PatientDTOTest {
         patientDTO.setOccupation("Retired");
         patientDTO.setBirthDay(new Date());
         patientDTO.setFirstName("Bao");
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -354,6 +365,8 @@ public class PatientDTOTest {
         patientDTO.setOccupation("Retired");
         patientDTO.setBirthDay(new Date());
         patientDTO.setFirstName("Bao");
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -370,6 +383,8 @@ public class PatientDTOTest {
         patientDTO.setOccupation("Retired");
         patientDTO.setBirthDay(new Date());
         patientDTO.setFirstName("Bao");
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -387,6 +402,8 @@ public class PatientDTOTest {
         patientDTO.setBirthDay(new Date());
         patientDTO.setFirstName("Bao");
         patientDTO.setFaxNumber(faxNumber);
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -404,6 +421,8 @@ public class PatientDTOTest {
         patientDTO.setBirthDay(new Date());
         patientDTO.setFirstName("Bao");
         patientDTO.setNtkName(NTKName);
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -425,6 +444,8 @@ public class PatientDTOTest {
         patientDTO.setHomePhone(phoneNum);
         patientDTO.setMobilePhone(phoneNum);
         patientDTO.setOfficePhone(phoneNum);
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -441,6 +462,8 @@ public class PatientDTOTest {
         patientDTO.setOccupation(occupation);
         patientDTO.setBirthDay(new Date());
         patientDTO.setFirstName("Bao");
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 
@@ -462,6 +485,8 @@ public class PatientDTOTest {
         patientDTO.setHomePhone("0906483528");
         patientDTO.setMobilePhone("0906483528");
         patientDTO.setOfficePhone("0906483528");
+        patientDTO.setPostalCode("2213");
+
         return patientDTO;
     }
 }
