@@ -15,7 +15,22 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:5000/patient/all?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
 						},
 						"description": "Each page contains 10 records"
 					},
@@ -27,7 +42,26 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:5000/patient/name?patientName=John&page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"name"
+							],
+							"query": [
+								{
+									"key": "patientName",
+									"value": "John"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
 						}
 					},
 					"response": []
@@ -38,14 +72,29 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:5000/patient/detail?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
 						},
 						"description": "http://localhost:5000/patient/detail/{patientID}"
 					},
 					"response": []
 				},
 				{
-					"name": "Add new patient (Error)",
+					"name": "Add new patient",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -82,7 +131,7 @@
 					"response": []
 				},
 				{
-					"name": "Update new patient (Error)",
+					"name": "Update new patient",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -126,7 +175,7 @@
 			"name": "Visits",
 			"item": [
 				{
-					"name": "Add new visit (Error)",
+					"name": "Add new visit",
 					"request": {
 						"method": "POST",
 						"header": [
