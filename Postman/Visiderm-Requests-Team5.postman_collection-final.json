@@ -152,7 +152,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/patient/add",
+							"raw": "http://localhost:5000/patient/update/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -160,10 +160,11 @@
 							"port": "5000",
 							"path": [
 								"patient",
-								"add"
+								"update",
+								"1"
 							]
 						},
-						"description": "The API will require the information of lastname, first name, occupation, email, title,\r\nbirthday, gender, married, street address, suburb, country. Other fields such as home phone,\r\noffice phone, fax number next to kin name and contact info will be optional\r\n\r\nError: I keep getting 405 (method not allowed) error response"
+						"description": "http://localhost:5000/patient/update/{ID}"
 					},
 					"response": []
 				}
